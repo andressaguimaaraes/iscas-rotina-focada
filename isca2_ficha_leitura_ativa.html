@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ficha de Leitura Ativa — Template Gratuito</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #1a237e 0%, #283593 50%, #0d1757 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      max-width: 520px;
+      width: 100%;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #283593, #3949ab);
+      padding: 40px 36px 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 200px;
+      height: 200px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      left: -40px;
+      width: 180px;
+      height: 180px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .icon {
+      font-size: 52px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .hero h1 {
+      color: #fff;
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 14px;
+    }
+
+    .hero p {
+      color: rgba(255,255,255,0.88);
+      font-size: 15px;
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    .hero p strong {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .form-body {
+      padding: 36px;
+    }
+
+    .form-body h2 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 6px;
+    }
+
+    .form-body > p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 24px;
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #444;
+      margin-bottom: 6px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 15px;
+      color: #1a1a2e;
+      background: #fafafa;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 40px;
+      cursor: pointer;
+    }
+
+    input:focus, select:focus {
+      border-color: #3949ab;
+      box-shadow: 0 0 0 3px rgba(57,73,171,0.12);
+      background: #fff;
+    }
+
+    input::placeholder {
+      color: #bbb;
+      font-size: 14px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #283593, #3949ab);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: 800;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: transform 0.15s, box-shadow 0.15s;
+      letter-spacing: 0.3px;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(40,53,147,0.4);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .privacy {
+      text-align: center;
+      font-size: 12px;
+      color: #aaa;
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+
+    .privacy span {
+      color: #3949ab;
+      font-weight: 600;
+    }
+
+    .footer-brand {
+      text-align: center;
+      padding: 0 36px 28px;
+      font-size: 12px;
+      color: #bbb;
+    }
+
+    .footer-brand strong {
+      color: #3949ab;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 12px;
+        align-items: flex-start;
+      }
+      .hero {
+        padding: 32px 24px 28px;
+      }
+      .hero h1 {
+        font-size: 19px;
+      }
+      .form-body {
+        padding: 28px 24px;
+      }
+      .footer-brand {
+        padding: 0 24px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      <span class="badge">📋 Template Gratuito</span>
+      <span class="icon">🧠</span>
+      <h1>Ficha de Leitura Ativa</h1>
+      <p>Leia com <strong>intenção e foco total</strong> — retenha mais conhecimento e aplique o que aprendeu para acelerar seus resultados de verdade.</p>
+    </div>
+
+    <div class="form-body">
+      <h2>Quero o template gratuito!</h2>
+      <p>Preencha os campos abaixo e receba a ficha no seu e-mail agora.</p>
+
+      <!--
+        ============================================================
+        INSTRUÇÃO: Substitua "SEU_FORM_ID_ISCA2" pelo ID do formulário
+        criado em formspree.io para esta isca
+        ============================================================
+      -->
+      <form action="https://formspree.io/f/xkoypjyo" method="POST">
+
+        <input type="hidden" name="_next" value="https://docs.google.com/document/d/1zKq0uxmss7ToC4xrsPi3WHPnqavcnjdw/edit?usp=sharing" />
+
+        <input type="hidden" name="_subject" value="[ISCA 2] Novo lead — Ficha de Leitura Ativa" />
+        <input type="hidden" name="isca" value="Isca 2 — Ficha de Leitura Ativa" />
+
+        <div class="field">
+          <label for="nome">Seu nome completo</label>
+          <input type="text" id="nome" name="nome" placeholder="Como posso te chamar?" required />
+        </div>
+
+        <div class="field">
+          <label for="email">Seu melhor e-mail</label>
+          <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required />
+        </div>
+
+        <div class="field">
+          <label for="whatsapp">WhatsApp (com DDD)</label>
+          <input type="tel" id="whatsapp" name="whatsapp" placeholder="(11) 99999-9999" required />
+        </div>
+
+        <div class="field">
+          <label for="instagram">Instagram (opcional)</label>
+          <input type="text" id="instagram" name="instagram" placeholder="@seuperfil" />
+        </div>
+
+        <div class="field">
+          <label for="faturamento">Faturamento mensal atual</label>
+          <select id="faturamento" name="faturamento" required>
+            <option value="" disabled selected>Selecione uma faixa...</option>
+            <option value="Ainda não faturando">Ainda não faturando</option>
+            <option value="Até R$ 5.000">Até R$ 5.000</option>
+            <option value="R$ 5.000 a R$ 10.000">R$ 5.000 a R$ 10.000</option>
+            <option value="R$ 10.000 a R$ 30.000">R$ 10.000 a R$ 30.000</option>
+            <option value="R$ 30.000 a R$ 50.000">R$ 30.000 a R$ 50.000</option>
+            <option value="Acima de R$ 50.000">Acima de R$ 50.000</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn" id="btn2">📥 Quero a Ficha Gratuita!</button>
+      </form>
+      <script>
+        document.querySelector('form').addEventListener('submit', async function(e) {
+          e.preventDefault();
+          const form = e.target;
+          const btn = document.getElementById('btn2');
+          btn.disabled = true;
+          btn.textContent = 'Enviando...';
+          const formData = new FormData(form);
+          const data = Object.fromEntries(formData);
+          const redirectUrl = data['_next'];
+          await Promise.allSettled([
+            fetch(form.action, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } }),
+            fetch('https://hook.us2.make.com/w2guw0aeojlpn1mdi7348mkhh3k', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+          ]);
+          window.location.href = redirectUrl;
+        });
+      </script>
+
+      <p class="privacy">🔒 Seus dados estão seguros. <span>Sem spam, prometido.</span><br/>Andressa Guimarães respeita sua privacidade.</p>
+    </div>
+
+    <div class="footer-brand">
+      Material criado por <strong>Andressa Guimarães</strong> · Rotina Focada
+    </div>
+  </div>
+</body>
+</html>

@@ -422,19 +422,19 @@ section {
 }
 
 .sobre__foto {
-  width: 240px;
-  height: 240px;
+  width: 260px;
+  height: 260px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--rose-soft) 0%, #fbcfe8 100%);
+  background: var(--ink);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-script);
   font-size: 4rem;
-  color: var(--rose-deep);
+  color: var(--rose-soft);
   margin: 0 auto;
   overflow: hidden;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-md), 0 0 0 6px var(--rose-soft);
 }
 
 .sobre__foto img {

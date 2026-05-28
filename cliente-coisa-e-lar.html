@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coisa e Lar — Programa de Aceleração em IA · winner.ia</title>
+<!-- VERSÃO CLIENTE · acesso gradual ao conteúdo -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ============================================
+     winner.ia — Brand System v1.0
+     Onyx · Signature Gold · Warm Paper
+     ============================================ */
+  :root {
+    --onyx: #0A0A0B;
+    --onyx-soft: #15151A;
+    --onyx-line: rgba(242, 235, 221, 0.08);
+    --gold: #C8A24A;
+    --gold-deep: #8C6E22;
+    --paper: #F2EBDD;
+    --sand: #E6DDC8;
+    --paper-line: rgba(10, 10, 11, 0.10);
+    --paper-text: #2A2622;
+    --paper-muted: #6B6258;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--onyx);
+    color: var(--paper);
+    line-height: 1.55;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* TAGS MONOESPAÇADAS — sempre uppercase, JetBrains Mono */
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--paper);
+    opacity: 0.55;
+    font-weight: 400;
+  }
+  .tag-gold { color: var(--gold); opacity: 1; }
+
+  /* GRID HEAD (topo institucional) ----------------- */
+  .head-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    padding: 28px 48px 0;
+    gap: 24px;
+  }
+  .head-bar .left { display: flex; flex-direction: column; gap: 2px; }
+  .head-bar .right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+  }
+
+  /* HERO INSTITUCIONAL (fundo onyx) ---------------- */
+  .hero {
+    padding: 80px 48px 96px;
+    min-height: 86vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, var(--onyx-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--onyx-line) 1px, transparent 1px);
+    background-size: 96px 96px;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    width: 100%;
+    padding-top: 80px;
+  }
+
+  .hero-kicker {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.1s forwards;
+  }
+
+  .hero-kicker .line {
+    flex: 0 0 64px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  h1.display {
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.8rem, 7vw, 6rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--paper);
+    margin-bottom: 32px;
+    max-width: 1100px;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.2s forwards;
+  }
+
+  h1.display em {
+    font-style: normal;
+    color: var(--gold);
+  }
+
+  .hero-lede {
+    font-size: clamp(1rem, 1.4vw, 1.18rem);
+    line-height: 1.6;
+    max-width: 620px;
+    color: var(--paper);
+    opacity: 0.7;
+    margin-bottom: 56px;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.35s forwards;
+    animation-fill-mode: forwards;
+  }
+  .hero-lede { animation-name: fadeUpDim; }
+
+  @keyframes fadeUpDim {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 0.7; transform: translateY(0); }
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+    padding-top: 32px;
+    border-top: 1px solid var(--onyx-line);
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.5s forwards;
+  }
+
+  .hero-meta .item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .hero-meta .item .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--paper);
+    opacity: 0.5;
+  }
+  .hero-meta .item .value {
+    font-size: 0.95rem;
+    color: var(--paper);
+    font-weight: 500;
+  }
+
+  /* LOGO V· em SVG ---------------------------------- */
+  .logo-v {
+    display: inline-block;
+    width: 28px;
+    height: 32px;
+    color: var(--paper);
+  }
+  .logo-v svg { display: block; width: 100%; height: 100%; }
+
+  .brand-stack {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .brand-stack .wordmark {
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: -0.02em;
+  }
+  .brand-stack .wordmark .ia { color: var(--gold); }
+
+  /* SEÇÃO RECURSOS (fundo papel) ------------------- */
+  .resources {
+    background: var(--paper);
+    color: var(--paper-text);
+    padding: 96px 48px 88px;
+    position: relative;
+  }
+
+  .resources-head {
+    max-width: 1280px;
+    margin: 0 auto 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--paper-line);
+  }
+
+  .resources-head .left { display: flex; flex-direction: column; gap: 12px; }
+
+  .resources-head h2 {
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 3.6vw, 3rem);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    color: var(--onyx);
+    max-width: 560px;
+  }
+  .resources-head .right {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--paper-muted);
+    max-width: 460px;
+    align-self: end;
+  }
+
+  .resources .tag { color: var(--paper-text); opacity: 0.55; }
+
+  /* GRID DE CARDS ------------------------------------ */
+  .card-grid {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 16px;
+  }
+
+  .card {
+    grid-column: span 4;
+    position: relative;
+    background: var(--sand);
+    border: 1px solid var(--paper-line);
+    padding: 32px 28px 28px;
+    text-decoration: none;
+    color: var(--paper-text);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 280px;
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+                background 0.35s ease, border-color 0.35s ease,
+                box-shadow 0.35s ease;
+    cursor: pointer;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: cardIn 0.6s ease forwards;
+  }
+
+  .card:nth-child(1) { animation-delay: 0.10s; }
+  .card:nth-child(2) { animation-delay: 0.18s; }
+  .card:nth-child(3) { animation-delay: 0.26s; }
+  .card:nth-child(4) { animation-delay: 0.34s; }
+  .card:nth-child(5) { animation-delay: 0.42s; }
+
+  /* Cards 4 e 5 ocupam 6 colunas cada — destaque secundário */
+  .card:nth-child(4), .card:nth-child(5) { grid-column: span 6; }
+
+  .card:hover:not(.locked) {
+    background: var(--onyx);
+    color: var(--paper);
+    border-color: var(--onyx);
+    transform: translateY(-4px);
+    box-shadow: 0 24px 60px rgba(10, 10, 11, 0.22);
+  }
+
+  .card:hover:not(.locked) .card-num { color: var(--gold); opacity: 1; }
+  .card:hover:not(.locked) .card-desc { color: var(--paper); opacity: 0.75; }
+  .card:hover:not(.locked) .card-meta { color: var(--paper); opacity: 0.55; border-color: var(--onyx-line); }
+  .card:hover:not(.locked) .card-meta strong { color: var(--gold); }
+  .card:hover:not(.locked) .card-arrow { color: var(--gold); transform: translateX(4px); }
+
+  .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .card-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--paper-text);
+    opacity: 0.5;
+    transition: color 0.3s ease, opacity 0.3s ease;
+  }
+
+  .card-arrow {
+    color: var(--paper-text);
+    opacity: 0.4;
+    transition: color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .card:hover:not(.locked) .card-arrow { opacity: 1; }
+
+  .card-title {
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 600;
+    font-size: 1.45rem;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    color: inherit;
+    margin-top: auto;
+  }
+
+  .card-desc {
+    font-size: 0.94rem;
+    line-height: 1.5;
+    color: var(--paper-muted);
+    transition: color 0.3s ease;
+  }
+
+  .card-meta {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid var(--paper-line);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--paper-text);
+    opacity: 0.55;
+    transition: color 0.3s ease, opacity 0.3s ease, border-color 0.3s ease;
+  }
+  .card-meta strong {
+    color: var(--gold-deep);
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  /* SEÇÃO CONSULTORIAS (fundo papel, cards onyx) ---- */
+  .consultorias {
+    background: var(--paper);
+    color: var(--paper-text);
+    padding: 96px 48px 96px;
+    border-top: 1px solid var(--paper-line);
+  }
+
+  .consult-grid {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .consult-card {
+    background: var(--onyx);
+    color: var(--paper);
+    padding: 32px 32px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 260px;
+    position: relative;
+    transition: transform 0.35s ease, background 0.35s ease;
+  }
+
+  .consult-card:hover {
+    transform: translateY(-4px);
+    background: #15151A;
+  }
+
+  .consult-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--onyx-line);
+  }
+  .consult-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .consult-month {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--paper);
+    opacity: 0.5;
+  }
+
+  .consult-title {
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 600;
+    font-size: 1.35rem;
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+    color: var(--paper);
+  }
+  .consult-sub {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: var(--paper);
+    opacity: 0.7;
+  }
+
+  .consult-downloads {
+    margin-top: auto;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding-top: 8px;
+  }
+
+  .dl-btn {
+    flex: 1;
+    min-width: 130px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 14px;
+    border: 1px solid var(--onyx-line);
+    color: var(--paper);
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+  }
+  .dl-btn:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(200, 162, 74, 0.06);
+  }
+  .dl-btn-primary {
+    background: var(--gold);
+    color: var(--onyx);
+    border-color: var(--gold);
+    font-weight: 500;
+  }
+  .dl-btn-primary:hover {
+    background: #D9B560;
+    color: var(--onyx);
+    border-color: #D9B560;
+  }
+  .dl-btn svg {
+    flex-shrink: 0;
+    opacity: 0.7;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .dl-btn:hover svg {
+    opacity: 1;
+    transform: translateY(2px);
+  }
+
+  /* CARD TRAVADO — versão externa para o cliente -------- */
+  .consult-card.locked {
+    position: relative;
+    background: var(--onyx);
+    color: var(--paper);
+    overflow: hidden;
+  }
+  .consult-card.locked > *:not(.lock-overlay) {
+    opacity: 0.18;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  .consult-card.locked .lock-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    text-align: center;
+    padding: 24px;
+    background: rgba(10, 10, 11, 0.55);
+    backdrop-filter: blur(2px);
+  }
+  .consult-card.locked .lock-icon {
+    color: var(--gold);
+    background: rgba(200, 162, 74, 0.08);
+    border: 1px solid var(--gold);
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .consult-card.locked .lock-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .consult-card.locked .lock-text {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 0.95rem;
+    color: var(--paper);
+    max-width: 260px;
+    line-height: 1.45;
+  }
+  .consult-card.locked .lock-month {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--paper);
+    opacity: 0.55;
+    padding-top: 6px;
+  }
+  .consult-card.locked:hover {
+    transform: none;
+  }
+
+  /* FOOTER ONYX -------------------------------------- */
+  footer {
+    background: var(--onyx);
+    color: var(--paper);
+    padding: 64px 48px 36px;
+    border-top: 1px solid var(--onyx-line);
+  }
+
+  .footer-grid {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 32px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--onyx-line);
+  }
+
+  .footer-grid .brand-stack { margin-bottom: 16px; }
+  .footer-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--paper);
+    opacity: 0.5;
+  }
+  .footer-tag.gold { color: var(--gold); opacity: 1; }
+  .footer-lede {
+    font-size: 0.95rem;
+    color: var(--paper);
+    opacity: 0.7;
+    margin-top: 12px;
+    max-width: 320px;
+  }
+
+  .footer-bottom {
+    max-width: 1280px;
+    margin: 24px auto 0;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* RESPONSIVO --------------------------------------- */
+  @media (max-width: 960px) {
+    .card { grid-column: span 6; }
+    .card:nth-child(4), .card:nth-child(5) { grid-column: span 6; }
+    .resources-head { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .consult-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .head-bar, .hero, .resources, .consultorias, footer { padding-left: 24px; padding-right: 24px; }
+    .card { grid-column: span 12; }
+    .card:nth-child(4), .card:nth-child(5) { grid-column: span 12; }
+    .hero-meta { gap: 24px; }
+    .resources-head .right { text-align: left; }
+    .dl-btn { min-width: 100%; }
+  }
+
+  /* ANIMATIONS -------------------------------------- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ==============================================
+       HERO INSTITUCIONAL — fundo onyx
+       ============================================== -->
+  <section class="hero">
+    <div class="hero-grid-bg"></div>
+
+    <div class="head-bar" style="padding-left:0;padding-right:0">
+      <div class="left">
+        <span class="tag">winner.ia &nbsp;—&nbsp; programa de aceleração em ia</span>
+        <span class="tag">cliente · coisa e lar</span>
+      </div>
+      <div class="right">
+        <span class="tag">v 1.0 / 2026</span>
+        <span class="tag">01 / 05</span>
+      </div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-kicker">
+        <span class="line"></span>
+        <span class="tag tag-gold">posicionamento · 2026</span>
+      </div>
+
+      <h1 class="display">
+        Inteligência artificial<br>
+        com propósito de negócio.<br>
+        <em>Sua aceleração começa agora.</em>
+      </h1>
+
+      <p class="hero-lede">
+        Bem-vinda, Coisa e Lar. Tudo o que você precisa para extrair o máximo do programa está aqui. Comece pelo curso, conheça o método e use os recursos abaixo para acelerar seu e-commerce com IA — do caixa ao Full, dos anúncios às imagens.
+      </p>
+
+      <div class="hero-meta">
+        <div class="item">
+          <span class="label">cliente</span>
+          <span class="value">Coisa e Lar · E-commerce</span>
+        </div>
+        <div class="item">
+          <span class="label">segmento</span>
+          <span class="value">Cama, mesa &amp; banho</span>
+        </div>
+        <div class="item">
+          <span class="label">início</span>
+          <span class="value">18 / 05 / 2026</span>
+        </div>
+        <div class="item">
+          <span class="label">duração</span>
+          <span class="value">6 meses</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="head-bar" style="padding-top:32px">
+      <div class="left brand-stack">
+        <span class="logo-v">
+          <svg viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true">
+            <path d="M 8 6 L 32 6 L 52 70 L 38 92 L 18 28 Z"/>
+            <path d="M 38 92 L 50 110 L 62 92 L 50 70 Z"/>
+            <path d="M 50 70 L 62 92 L 92 6 L 68 6 Z"/>
+            <circle cx="91" cy="9" r="6"/>
+          </svg>
+        </span>
+        <span class="wordmark">winner<span class="ia">.ia</span></span>
+      </div>
+      <div class="right">
+        <span class="tag">↓ navegue pelos recursos</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================
+       RECURSOS — fundo papel
+       ============================================== -->
+  <section class="resources">
+    <div class="resources-head">
+      <div class="left">
+        <span class="tag">02 — recursos</span>
+        <h2>Tudo que você acessa<br>durante a mentoria.</h2>
+      </div>
+      <div class="right">
+        Comece pelo curso, leia o manual, conheça o seu mapa estratégico. As tutorias e a comunidade estão a um clique.
+      </div>
+    </div>
+
+    <div class="card-grid">
+
+      <!-- 01 — CURSO -->
+      <a href="https://members.kiwify.com/?club=04f64c9d-075c-4543-b44f-5fdeca907f51" target="_blank" rel="noopener" class="card">
+        <div class="card-head">
+          <span class="card-num">01 / curso</span>
+          <span class="card-arrow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </span>
+        </div>
+        <h3 class="card-title">Claude<br>Sem Código</h3>
+        <p class="card-desc">Comece por aqui. O treinamento-base para dominar o Claude na prática — direto ao ponto.</p>
+        <div class="card-meta">acesso · <strong>seu login Kiwify</strong></div>
+      </a>
+
+      <!-- 02 — MANUAL -->
+      <a href="https://materialalunos.winneria.com.br/" target="_blank" rel="noopener" class="card">
+        <div class="card-head">
+          <span class="card-num">02 / manual</span>
+          <span class="card-arrow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </span>
+        </div>
+        <h3 class="card-title">Manual<br>do Mentorado</h3>
+        <p class="card-desc">Como funciona o programa, o que esperar e como extrair o máximo de cada reunião.</p>
+        <div class="card-meta">senha · <strong>programaia2026</strong></div>
+      </a>
+
+      <!-- 03 — DRIVE -->
+      <a href="https://drive.google.com/drive/folders/1GFIEGb8mqbfSoZLVNclbFpdxc8pUC_vr?usp=drive_link" target="_blank" rel="noopener" class="card">
+        <div class="card-head">
+          <span class="card-num">03 / arquivos</span>
+          <span class="card-arrow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </span>
+        </div>
+        <h3 class="card-title">Drive<br>Compartilhado</h3>
+        <p class="card-desc">Arquivos, templates e materiais da mentoria — atualizados a cada reunião.</p>
+        <div class="card-meta">exclusivo · <strong>Coisa e Lar</strong></div>
+      </a>
+
+      <!-- 04 — MAPA ESTRATÉGICO -->
+      <a href="mapa_estrategico_coisa_e_lar.html" class="card">
+        <div class="card-head">
+          <span class="card-num">04 / diagnóstico</span>
+          <span class="card-arrow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </span>
+        </div>
+        <h3 class="card-title">Mapa<br>Estratégico de IA</h3>
+        <p class="card-desc">Seu diagnóstico personalizado — 6 áreas mapeadas, gargalos identificados e o plano dos próximos 6 meses, com base no seu formulário e na call de boas-vindas.</p>
+        <div class="card-meta">pronto · <strong>baseado no seu formulário</strong></div>
+      </a>
+
+      <!-- 05 — WHATSAPP -->
+      <a href="https://chat.whatsapp.com/KRwPzDFFjEsLEjLzWq1Ppf?mode=gi_t" target="_blank" rel="noopener" class="card">
+        <div class="card-head">
+          <span class="card-num">05 / comunidade</span>
+          <span class="card-arrow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </span>
+        </div>
+        <h3 class="card-title">Suporte &amp; Comunidade<br>WhatsApp</h3>
+        <p class="card-desc">Dúvidas, avanços, travamentos — acesso direto ao suporte da mentoria. Sua equipe e a equipe Winner no mesmo grupo.</p>
+        <div class="card-meta">grupo exclusivo · <strong>resposta rápida</strong></div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ==============================================
+       CONSULTORIAS — fundo papel, cards onyx
+       ============================================== -->
+  <section class="consultorias">
+    <div class="resources-head">
+      <div class="left">
+        <span class="tag">03 — consultorias estratégicas</span>
+        <h2>4 frentes, 4 meses.<br>Liberadas <em style="font-style:italic;color:var(--brown-warm)">uma por vez</em>,<br>conforme o programa avança.</h2>
+      </div>
+      <div class="right">
+        Comece pela Consultoria 01 — Financeiro. As outras 3 abrem no início de cada mês, na ordem certa. Cada uma tem 3 documentos: <strong>comece por aqui</strong> (o que fazer esta semana), <strong>cronograma</strong> (as 4 semanas) e <strong>passo a passo</strong> (método detalhado).
+      </div>
+    </div>
+
+    <div class="consult-grid">
+
+      <!-- CONSULTORIA 01 — FINANCEIRO -->
+      <article class="consult-card">
+        <div class="consult-head">
+          <span class="consult-num">consultoria 01</span>
+          <span class="consult-month">mês 2 · julho</span>
+        </div>
+        <h3 class="consult-title">Financeiro Inteligente:<br>Caixa Previsível em 30 Dias</h3>
+        <p class="consult-sub">Sair do controle de contas a pagar e chegar a um fluxo de caixa preditivo. Fim da dificuldade de caixa às cegas.</p>
+        <div class="consult-downloads">
+          <a href="consultorias/consultoria_1_financeiro_proximo_passo.docx" download class="dl-btn dl-btn-primary">
+            Comece por aqui
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="consultorias/consultoria_1_financeiro_cronograma.docx" download class="dl-btn">
+            Cronograma
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </a>
+          <a href="consultorias/consultoria_1_financeiro_passo_a_passo.docx" download class="dl-btn">
+            Passo a passo
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- CONSULTORIA 02 — FULL · TRAVADA -->
+      <article class="consult-card locked">
+        <div class="consult-head">
+          <span class="consult-num">consultoria 02</span>
+          <span class="consult-month">mês 3 · agosto</span>
+        </div>
+        <h3 class="consult-title">Full e Estoque:<br>Fim das Rupturas</h3>
+        <p class="consult-sub">Recuperar parte dos R$ 217k perdidos em março. Liberar a Isa do operacional.</p>
+        <div class="lock-overlay">
+          <span class="lock-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </span>
+          <span class="lock-label">disponível em breve</span>
+          <span class="lock-text">Foque agora na Consultoria 01 — Financeiro. Esse conteúdo abre no início de agosto.</span>
+          <span class="lock-month">mês 3 · agosto</span>
+        </div>
+      </article>
+
+      <!-- CONSULTORIA 03 — ADS · TRAVADA -->
+      <article class="consult-card locked">
+        <div class="consult-head">
+          <span class="consult-num">consultoria 03</span>
+          <span class="consult-month">mês 4 · setembro</span>
+        </div>
+        <h3 class="consult-title">Central de Promoções &amp; ADS:<br>Marketing com Dados</h3>
+        <p class="consult-sub">Decisão sobre cada oferta da central em 5 minutos, com justificativa.</p>
+        <div class="lock-overlay">
+          <span class="lock-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </span>
+          <span class="lock-label">disponível em breve</span>
+          <span class="lock-text">Esse conteúdo abre no início de setembro, depois das duas primeiras consultorias.</span>
+          <span class="lock-month">mês 4 · setembro</span>
+        </div>
+      </article>
+
+      <!-- CONSULTORIA 04 — IMAGENS · TRAVADA -->
+      <article class="consult-card locked">
+        <div class="consult-head">
+          <span class="consult-num">consultoria 04</span>
+          <span class="consult-month">mês 5 · outubro</span>
+        </div>
+        <h3 class="consult-title">Imagens com IA:<br>Multiplicando o Estilo Isa</h3>
+        <p class="consult-sub">Transformar o método autoral da Isa em pipeline replicável.</p>
+        <div class="lock-overlay">
+          <span class="lock-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </span>
+          <span class="lock-label">disponível em breve</span>
+          <span class="lock-text">Esse conteúdo abre no início de outubro, na reta final do programa.</span>
+          <span class="lock-month">mês 5 · outubro</span>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ==============================================
+       FOOTER — fundo onyx
+       ============================================== -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="brand-stack">
+          <span class="logo-v">
+            <svg viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true">
+              <path d="M 8 6 L 32 6 L 52 70 L 38 92 L 18 28 Z"/>
+              <path d="M 38 92 L 50 110 L 62 92 L 50 70 Z"/>
+              <path d="M 50 70 L 62 92 L 92 6 L 68 6 Z"/>
+              <circle cx="91" cy="9" r="6"/>
+            </svg>
+          </span>
+          <span class="wordmark">winner<span class="ia">.ia</span></span>
+        </div>
+        <p class="footer-lede">
+          Consultoria estratégica em I.A para empresários. Vencer não é tendência — é decisão.
+        </p>
+      </div>
+      <div>
+        <div class="footer-tag">programa</div>
+        <p style="font-size:0.95rem;color:var(--paper);opacity:0.75;margin-top:8px">Aceleração em IA<br>Edição 2026</p>
+      </div>
+      <div>
+        <div class="footer-tag">contato</div>
+        <p style="font-size:0.95rem;margin-top:8px"><a href="http://winneria.com.br" style="color:var(--gold);text-decoration:none">winneria.com.br</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-tag">© 2026 · winner.ia · brand system v 1.0</span>
+      <span class="footer-tag">cliente · coisa e lar · e-commerce</span>
+    </div>
+  </footer>
+
+</body>
+</html>

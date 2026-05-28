@@ -1,0 +1,26 @@
+# Mac
+.DS_Store
+**/.DS_Store
+
+# Claude (sessions, worktrees, local config)
+.claude/
+
+# Arquivos temporários de preview
+_preview_membros/
+
+# ZIPs antigos de publicação manual (Netlify drop)
+*.zip
+
+# Sub-repo separado (tem seu próprio remoto e deploy)
+consultorias/cafealcool/
+
+# Foto pessoal (não precisa estar no repo do site)
+foto-mentora.jpeg
+
+# Node / build (caso futuramente)
+node_modules/
+.vercel/
+
+# Editor
+.vscode/
+.idea/

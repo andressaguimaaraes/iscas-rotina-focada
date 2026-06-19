@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Área de Membros · Rotina Focada</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body class="dark-dashboard">
+  <header class="dark-header">
+    <div class="brand">Rotina <span class="accent">Focada</span></div>
+    <div class="user-bar">
+      <span id="greeting">Olá</span>
+      <button class="btn-ghost" onclick="Auth.logout()">Sair</button>
+    </div>
+  </header>
+
+  <section class="dark-hero">
+    <span class="eyebrow">Área exclusiva de membros</span>
+    <h1>Bem-vinda ao <em>Rotina Focada</em></h1>
+    <p class="subtitle">6 módulos · 22 aulas práticas para sair do zero e construir uma rotina que gera resultados reais. Clique numa aula para abrir o conteúdo completo.</p>
+  </section>
+
+  <div class="dark-progress">
+    <div class="dark-progress-card">
+      <div>
+        <div class="label">Seu progresso</div>
+        <div class="count"><strong id="doneCount">0</strong> de <span id="totalCount">0</span> aulas concluídas</div>
+      </div>
+      <div class="bar"><div class="bar-fill" id="progressFill" style="width: 0%"></div></div>
+    </div>
+  </div>
+
+  <main id="modulesContainer">
+    <!-- Modules rendered via JS -->
+  </main>
+
+  <!-- Bônus Section -->
+  <section class="module-row" id="bonusSection">
+    <header class="module-row-header">
+      <span class="module-num">Conteúdos extras</span>
+      <h2>✨ Bônus exclusivos</h2>
+      <span class="module-tagline">— material que complementa o método</span>
+    </header>
+    <div class="lesson-row" id="bonusCards"><!-- Bonus cards rendered via JS --></div>
+  </section>
+
+  <!-- Notion Sistema Card -->
+  <section class="notion-section">
+    <div class="notion-icon">📔</div>
+    <div class="notion-info">
+      <div class="notion-eyebrow">Sistema completo</div>
+      <h3>Template do Sistema Rotina Focada no Notion</h3>
+      <p>Acesse o sistema completo no Notion — o mesmo que a Andressa usa todos os dias. Duplique e adapte para sua rotina.</p>
+    </div>
+    <a href="https://miniature-timer-bee.notion.site/Sistema-Rotina-Focada-11f7769f615f80c5b382e16c23d9b235?source=copy_link" target="_blank" rel="noopener" class="notion-btn">
+      Abrir no Notion →
+    </a>
+  </section>
+
+  <footer class="dark-footer">
+    Criado por <strong>Andressa Guimarães</strong> · Área exclusiva para alunos do Rotina Focada
+  </footer>
+
+  <script src="assets/auth.js"></script>
+  <script src="assets/data.js"></script>
+  <script>
+    Auth.requireAuth();
+
+    const user = Auth.getUser();
+    if (user && user.name) {
+      document.getElementById("greeting").textContent = `Olá, ${user.name.split(" ")[0]}`;
+    }
+
+    // Stats
+    const stats = Progress.getStats(COURSE_DATA);
+    document.getElementById("doneCount").textContent = stats.done;
+    document.getElementById("totalCount").textContent = stats.total;
+    document.getElementById("progressFill").style.width = stats.percent + "%";
+
+    // Render modules as horizontal rows (Netflix style)
+    const container = document.getElementById("modulesContainer");
+    const completedSet = new Set(Progress.getCompleted());
+
+    COURSE_DATA.modules.forEach((module) => {
+      const modStats = Progress.getModuleStats(module);
+
+      const cardsHTML = module.lessons.map((lesson) => {
+        const isDone = completedSet.has(lesson.id);
+        return `
+          <a class="lesson-card mod${module.id} ${isDone ? 'done' : ''}" href="aula.html?id=${lesson.id}">
+            <div class="lesson-card-bg"></div>
+            <div class="lesson-card-emoji">${module.emoji}</div>
+            <div class="lesson-card-overlay"></div>
+            <div class="lesson-card-content">
+              <div class="lesson-card-top">
+                <span class="lesson-card-num">Aula ${lesson.number}</span>
+                <span class="lesson-card-status">${isDone ? '✓' : '▶'}</span>
+              </div>
+              <div>
+                <div class="lesson-card-title">${lesson.title}</div>
+                <div class="lesson-card-tagline">${lesson.tagline}</div>
+              </div>
+            </div>
+          </a>
+        `;
+      }).join("");
+
+      const section = document.createElement("section");
+      section.className = "module-row";
+      section.innerHTML = `
+        <header class="module-row-header">
+          <span class="module-num">Módulo ${module.number}</span>
+          <h2>${module.emoji} ${module.title}</h2>
+          <span class="module-tagline">— ${module.tagline}</span>
+          <span class="mini-count">
+            <span class="dot"></span>
+            ${modStats.done}/${modStats.total} aulas
+          </span>
+        </header>
+        <div class="lesson-row">${cardsHTML}</div>
+      `;
+      container.appendChild(section);
+    });
+
+    // Render Bonus cards
+    const bonusContainer = document.getElementById("bonusCards");
+    BONUS_DATA.bonuses.forEach((bonus) => {
+      const card = document.createElement("a");
+      card.className = "lesson-card bonus-card";
+      // Se o bônus tem externalUrl, vai pra essa página; senão, abre bonus.html
+      card.href = bonus.externalUrl ? bonus.externalUrl : `bonus.html?id=${bonus.id}`;
+      card.innerHTML = `
+        <div class="lesson-card-bg" style="background: ${bonus.gradient};"></div>
+        <div class="lesson-card-emoji">${bonus.emoji}</div>
+        <div class="lesson-card-overlay"></div>
+        <div class="lesson-card-content">
+          <div class="lesson-card-top">
+            <span class="lesson-card-num">Bônus</span>
+            <span class="lesson-card-status">★</span>
+          </div>
+          <div>
+            <div class="lesson-card-title">${bonus.title}</div>
+            <div class="lesson-card-tagline">${bonus.tagline}</div>
+          </div>
+        </div>
+      `;
+      bonusContainer.appendChild(card);
+    });
+  </script>
+</body>
+</html>

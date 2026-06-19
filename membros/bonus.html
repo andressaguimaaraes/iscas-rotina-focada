@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bônus · Rotina Focada</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="index.html" style="text-decoration:none;" class="brand">Rotina <span class="accent">Focada</span></a>
+      <div class="user-bar">
+        <span class="greeting" id="greeting">Olá</span>
+        <a href="index.html" class="btn-ghost" style="text-decoration:none;">Todos os módulos</a>
+        <button class="btn-ghost" onclick="Auth.logout()">Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="lesson-container" id="bonusContainer">
+    <!-- Bonus content rendered via JS -->
+  </main>
+
+  <footer class="site-footer">
+    Criado por <strong>Andressa Guimarães</strong> · Rotina Focada
+  </footer>
+
+  <script src="assets/auth.js"></script>
+  <script src="assets/data.js"></script>
+  <script>
+    Auth.requireAuth();
+
+    const user = Auth.getUser();
+    if (user && user.name) {
+      document.getElementById("greeting").textContent = `Olá, ${user.name.split(" ")[0]}`;
+    }
+
+    // Parse bonus ID
+    const params = new URLSearchParams(window.location.search);
+    const bonusId = params.get("id");
+
+    const bonus = BONUS_DATA.bonuses.find(b => b.id === bonusId);
+    const content = BONUS_DATA.content[bonusId];
+
+    const container = document.getElementById("bonusContainer");
+
+    if (!bonus || !content) {
+      container.innerHTML = `
+        <div style="text-align:center; padding: 80px 20px;">
+          <h1>Bônus não encontrado</h1>
+          <p style="margin-top:16px;"><a href="index.html" style="color: var(--accent);">← Voltar para o início</a></p>
+        </div>
+      `;
+    } else {
+      document.title = `${bonus.title} · Bônus · Rotina Focada`;
+
+      // Build content based on type
+      let typeContent = "";
+
+      if (bonus.type === "books") {
+        typeContent = content.books.map(book => `
+          <div class="book-card">
+            <div class="book-cover-wrap">
+              <img class="book-cover-img" src="${book.cover}" alt="${book.title}"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+              <div class="book-cover-fallback" style="background: ${book.fallbackColor}; display:none;">
+                <div class="book-cover-fallback-title">${book.fallbackTitle.replace(/\n/g, '<br/>')}</div>
+              </div>
+            </div>
+            <div class="book-info">
+              <span class="eyebrow-soft">📖 Livro recomendado</span>
+              <h3 class="book-title">${book.title}</h3>
+              <div class="book-author">por ${book.author}</div>
+
+              <div class="book-section">
+                <div class="book-section-label">🩷 Por que ler</div>
+                <p>${book.why}</p>
+              </div>
+
+              ${book.excerpt ? `
+                <div class="book-section">
+                  <div class="book-section-label">✏️ Trecho</div>
+                  <p class="book-excerpt">${book.excerpt}</p>
+                </div>
+              ` : ""}
+
+              ${book.highlights && book.highlights.length > 0 ? `
+                <div class="book-section">
+                  <div class="book-section-label">✨ Destaques</div>
+                  ${book.highlights.map(h => `
+                    <p class="highlight-${h.type}">"${h.text}"</p>
+                  `).join("")}
+                </div>
+              ` : ""}
+
+              ${book.quote ? `<div class="callout">${book.quote}</div>` : ""}
+
+              <a href="${book.amazonLink}" target="_blank" rel="noopener" class="amazon-btn">
+                <span>🛒</span> Ver na Amazon →
+              </a>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      if (bonus.type === "schedule") {
+        typeContent = content.weeks.map(week => `
+          <div class="schedule-week">
+            <div class="schedule-week-header">
+              <div class="schedule-week-num">Semana ${week.number}</div>
+              <h3 class="schedule-week-title">${week.title}</h3>
+              <div class="schedule-week-tagline">${week.tagline}</div>
+            </div>
+            <div class="schedule-days">
+              ${week.days.map(d => `
+                <div class="schedule-day">
+                  <div class="schedule-day-num">Dia ${d.day}</div>
+                  <div class="schedule-day-body">
+                    <h4>${d.title}</h4>
+                    <p>${d.action}</p>
+                  </div>
+                  <div class="schedule-checkbox" data-day="${d.day}"></div>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        `).join("");
+      }
+
+      if (bonus.type === "morning") {
+        typeContent = content.moments.map(m => `
+          <div class="moment-card">
+            <div class="moment-header">
+              <div class="moment-icon">${m.icon}</div>
+              <div class="moment-meta">
+                <div class="moment-num">Momento ${m.number}</div>
+                <h3>${m.title}</h3>
+                <div class="moment-time">⏱ ${m.time}</div>
+              </div>
+            </div>
+            <div class="moment-subtitle">${m.subtitle}</div>
+            <p class="moment-description">${m.description}</p>
+            <div class="book-section">
+              <div class="book-section-label">✏️ Como fazer</div>
+              <ul class="practical-list">
+                ${m.practical.map(p => `<li>${p}</li>`).join("")}
+              </ul>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      if (bonus.type === "devotional") {
+        typeContent = content.days.map(d => `
+          <div class="devotional-day">
+            <div class="devotional-day-header">
+              <div class="devotional-day-num">Dia ${d.day}</div>
+              <div class="devotional-day-theme">${d.theme}</div>
+            </div>
+            <div class="verse-block">
+              <p class="verse-text">"${d.verse}"</p>
+              <div class="verse-ref">— ${d.reference}</div>
+            </div>
+            <div class="book-section">
+              <div class="book-section-label">🩷 Reflexão</div>
+              <p>${d.reflection}</p>
+            </div>
+            <div class="book-section">
+              <div class="book-section-label">✨ Prática do dia</div>
+              <p class="highlight-yellow">${d.practice}</p>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      if (bonus.type === "framework") {
+        const sectionsHTML = content.sections.map(sec => `
+          <div class="framework-section">
+            <div class="framework-section-header">
+              <div class="framework-section-icon">${sec.icon}</div>
+              <h3 class="framework-section-title">${sec.title}</h3>
+            </div>
+            <div class="framework-items">
+              ${sec.items.map(item => `
+                <div class="framework-item">
+                  <div class="framework-item-label">${item.label}</div>
+                  <p>${item.text}</p>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        `).join("");
+
+        const highlightsHTML = (content.highlights && content.highlights.length > 0) ? `
+          <div class="framework-highlights">
+            <div class="book-section-label">✨ Frases pra fixar</div>
+            ${content.highlights.map(h => `<p class="highlight-${h.type}">"${h.text}"</p>`).join("")}
+          </div>
+        ` : "";
+
+        typeContent = sectionsHTML + highlightsHTML;
+      }
+
+      if (bonus.type === "checklist") {
+        const storageKey = `bonus-checklist-${bonusId}`;
+        typeContent = content.categories.map((cat, ci) => `
+          <div class="checklist-category">
+            <div class="checklist-category-header">
+              <span class="checklist-category-icon">${cat.icon}</span>
+              <h3 class="checklist-category-title">${cat.name}</h3>
+            </div>
+            <ul class="checklist-items">
+              ${cat.items.map((item, idx) => {
+                const itemId = `${ci}-${idx}`;
+                return `
+                  <li class="checklist-item" data-id="${itemId}">
+                    <span class="checklist-checkbox"></span>
+                    <span class="checklist-text">${item}</span>
+                  </li>
+                `;
+              }).join("")}
+            </ul>
+          </div>
+        `).join("");
+      }
+
+      if (bonus.type === "library") {
+        typeContent = content.categories.map(cat => `
+          <div class="library-category">
+            <h3 class="library-category-title">${cat.name}</h3>
+            <div class="library-books">
+              ${cat.books.map(book => `
+                <a href="${book.link}" target="_blank" rel="noopener" class="library-book">
+                  <div class="library-book-icon">📕</div>
+                  <div class="library-book-info">
+                    <div class="library-book-title">${book.title}</div>
+                    <div class="library-book-author">${book.author}</div>
+                  </div>
+                  <div class="library-book-arrow">→</div>
+                </a>
+              `).join("")}
+            </div>
+          </div>
+        `).join("");
+      }
+
+      container.innerHTML = `
+        <nav class="lesson-breadcrumb">
+          <a href="index.html">Módulos</a>
+          <span class="separator">/</span>
+          <span>Bônus</span>
+          <span class="separator">/</span>
+          <span>${bonus.title}</span>
+        </nav>
+
+        <header class="lesson-header bonus-header" style="background: ${bonus.gradient};">
+          <span class="module-tag" style="color: rgba(255,255,255,0.9);">✨ Bônus exclusivo</span>
+          <h1 style="color: #fff;">${bonus.emoji} ${bonus.title}</h1>
+          <div class="lesson-tagline" style="color: rgba(255,255,255,0.85);">${bonus.tagline}</div>
+        </header>
+
+        <section class="lesson-section">
+          <p class="bonus-intro">${content.intro}</p>
+        </section>
+
+        <section class="lesson-section bonus-content">
+          ${typeContent}
+        </section>
+
+        ${content.closing ? `
+          <section class="lesson-section">
+            <div class="callout-soft">${content.closing}</div>
+          </section>
+        ` : ""}
+
+        <nav class="lesson-nav">
+          <a href="index.html" class="nav-link prev">
+            <div class="nav-direction">← Voltar</div>
+            <div class="nav-title">Todos os bônus</div>
+          </a>
+        </nav>
+      `;
+
+      // Schedule checkbox state (saved in localStorage)
+      if (bonus.type === "schedule") {
+        const storageKey = `bonus-schedule-${bonusId}`;
+        const saved = JSON.parse(localStorage.getItem(storageKey) || "[]");
+        document.querySelectorAll(".schedule-checkbox").forEach(cb => {
+          const day = cb.dataset.day;
+          if (saved.includes(day)) cb.classList.add("checked");
+          cb.addEventListener("click", () => {
+            cb.classList.toggle("checked");
+            const currentSaved = JSON.parse(localStorage.getItem(storageKey) || "[]");
+            if (cb.classList.contains("checked")) {
+              if (!currentSaved.includes(day)) currentSaved.push(day);
+            } else {
+              const idx = currentSaved.indexOf(day);
+              if (idx >= 0) currentSaved.splice(idx, 1);
+            }
+            localStorage.setItem(storageKey, JSON.stringify(currentSaved));
+          });
+        });
+      }
+
+      // Checklist state (saved in localStorage)
+      if (bonus.type === "checklist") {
+        const storageKey = `bonus-checklist-${bonusId}`;
+        const saved = JSON.parse(localStorage.getItem(storageKey) || "[]");
+        document.querySelectorAll(".checklist-item").forEach(li => {
+          const id = li.dataset.id;
+          if (saved.includes(id)) li.classList.add("checked");
+          li.addEventListener("click", () => {
+            li.classList.toggle("checked");
+            const currentSaved = JSON.parse(localStorage.getItem(storageKey) || "[]");
+            if (li.classList.contains("checked")) {
+              if (!currentSaved.includes(id)) currentSaved.push(id);
+            } else {
+              const idx = currentSaved.indexOf(id);
+              if (idx >= 0) currentSaved.splice(idx, 1);
+            }
+            localStorage.setItem(storageKey, JSON.stringify(currentSaved));
+          });
+        });
+      }
+    }
+  </script>
+</body>
+</html>

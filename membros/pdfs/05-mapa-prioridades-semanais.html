@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Mapa de prioridades semanais · Rotina Focada</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4 landscape; margin: 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; color: #1a1a1a; line-height: 1.4; font-size: 10pt; background: #fff; }
+
+  /* HEADER */
+  .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid #1a1a1a; }
+  .header-left .tag { display: inline-block; background: rgba(255,80,0,0.1); border: 1px solid rgba(255,80,0,0.4); color: #ff5000; font-size: 8pt; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 3px 10px; border-radius: 100px; margin-bottom: 6px; }
+  .header h1 { font-family: 'Bebas Neue', sans-serif; font-size: 26pt; letter-spacing: 0.5px; line-height: 1; }
+  .header h1 span { color: #ff5000; }
+  .header-right { text-align: right; font-size: 9pt; color: #555; }
+  .header-right .week-label { font-weight: 700; color: #ff5000; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 4px; }
+  .header-right .week-line { width: 160px; border-bottom: 1.5px solid #1a1a1a; height: 18px; }
+
+  /* TOP SECTION - 3 PRIORITIES */
+  .top-3 { background: linear-gradient(135deg, #fff5ef, #ffeadc); border: 2px solid #ff5000; border-radius: 10px; padding: 10px 14px; margin-bottom: 12px; }
+  .top-3-title { font-family: 'Bebas Neue', sans-serif; font-size: 14pt; color: #ff5000; letter-spacing: 1px; margin-bottom: 6px; }
+  .top-3-list { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .top-3-item { display: flex; gap: 8px; align-items: center; }
+  .top-3-num { flex-shrink: 0; width: 22px; height: 22px; background: #ff5000; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 12pt; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .top-3-line { flex: 1; border-bottom: 1.5px solid #ff5000; height: 20px; }
+
+  /* CALENDAR GRID */
+  .calendar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-bottom: 10px; }
+  .day { border: 1.5px solid #1a1a1a; border-radius: 8px; min-height: 175px; display: flex; flex-direction: column; overflow: hidden; }
+  .day-header { background: #1a1a1a; color: #fff; padding: 5px 8px; text-align: center; }
+  .day-header .day-name { font-family: 'Bebas Neue', sans-serif; font-size: 12pt; letter-spacing: 1px; }
+  .day-header .day-date { font-size: 8pt; color: #ccc; margin-top: 1px; }
+  .day-body { padding: 6px 8px; flex: 1; display: flex; flex-direction: column; }
+  .day-line { border-bottom: 1px dashed #ccc; height: 16px; }
+
+  /* WEEKEND */
+  .day.weekend .day-header { background: #ff5000; }
+
+  /* BOTTOM SECTION */
+  .bottom { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .bottom-box { border: 1.5px solid #ddd; border-radius: 8px; padding: 8px 12px; }
+  .bottom-box .label { font-family: 'Bebas Neue', sans-serif; font-size: 11pt; color: #ff5000; letter-spacing: 1px; margin-bottom: 4px; }
+  .bottom-line { border-bottom: 1px dashed #ccc; height: 16px; }
+
+  .footer-note { margin-top: 8px; text-align: center; font-size: 8pt; color: #999; }
+  .footer-note strong { color: #ff5000; font-style: italic; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="tag">📄 Imprimível · Mapa Semanal</div>
+    <h1>MAPA DE PRIORIDADES <span>SEMANAIS</span></h1>
+  </div>
+  <div class="header-right">
+    <div class="week-label">Semana de</div>
+    <div class="week-line"></div>
+  </div>
+</div>
+
+<!-- 3 PRIORIDADES DA SEMANA -->
+<div class="top-3">
+  <div class="top-3-title">🎯 AS 3 PRIORIDADES DA SEMANA</div>
+  <div class="top-3-list">
+    <div class="top-3-item">
+      <div class="top-3-num">1</div>
+      <div class="top-3-line"></div>
+    </div>
+    <div class="top-3-item">
+      <div class="top-3-num">2</div>
+      <div class="top-3-line"></div>
+    </div>
+    <div class="top-3-item">
+      <div class="top-3-num">3</div>
+      <div class="top-3-line"></div>
+    </div>
+  </div>
+</div>
+
+<!-- CALENDÁRIO DA SEMANA -->
+<div class="calendar">
+  <div class="day">
+    <div class="day-header">
+      <div class="day-name">SEG</div>
+      <div class="day-date">___ / ___</div>
+    </div>
+    <div class="day-body">
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="day-header">
+      <div class="day-name">TER</div>
+      <div class="day-date">___ / ___</div>
+    </div>
+    <div class="day-body">
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="day-header">
+      <div class="day-name">QUA</div>
+      <div class="day-date">___ / ___</div>
+    </div>
+    <div class="day-body">
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="day-header">
+      <div class="day-name">QUI</div>
+      <div class="day-date">___ / ___</div>
+    </div>
+    <div class="day-body">
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="day-header">
+      <div class="day-name">SEX</div>
+      <div class="day-date">___ / ___</div>
+    </div>
+    <div class="day-body">
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+    </div>
+  </div>
+
+  <div class="day weekend">
+    <div class="day-header">
+      <div class="day-name">SÁB</div>
+      <div class="day-date">___ / ___</div>
+    </div>
+    <div class="day-body">
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+    </div>
+  </div>
+
+  <div class="day weekend">
+    <div class="day-header">
+      <div class="day-name">DOM</div>
+      <div class="day-date">___ / ___</div>
+    </div>
+    <div class="day-body">
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+      <div class="day-line"></div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM SECTION -->
+<div class="bottom">
+  <div class="bottom-box">
+    <div class="label">✨ FOCO DA SEMANA</div>
+    <div class="bottom-line"></div>
+    <div class="bottom-line"></div>
+  </div>
+  <div class="bottom-box">
+    <div class="label">⚡ HÁBITOS-ÂNCORA</div>
+    <div class="bottom-line"></div>
+    <div class="bottom-line"></div>
+  </div>
+  <div class="bottom-box">
+    <div class="label">🌷 REVISÃO DE DOMINGO</div>
+    <div class="bottom-line"></div>
+    <div class="bottom-line"></div>
+  </div>
+</div>
+
+<div class="footer-note">
+  Material exclusivo · <strong>Rotina Focada</strong> por Andressa Guimarães · Imprimir e usar toda semana
+</div>
+
+</body>
+</html>

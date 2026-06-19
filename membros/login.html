@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acesso · Rotina Focada</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body class="login-page">
+  <div class="login-card">
+    <div class="brand-large">Rotina <span class="accent">Focada</span></div>
+    <div class="login-subtitle">Área de Membros</div>
+
+    <h1>Bem-vinda de volta</h1>
+    <p class="welcome-text">Entre com a senha que você recebeu por e-mail após a compra para acessar todos os módulos do curso.</p>
+
+    <div class="error-msg" id="errorMsg">Senha incorreta. Tente novamente ou verifique o e-mail de boas-vindas.</div>
+
+    <form id="loginForm" autocomplete="off">
+      <div class="field">
+        <label for="name">Seu nome</label>
+        <input type="text" id="name" name="name" placeholder="Como posso te chamar?" required />
+      </div>
+
+      <div class="field">
+        <label for="password">Senha de acesso</label>
+        <input type="password" id="password" name="password" placeholder="Digite a senha" required autofocus />
+      </div>
+
+      <button type="submit" class="btn-primary" id="loginBtn">Entrar no curso</button>
+    </form>
+
+    <p class="login-footer">
+      Esqueceu a senha? <a href="mailto:contato@andressaguimaraes.com">Fale com a Andressa</a>
+    </p>
+  </div>
+
+  <script src="assets/auth.js"></script>
+  <script>
+    if (Auth.isAuthenticated()) {
+      window.location.href = "index.html";
+    }
+
+    const form = document.getElementById("loginForm");
+    const errorMsg = document.getElementById("errorMsg");
+    const btn = document.getElementById("loginBtn");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      errorMsg.classList.remove("show");
+      const name = document.getElementById("name").value.trim();
+      const password = document.getElementById("password").value;
+
+      btn.disabled = true;
+      btn.textContent = "Verificando...";
+
+      setTimeout(() => {
+        if (Auth.login(name, password)) {
+          btn.textContent = "✓ Acesso liberado";
+          setTimeout(() => {
+            window.location.href = "index.html";
+          }, 400);
+        } else {
+          errorMsg.classList.add("show");
+          btn.disabled = false;
+          btn.textContent = "Entrar no curso";
+          document.getElementById("password").value = "";
+          document.getElementById("password").focus();
+        }
+      }, 500);
+    });
+  </script>
+</body>
+</html>

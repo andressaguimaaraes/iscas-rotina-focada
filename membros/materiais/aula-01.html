@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Aula 01 · Rotina Focada — Material em PDF</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap');
+
+    @page {
+      size: A4;
+      margin: 18mm 16mm 18mm 16mm;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #f5ecdb;
+      color: #2a1f15;
+      line-height: 1.65;
+      font-size: 11.5pt;
+    }
+
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+
+    /* COVER */
+    .cover {
+      text-align: center;
+      padding: 60px 20px 50px;
+      page-break-after: always;
+      border-bottom: 1px solid #e2cfa6;
+    }
+
+    .cover .brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28pt;
+      font-weight: 600;
+      color: #2a1f15;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+
+    .cover .brand em {
+      font-style: italic;
+      color: #c2410c;
+    }
+
+    .cover .module-label {
+      font-size: 9pt;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #c2410c;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .cover h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26pt;
+      line-height: 1.15;
+      font-weight: 600;
+      color: #2a1f15;
+      margin-bottom: 14px;
+      letter-spacing: -0.5px;
+    }
+
+    .cover .tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14pt;
+      font-style: italic;
+      color: #5c4a36;
+      margin-bottom: 26px;
+    }
+
+    .cover .ornament {
+      color: #c2410c;
+      font-size: 18pt;
+      letter-spacing: 6px;
+      margin: 30px 0;
+    }
+
+    .cover .author {
+      font-size: 10pt;
+      color: #8a7559;
+      letter-spacing: 1px;
+    }
+
+    .cover .author strong {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: #c2410c;
+      font-size: 13pt;
+      font-weight: 600;
+    }
+
+    /* CONTENT */
+    .eyebrow {
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #c2410c;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22pt;
+      font-weight: 600;
+      color: #2a1f15;
+      margin: 28px 0 14px;
+      line-height: 1.2;
+      letter-spacing: -0.3px;
+      page-break-after: avoid;
+    }
+
+    h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17pt;
+      font-weight: 600;
+      color: #2a1f15;
+      margin: 22px 0 10px;
+      line-height: 1.3;
+      page-break-after: avoid;
+    }
+
+    p {
+      margin-bottom: 12px;
+      color: #2a1f15;
+    }
+
+    strong {
+      font-weight: 600;
+      color: #2a1f15;
+    }
+
+    em {
+      color: #c2410c;
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    .callout-soft {
+      background: #fce7d8;
+      border: 1px solid #f4c89f;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 20px 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14pt;
+      line-height: 1.5;
+      page-break-inside: avoid;
+    }
+
+    .callout {
+      background: rgba(194, 65, 12, 0.06);
+      border-left: 3px solid #c2410c;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 22px 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 14pt;
+      color: #5c4a36;
+      line-height: 1.5;
+      page-break-inside: avoid;
+    }
+
+    /* Reflection grid */
+    .reflect-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 16px 0 22px;
+    }
+
+    .reflect-card {
+      background: #f7ecd5;
+      border: 1px solid #e2cfa6;
+      border-radius: 10px;
+      padding: 14px 16px;
+      page-break-inside: avoid;
+    }
+
+    .reflect-card-wide {
+      grid-column: 1 / -1;
+    }
+
+    .reflect-icon {
+      font-size: 18pt;
+      margin-bottom: 4px;
+    }
+
+    .reflect-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14pt;
+      font-weight: 600;
+      color: #c2410c;
+      margin-bottom: 4px;
+    }
+
+    .reflect-card p {
+      font-size: 10.5pt;
+      color: #5c4a36;
+      line-height: 1.55;
+      margin-bottom: 0;
+    }
+
+    /* Goals list */
+    .goals-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 14px 0;
+    }
+
+    .goals-list li {
+      background: #f7ecd5;
+      border: 1px solid #e2cfa6;
+      border-radius: 8px;
+      padding: 10px 16px;
+      margin-bottom: 8px;
+      font-size: 11pt;
+      page-break-inside: avoid;
+    }
+
+    /* Exercise list */
+    .exercise-card {
+      background: #f7ecd5;
+      border: 1px solid #e2cfa6;
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      page-break-inside: avoid;
+    }
+
+    .exercise-num {
+      flex-shrink: 0;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #c2410c;
+      color: #fff;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15pt;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .exercise-body h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14pt;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #2a1f15;
+    }
+
+    .exercise-body p {
+      color: #5c4a36;
+      font-size: 10.5pt;
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+
+    .footer {
+      margin-top: 50px;
+      padding-top: 24px;
+      border-top: 1px solid #e2cfa6;
+      text-align: center;
+      font-size: 9pt;
+      color: #8a7559;
+      page-break-inside: avoid;
+    }
+
+    .footer strong {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: #c2410c;
+      font-size: 11pt;
+      font-weight: 600;
+    }
+
+    /* Print only */
+    .print-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #c2410c;
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 100px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(194,65,12,0.3);
+      z-index: 100;
+    }
+
+    .print-button:hover {
+      background: #7a2a08;
+    }
+
+    @media print {
+      .print-button { display: none; }
+      body { background: #fff; }
+    }
+  </style>
+</head>
+<body>
+  <button class="print-button" onclick="window.print()">🖨️ Salvar como PDF</button>
+
+  <!-- CAPA -->
+  <div class="cover">
+    <div class="brand">Rotina <em>Focada</em></div>
+    <div class="ornament">· · ·</div>
+    <div class="module-label">Módulo 01 · Aula 01 · Princípios</div>
+    <h1>Entender isso te fará querer<br/>ter uma rotina focada</h1>
+    <div class="tagline">O ponto de virada que muda tudo</div>
+    <div class="ornament">· · ·</div>
+    <div class="author">Material de apoio por<br/><strong>Andressa Guimarães</strong></div>
+  </div>
+
+  <!-- CONTEÚDO -->
+  <div class="page">
+
+    <span class="eyebrow">Resumo da aula</span>
+    <h2>O que você vai entender</h2>
+
+    <p>Antes de qualquer técnica ou ferramenta, é preciso entender por que uma rotina focada funciona — e por que sem ela, mesmo a melhor agenda do mundo desmorona. Esta aula muda sua percepção sobre o que é, de fato, ter foco.</p>
+
+    <div class="callout-soft">
+      🩷 <strong>As pessoas bem-sucedidas sabem aonde querem ir na vida e têm um plano para chegar lá.</strong>
+    </div>
+
+    <h3>Onde você quer estar daqui 10 anos?</h3>
+    <p>Considere sua condição em cada uma destas áreas:</p>
+
+    <div class="reflect-grid">
+      <div class="reflect-card">
+        <div class="reflect-icon">💰</div>
+        <div class="reflect-title">Financeira</div>
+        <p>Quanto gostaria de estar ganhando?</p>
+      </div>
+      <div class="reflect-card">
+        <div class="reflect-icon">👑</div>
+        <div class="reflect-title">Carreira</div>
+        <p>Quais são seus objetivos profissionais? Qual trabalho gostaria de ter?</p>
+      </div>
+      <div class="reflect-card">
+        <div class="reflect-icon">🦋</div>
+        <div class="reflect-title">Família</div>
+        <p>Em que gostaria que seu relacionamento com seu marido fosse diferente? Como gostaria de passar o tempo livre juntos?</p>
+      </div>
+      <div class="reflect-card">
+        <div class="reflect-icon">🏡</div>
+        <div class="reflect-title">Estilo de vida</div>
+        <p>Onde gostaria de morar? Como seria a sua casa?</p>
+      </div>
+      <div class="reflect-card reflect-card-wide">
+        <div class="reflect-icon">✨</div>
+        <div class="reflect-title">Condição espiritual</div>
+        <p>Em que seu relacionamento com Deus seria diferente do que é agora? Quais hábitos não fariam mais parte da sua vida?</p>
+      </div>
+    </div>
+
+    <h3>Nunca subestime o poder de sonhar ✨💭</h3>
+    <p>Crescemos através de sonhos grandes — <strong>todas as pessoas de grande sucesso são grandes sonhadores</strong>.</p>
+    <p>Alguns de nós deixam esses sonhos morrerem. Outros os nutrem e os protegem, cuidam deles em meio aos dias maus até trazê-los para o sol e a luz.</p>
+
+    <p>Os sonhos são importantes, mas <strong>não são suficientes</strong> para mudar a sua vida. Precisamos de um <em>Plano de ação</em> a fim de chegar ao destino desejado.</p>
+
+    <div class="callout">Um sonho sem um plano é apenas um desejo.</div>
+
+    <p>Você precisa de um <strong>mapa de estrada específico</strong>, que te leve de onde está atualmente para:</p>
+
+    <ul class="goals-list">
+      <li>💛 A <strong>liberdade</strong> em suas finanças</li>
+      <li>🦋 A <strong>satisfação</strong> na vida de sua família</li>
+      <li>👑 O <strong>sucesso</strong> em sua carreira</li>
+      <li>✨ A <strong>intimidade</strong> com Deus</li>
+    </ul>
+
+    <!-- PONTOS-CHAVE -->
+    <span class="eyebrow">Pontos-chave</span>
+    <h2>O que carregar dessa aula</h2>
+
+    <ul class="goals-list">
+      <li>Pessoas bem-sucedidas sabem aonde querem ir — e têm um plano para chegar lá.</li>
+      <li>Sonhos grandes movem grandes mudanças. Não deixe os seus morrerem.</li>
+      <li>Um sonho sem plano é apenas um desejo.</li>
+      <li>Você precisa de um mapa específico para sair de onde está e chegar onde sonha.</li>
+    </ul>
+
+    <!-- EXERCÍCIOS -->
+    <span class="eyebrow">Mãos à obra</span>
+    <h2>Exercícios passo a passo</h2>
+    <p>Não pule esta parte. Aplicar é o que separa quem assiste do que transforma a rotina.</p>
+
+    <div class="exercise-card">
+      <div class="exercise-num">1</div>
+      <div class="exercise-body">
+        <h4>Escreva sua visão de 10 anos</h4>
+        <p>Pegue uma folha e responda, em até 1 página, como seria sua vida daqui a 10 anos nas 5 áreas: financeira, carreira, família, estilo de vida e espiritual. Não filtre — sonhe grande.</p>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="exercise-num">2</div>
+      <div class="exercise-body">
+        <h4>Desenhe o mapa do destino</h4>
+        <p>Para cada área da sua visão, escreva: "Onde estou hoje" vs. "Onde quero estar em 10 anos". Olhe a distância entre os dois pontos. Esse é o seu mapa.</p>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="exercise-num">3</div>
+      <div class="exercise-body">
+        <h4>Defina a primeira parada do mapa</h4>
+        <p>Qual é o próximo passo concreto, dos próximos 90 dias, que te aproxima dessa visão? Escreva e coloque em um lugar visível.</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      Material de apoio · Aula 01 · Módulo 01<br/>
+      <strong>Rotina Focada</strong> por Andressa Guimarães
+    </div>
+  </div>
+
+  <script>
+    // Auto-prompt para imprimir/salvar como PDF se a aluna abriu pra isso
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('print') === '1') {
+      setTimeout(() => window.print(), 600);
+    }
+  </script>
+</body>
+</html>

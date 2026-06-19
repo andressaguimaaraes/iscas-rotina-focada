@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Como criar blocos de trabalho profundo · Rotina Focada</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 18mm 16mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; color: #1a1a1a; line-height: 1.6; font-size: 11pt; background: #fff; }
+  .page { padding: 20px 10px; page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+
+  .cover { text-align: center; padding: 70px 30px; background: linear-gradient(180deg, #fff 0%, #fff5ef 100%); }
+  .cover .tag { display: inline-block; background: rgba(255,80,0,0.1); border: 1px solid rgba(255,80,0,0.4); color: #ff5000; font-size: 10pt; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; padding: 6px 16px; border-radius: 100px; margin-bottom: 30px; }
+  .cover h1 { font-family: 'Bebas Neue', sans-serif; font-size: 50pt; line-height: 0.95; letter-spacing: 1px; margin-bottom: 14px; }
+  .cover h1 span { color: #ff5000; }
+  .cover .subtitle { font-size: 14pt; color: #555; margin: 18px 0 40px; font-style: italic; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.45; }
+  .cover .ornament { font-size: 18pt; color: #ff5000; letter-spacing: 8px; margin: 40px 0; }
+  .cover .author { font-size: 10pt; color: #888; letter-spacing: 1px; }
+  .cover .author strong { color: #ff5000; font-size: 12pt; }
+
+  .eyebrow { font-size: 10pt; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: #ff5000; margin-bottom: 10px; display: block; }
+  h2 { font-family: 'Bebas Neue', sans-serif; font-size: 28pt; color: #1a1a1a; letter-spacing: 0.5px; margin: 8px 0 18px; line-height: 1.05; page-break-after: avoid; }
+  h2 span { color: #ff5000; }
+  h3 { font-family: 'Inter', sans-serif; font-size: 14pt; font-weight: 700; color: #1a1a1a; margin: 22px 0 6px; }
+  p { margin-bottom: 12px; font-size: 11pt; line-height: 1.7; color: #2a2a2a; }
+  strong { color: #1a1a1a; font-weight: 600; }
+  ul, ol { padding-left: 0; list-style: none; margin: 10px 0 16px; }
+  li { padding: 8px 0 8px 28px; position: relative; font-size: 11pt; line-height: 1.6; }
+  li::before { content: '▸'; position: absolute; left: 8px; color: #ff5000; font-weight: 700; }
+
+  .callout { background: #fff5ef; border-left: 4px solid #ff5000; border-radius: 8px; padding: 16px 22px; margin: 16px 0; font-style: italic; font-size: 13pt; color: #4a2515; line-height: 1.5; page-break-inside: avoid; }
+  .step { background: #fffaf5; border: 1px solid #ffdcc4; border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; display: flex; gap: 14px; page-break-inside: avoid; }
+  .step-num { flex-shrink: 0; width: 32px; height: 32px; background: #ff5000; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 16pt; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .step-body h4 { font-family: 'Inter', sans-serif; font-size: 13pt; font-weight: 700; margin-bottom: 4px; color: #1a1a1a; }
+  .step-body p { font-size: 10.5pt; color: #555; margin: 0; }
+  .footer-page { margin-top: 40px; padding-top: 16px; border-top: 1px solid #eee; text-align: center; font-size: 9pt; color: #999; }
+  .footer-page strong { color: #ff5000; font-style: italic; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="tag">📄 PDF de Foco · Material 02</div>
+  <h1>COMO CRIAR<br>BLOCOS DE<br>TRABALHO<br><span>PROFUNDO</span></h1>
+  <div class="subtitle">O guia completo para entregar mais em 90 minutos do que muita gente entrega em um dia inteiro.</div>
+  <div class="ornament">· · ·</div>
+  <div class="author">Material exclusivo da<br><strong>Biblioteca Anti Procrastinação</strong></div>
+</div>
+
+<div class="page">
+  <span class="eyebrow">O que é trabalho profundo</span>
+  <h2>A unidade básica de toda <span>entrega real</span></h2>
+  <p>Trabalho profundo é qualquer atividade cognitiva exigente, feita em estado de concentração total, sem distração. É o tipo de trabalho que cria valor real — diferente de "trabalho raso" que é responder e-mails, mensagens, reuniões automáticas.</p>
+  <p>Em uma economia em que TODOS estão dispersos, a capacidade de focar profundamente virou um superpoder. Quem cultiva blocos profundos entrega 3 a 5 vezes mais que a média — em metade do tempo.</p>
+
+  <div class="callout">"A capacidade de fazer trabalho profundo está se tornando cada vez mais rara — e cada vez mais valiosa." — Cal Newport</div>
+
+  <h3>Por que blocos funcionam</h3>
+  <p>Seu cérebro NÃO foi feito pra focar 8 horas direto. Ele funciona em ciclos de 90 a 120 minutos (chamados ciclos ultradianos). Tentar trabalhar além disso sem pausa diminui sua eficiência drasticamente.</p>
+  <p>Por outro lado, trabalhar em <strong>blocos curtos de 60 a 90 minutos com foco total</strong> respeita o ritmo natural do cérebro e produz resultados exponencialmente maiores.</p>
+</div>
+
+<div class="page">
+  <span class="eyebrow">Antes do bloco</span>
+  <h2>Como <span>preparar</span> o terreno</h2>
+  <p>90% do sucesso de um bloco profundo está na preparação. Pular essa parte é desperdiçar o bloco antes mesmo de começar.</p>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <h4>Limpe o ambiente</h4>
+      <p>Mesa só com o necessário. Celular em outro cômodo. Notificações desligadas no computador. Água ao lado.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <h4>Defina o objetivo do bloco</h4>
+      <p>Escreva em uma frase: "Ao final dessas 90 minutos, terei [resultado concreto]". Sem isso, você flutua.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-body">
+      <h4>Cuide do corpo</h4>
+      <p>Cabeça precisa estar alimentada e hidratada. Banheiro feito. Energia disponível. Bloco vai exigir.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-body">
+      <h4>Faça o ritual de entrada</h4>
+      <p>3 respirações profundas. Olhe para a folha com o objetivo. Comece. Sem pensar muito.</p>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+  <span class="eyebrow">Durante o bloco</span>
+  <h2>Como <span>manter</span> o foco</h2>
+  <p>Entrar no bloco é fácil. Permanecer é onde a maioria falha. Esses são os 4 pilares pra sustentar a concentração até o fim.</p>
+
+  <h3>1. A regra do "não negociar"</h3>
+  <p>Se você sentiu vontade de pegar o celular — não pega. Se pensou em conferir o e-mail — não confere. Você fez um pacto com você mesma. Esse pacto não é negociável durante o bloco.</p>
+
+  <h3>2. Caderno de distrações</h3>
+  <p>Pensou em algo que precisa fazer depois? Tem ideia que veio do nada? Anote em um caderno ao lado. NÃO interrompa o bloco pra resolver. Volta pra anotação depois.</p>
+
+  <h3>3. Use timer visível</h3>
+  <p>Tenha um relógio ou timer visível. Saber quanto falta dá direção. Recomendado: 90 minutos com aviso de 10 min restantes.</p>
+
+  <h3>4. Música sem letra (opcional)</h3>
+  <p>Música com letra divide o cérebro. Se for usar áudio, prefira instrumental, lo-fi ou natureza. Som branco também funciona muito bem.</p>
+
+  <div class="callout">Se você foi interrompida mesmo assim, NÃO desista. Volte ao objetivo escrito e continue. O bloco continua sendo seu.</div>
+</div>
+
+<div class="page">
+  <span class="eyebrow">Depois do bloco</span>
+  <h2>O <span>encerramento</span> que poucos fazem</h2>
+  <p>Encerrar bem é tão importante quanto começar bem. O ritual de saída protege o que você acabou de produzir e prepara o próximo bloco.</p>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <h4>Pare quando o timer tocar</h4>
+      <p>Não estenda "só mais 10 min". Você quebra a confiança do seu cérebro no método.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <h4>Escreva o que avançou</h4>
+      <p>Uma frase: "Avancei [X]." Outra: "Próximo passo é [Y]." Sua próxima sessão começa daqui.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-body">
+      <h4>Levante e movimente</h4>
+      <p>Saia da cadeira. Andar 5 minutos. Olhar pra janela. NÃO pega o celular ainda.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-body">
+      <h4>Pausa real</h4>
+      <p>15 a 20 minutos longe da tela. Beba água. Coma uma fruta. Respire. O cérebro precisa absorver o que foi feito.</p>
+    </div>
+  </div>
+
+  <h3>Erros comuns na hora de encerrar</h3>
+  <ul>
+    <li>Olhar Instagram "rapidinho" durante a pausa (anula a pausa)</li>
+    <li>Pular pra próxima tarefa sem registrar o avanço (perde memória)</li>
+    <li>Estender o bloco quando tava "fluindo" (quebra o ritmo)</li>
+    <li>Não fazer pausa entre blocos (queima energia rápido demais)</li>
+  </ul>
+</div>
+
+<div class="page">
+  <span class="eyebrow">Cronograma sugerido</span>
+  <h2>Como encaixar blocos<br>no <span>seu dia</span></h2>
+  <p>Você não precisa ter 8 blocos por dia. Comece com 1 ou 2 e cresça de acordo com a sua energia e horário. Esses são modelos que funcionam pra diferentes rotinas.</p>
+
+  <h3>Modelo 1 — Manhã profunda (recomendado)</h3>
+  <ul>
+    <li><strong>06h00 – 06h30</strong> · Ritual matinal (água, leitura, intenção)</li>
+    <li><strong>06h30 – 08h00</strong> · BLOCO 1 (trabalho mais importante do dia)</li>
+    <li><strong>08h00 – 08h30</strong> · Pausa real (café, banho, família)</li>
+    <li><strong>08h30 – 10h00</strong> · BLOCO 2 (segunda prioridade)</li>
+    <li><strong>10h00 em diante</strong> · Trabalho raso (e-mails, reuniões, recados)</li>
+  </ul>
+
+  <h3>Modelo 2 — Para quem tem filhos pequenos</h3>
+  <ul>
+    <li><strong>05h00 – 06h30</strong> · BLOCO 1 (antes da casa acordar)</li>
+    <li><strong>06h30 – 09h00</strong> · Família, café da manhã, escola</li>
+    <li><strong>09h00 – 10h30</strong> · BLOCO 2 (se tiver disponível)</li>
+    <li><strong>20h30 – 21h30</strong> · BLOCO leve (revisão, escrita, leitura)</li>
+  </ul>
+
+  <h3>Modelo 3 — Para quem trabalha em equipe</h3>
+  <ul>
+    <li><strong>09h00 – 10h30</strong> · BLOCO 1 (sem reuniões antes das 10h30)</li>
+    <li><strong>10h30 – 12h00</strong> · Reuniões e respostas</li>
+    <li><strong>14h00 – 15h30</strong> · BLOCO 2 (depois do almoço)</li>
+    <li><strong>15h30 – 18h00</strong> · Colaboração e reuniões</li>
+  </ul>
+
+  <div class="callout">Comece com UM bloco por dia, todos os dias. Quando virar hábito (2-3 semanas), adicione o segundo. Crescer aos poucos é mais sustentável.</div>
+
+  <div class="footer-page">
+    Material exclusivo · <strong>Rotina Focada</strong> por Andressa Guimarães
+  </div>
+</div>
+
+</body>
+</html>

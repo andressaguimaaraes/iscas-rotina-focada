@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Biblioteca Anti Procrastinação · Rotina Focada</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0a0a0a;
+    --bg-card: #1a1a1a;
+    --bg-card-soft: #222;
+    --border: #2a2a2a;
+    --text: #fff;
+    --text-soft: #aaa;
+    --text-muted: #666;
+    --accent: #ff5000;
+    --accent-light: #ff8c00;
+    --accent-bg: rgba(255, 80, 0, 0.12);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    padding: 24px 16px;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  /* ============ HERO CARD ============ */
+  .hero-card {
+    background: #0d0d0d;
+    border: 1px solid #1a1a1a;
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    padding: 40px 30px 36px;
+    text-align: center;
+    box-shadow: 0 0 80px rgba(255,80,0,0.15);
+    margin-bottom: 36px;
+  }
+
+  .hero-card::after {
+    content: '';
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 360px;
+    height: 220px;
+    background: radial-gradient(ellipse, rgba(255,80,0,0.18) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero-card .content { position: relative; z-index: 1; }
+
+  .tag {
+    display: inline-block;
+    background: var(--accent-bg);
+    border: 1px solid rgba(255,80,0,0.4);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 18px;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 8vw, 72px);
+    letter-spacing: 2px;
+    line-height: 1;
+    margin-bottom: 14px;
+  }
+
+  .hero-title span { color: var(--accent); }
+
+  .hero-subtitle {
+    font-size: 15px;
+    color: var(--text-soft);
+    line-height: 1.6;
+    margin-bottom: 32px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid #1a1a1a;
+    flex-wrap: wrap;
+  }
+
+  .hero-stat {
+    text-align: center;
+  }
+
+  .hero-stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: 1px;
+  }
+
+  .hero-stat-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* ============ SECTION TITLE ============ */
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--text);
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    text-align: center;
+  }
+
+  .section-title span { color: var(--accent); }
+
+  .section-subtitle {
+    text-align: center;
+    color: var(--text-soft);
+    font-size: 14px;
+    margin-bottom: 28px;
+  }
+
+  /* ============ CATEGORIES GRID ============ */
+  .categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+
+  .category-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px 20px;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .category-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,80,0,0.08), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+
+  .category-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(255,80,0,0.15);
+  }
+
+  .category-card:hover::before {
+    opacity: 1;
+  }
+
+  .category-card.active {
+    border-color: var(--accent);
+    background: linear-gradient(180deg, rgba(255,80,0,0.08), var(--bg-card));
+    box-shadow: 0 12px 30px rgba(255,80,0,0.2);
+  }
+
+  .category-icon {
+    font-size: 38px;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .category-name {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 4px;
+    color: var(--text);
+  }
+
+  .category-count {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ============ CONTENT SECTIONS ============ */
+  .content-section {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 32px 28px;
+    margin-bottom: 24px;
+    display: none;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .content-section.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .content-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .content-icon-big {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+  }
+
+  .content-header h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 1.5px;
+    margin-bottom: 2px;
+  }
+
+  .content-header p {
+    color: var(--text-soft);
+    font-size: 13px;
+  }
+
+  /* ============ ITEMS LIST ============ */
+  .items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .item-card {
+    background: var(--bg-card-soft);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.2s;
+    text-decoration: none;
+    color: var(--text);
+    cursor: pointer;
+  }
+
+  .item-card:hover {
+    border-color: var(--accent);
+    transform: translateX(4px);
+    background: rgba(255,80,0,0.04);
+  }
+
+  .item-number {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    background: rgba(255,80,0,0.1);
+    border: 1px solid rgba(255,80,0,0.3);
+    border-radius: 50%;
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .item-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .item-title {
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 2px;
+  }
+
+  .item-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .item-action {
+    flex-shrink: 0;
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 100px;
+    background: rgba(255,80,0,0.08);
+    border: 1px solid rgba(255,80,0,0.3);
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+
+  .item-card:hover .item-action {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .item-action.soon {
+    color: var(--text-muted);
+    background: rgba(255,255,255,0.04);
+    border-color: var(--border);
+  }
+
+  .item-card.soon {
+    opacity: 0.55;
+  }
+
+  .item-card.soon:hover {
+    border-color: var(--border);
+    transform: none;
+    background: var(--bg-card-soft);
+  }
+
+  /* ============ FOOTER ============ */
+  .biblio-footer {
+    text-align: center;
+    padding: 32px 16px;
+    color: var(--text-muted);
+    font-size: 12px;
+    margin-top: 20px;
+  }
+
+  .biblio-footer strong {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* ============ MOBILE ============ */
+  @media (max-width: 540px) {
+    .hero-card {
+      padding: 32px 22px 28px;
+    }
+    .hero-title {
+      font-size: 44px;
+    }
+    .hero-stats {
+      gap: 18px;
+    }
+    .categories {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .content-section {
+      padding: 24px 18px;
+    }
+    .content-header h2 {
+      font-size: 26px;
+    }
+    .item-card {
+      padding: 14px 16px;
+      gap: 12px;
+    }
+    .item-title {
+      font-size: 14px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HERO CARD -->
+  <div class="hero-card">
+    <div class="content">
+      <div class="tag">🎁 Bônus Exclusivo</div>
+
+      <h1 class="hero-title">BIBLIOTECA<br><span>ANTI</span><br>PROCRASTINAÇÃO</h1>
+
+      <p class="hero-subtitle">Acesse os melhores conteúdos sobre foco, disciplina e produtividade no seu celular.</p>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">36</div>
+          <div class="hero-stat-label">Conteúdos</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">4</div>
+          <div class="hero-stat-label">Categorias</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">∞</div>
+          <div class="hero-stat-label">Vitalício</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO DE CATEGORIAS -->
+  <h2 class="section-title">Explore por <span>categoria</span></h2>
+  <p class="section-subtitle">Clique em uma categoria abaixo pra ver todos os conteúdos disponíveis</p>
+
+  <div class="categories">
+    <div class="category-card active" data-target="audios">
+      <span class="category-icon">🎧</span>
+      <div class="category-name">Resumos em Áudio</div>
+      <div class="category-count">5 conteúdos</div>
+    </div>
+    <div class="category-card" data-target="pdfs">
+      <span class="category-icon">📄</span>
+      <div class="category-name">PDFs de Foco</div>
+      <div class="category-count">5 conteúdos</div>
+    </div>
+    <div class="category-card" data-target="mapas">
+      <span class="category-icon">🧠</span>
+      <div class="category-name">Mapas Mentais</div>
+      <div class="category-count">5 conteúdos</div>
+    </div>
+    <div class="category-card" data-target="protocolos">
+      <span class="category-icon">⚡</span>
+      <div class="category-name">Protocolos</div>
+      <div class="category-count">5 conteúdos</div>
+    </div>
+  </div>
+
+  <!-- ÁUDIOS -->
+  <section class="content-section active" id="audios">
+    <div class="content-header">
+      <div class="content-icon-big">🎧</div>
+      <div>
+        <h2>Resumos em Áudio</h2>
+        <p>Ouça os melhores livros enquanto se desloca, treina ou descansa.</p>
+      </div>
+    </div>
+
+    <div class="items-list">
+      <a href="#" class="item-card soon">
+        <div class="item-number">01</div>
+        <div class="item-body">
+          <div class="item-title">Hábitos Atômicos — James Clear</div>
+          <div class="item-meta">⏱ 22 min · Áudio</div>
+        </div>
+        <span class="item-action soon">Em breve</span>
+      </a>
+
+      <a href="#" class="item-card soon">
+        <div class="item-number">02</div>
+        <div class="item-body">
+          <div class="item-title">O Poder do Hábito — Charles Duhigg</div>
+          <div class="item-meta">⏱ 18 min · Áudio</div>
+        </div>
+        <span class="item-action soon">Em breve</span>
+      </a>
+
+      <a href="#" class="item-card soon">
+        <div class="item-number">03</div>
+        <div class="item-body">
+          <div class="item-title">Foco — Daniel Goleman</div>
+          <div class="item-meta">⏱ 25 min · Áudio</div>
+        </div>
+        <span class="item-action soon">Em breve</span>
+      </a>
+
+      <a href="#" class="item-card soon">
+        <div class="item-number">04</div>
+        <div class="item-body">
+          <div class="item-title">Comece pelo Porquê — Simon Sinek</div>
+          <div class="item-meta">⏱ 20 min · Áudio</div>
+        </div>
+        <span class="item-action soon">Em breve</span>
+      </a>
+
+      <a href="#" class="item-card soon">
+        <div class="item-number">05</div>
+        <div class="item-body">
+          <div class="item-title">Deep Work — Cal Newport</div>
+          <div class="item-meta">⏱ 24 min · Áudio</div>
+        </div>
+        <span class="item-action soon">Em breve</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- PDFs -->
+  <section class="content-section" id="pdfs">
+    <div class="content-header">
+      <div class="content-icon-big">📄</div>
+      <div>
+        <h2>PDFs de Foco</h2>
+        <p>Materiais práticos pra imprimir, anotar e aplicar no seu dia.</p>
+      </div>
+    </div>
+
+    <div class="items-list">
+      <a href="#" class="item-card soon">
+        <div class="item-number">01</div>
+        <div class="item-body">
+          <div class="item-title">Os 10 erros que matam o seu foco</div>
+          <div class="item-meta">📄 PDF · 8 páginas</div>
+        </div>
+        <span class="item-action soon">Em breve</span>
+      </a>
+
+      <a href="#" class="item-card soon">
+        <div class="item-number">02</div>
+        <div class="item-body">
+          <div class="item-title">Como criar blocos de trabalho profundo</div>
+          <div class="item-meta">📄 PDF · 12 páginas</div>
+        </div>
+        <span class="item-action soon">Em breve</span>
+      </a>
+
+      <a href="#" class="item-card soon">
+        <div class="item-number">03</div>
+        <div class="item-body">
+          <div class="item-title">Manual do desvício digital</div>
+          <div class="item-meta">📄 PDF · 10 páginas</div>
+        </div>
+        <span class="item-action soon">Em breve</span>
+      </a>
+
+      <a href="#" class="item-card soon">
+        <div class="item-number">04</div>
+        <div class="item-body">
+          <div class="item-title">Checklist pré-bloco de foco</div>
+          <div class="item-meta">📄 PDF · 2 páginas</div>
+        </div>
+        <span class="item-action soon">Em breve</span>
+      </a>
+
+      <a href="#" class="item-card soon">
+        <div class="item-number">05</div>
+        <div class="item-body">
+          <div class="item-title">Mapa de prioridades semanais</div>
+          <div class="item-meta">📄 PDF · 1 página · Imprimível</div>
+        </div>
+        <span class="item-action soon">Em breve</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- MAPAS MENTAIS -->
+  <section class="content-section" id="mapas">
+    <div class="content-header">
+      <div class="content-icon-big">🧠</div>
+      <div>
+        <h2>Mapas Mentais</h2>
+        <p>Conceitos visuais pra fixar o método de cabeça pro coração.</p>
+      </div>
+    </div>
+
+    <div class="items-list">
+      <a href="#" class="item-card soon">
+        <div class="item-number">01</div>
+        <div class="item-body">
+          <div class="item-title">Sistema completo Rotina Focada</div>
+          <div class="item-meta">🗺️ Mapa mental visual</div>
+        </div>
+        <span class="item-action soon">Em breve</span>
+      </a>
+
+      <a href="#" class="item-card soon">
+        <div class="item-number">02</div>
+        <div class="item-body">
+          <div class="item-title">Fluxo da maturação ativa</div>
+          <div class="item-meta">🗺️ Diagrama estilo lápis</div>
+        </div>
+        <span class="item-action soon">Em breve</span>
+      </a>
+
+      <a href="#" class="item-card soon">
+        <div class="item-number">03</div>
+        <div class="item-body">
+          <div class="item-title">As 5 áreas da vida conectadas</div>
+          <div class="item-meta">🗺️ Mapa interativo</div>
+        </div>
+        <span class="item-action soon">Em breve</span>
+      </a>
+
+      <a href="#" class="item-card soon">
+        <div class="item-number">04</div>
+        <div class="item-body">
+          <div class="item-title">Os 4 ladrões do foco</div>
+          <div class="item-meta">🗺️ Mapa visual</div>
+        </div>
+        <span class="item-action soon">Em breve</span>
+      </a>
+
+      <a href="#" class="item-card soon">
+        <div class="item-number">05</div>
+        <div class="item-body">
+          <div class="item-title">Protocolo ARR visualizado</div>
+          <div class="item-meta">🗺️ Diagrama de ciclo</div>
+        </div>
+        <span class="item-action soon">Em breve</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- PROTOCOLOS -->
+  <section class="content-section" id="protocolos">
+    <div class="content-header">
+      <div class="content-icon-big">⚡</div>
+      <div>
+        <h2>Protocolos</h2>
+        <p>Passo a passo prontos pra aplicar quando a procrastinação bater à porta.</p>
+      </div>
+    </div>
+
+    <div class="items-list">
+      <a href="#" class="item-card soon">
+        <div class="item-number">01</div>
+        <div class="item-body">
+          <div class="item-title">Protocolo Anti-Procrastinação</div>
+          <div class="item-meta">⚡ Guia em 5 passos</div>
+        </div>
+        <span class="item-action soon">Em breve</span>
+      </a>
+
+      <a href="#" class="item-card soon">
+        <div class="item-number">02</div>
+        <div class="item-body">
+          <div class="item-title">Método dos 2 minutos</div>
+          <div class="item-meta">⚡ Aplicação imediata</div>
+        </div>
+        <span class="item-action soon">Em breve</span>
+      </a>
+
+      <a href="#" class="item-card soon">
+        <div class="item-number">03</div>
+        <div class="item-body">
+          <div class="item-title">Guia de foco profundo</div>
+          <div class="item-meta">⚡ Roteiro completo</div>
+        </div>
+        <span class="item-action soon">Em breve</span>
+      </a>
+
+      <a href="#" class="item-card soon">
+        <div class="item-number">04</div>
+        <div class="item-body">
+          <div class="item-title">Reset de hábito em 7 dias</div>
+          <div class="item-meta">⚡ Protocolo de emergência</div>
+        </div>
+        <span class="item-action soon">Em breve</span>
+      </a>
+
+      <a href="#" class="item-card soon">
+        <div class="item-number">05</div>
+        <div class="item-body">
+          <div class="item-title">Manual da manhã focada</div>
+          <div class="item-meta">⚡ 5 momentos passo a passo</div>
+        </div>
+        <span class="item-action soon">Em breve</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="biblio-footer">
+    Criado por <strong>Andressa Guimarães</strong> · Rotina Focada · Biblioteca Anti Procrastinação
+  </div>
+
+</div>
+
+<script>
+  // Trocar categoria
+  document.querySelectorAll('.category-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const targetId = card.dataset.target;
+
+      // Atualizar visual dos cards
+      document.querySelectorAll('.category-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+
+      // Esconder todas as seções e mostrar a selecionada
+      document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+      document.getElementById(targetId).classList.add('active');
+
+      // Scroll suave até a seção
+      setTimeout(() => {
+        document.getElementById(targetId).scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }, 50);
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Checklist pré-bloco de foco · Rotina Focada</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 16mm 14mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; color: #1a1a1a; line-height: 1.55; font-size: 11pt; background: #fff; }
+  .page { padding: 0 5px; page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+
+  /* HEADER */
+  .header { text-align: center; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 2px solid #1a1a1a; }
+  .header .tag { display: inline-block; background: rgba(255,80,0,0.1); border: 1px solid rgba(255,80,0,0.4); color: #ff5000; font-size: 9pt; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; padding: 5px 14px; border-radius: 100px; margin-bottom: 14px; }
+  .header h1 { font-family: 'Bebas Neue', sans-serif; font-size: 42pt; letter-spacing: 1px; line-height: 0.95; margin-bottom: 8px; }
+  .header h1 span { color: #ff5000; }
+  .header .subtitle { font-size: 11pt; color: #555; font-style: italic; }
+
+  /* DATA / OBJETIVO */
+  .meta-row { display: flex; gap: 14px; margin-bottom: 24px; }
+  .meta-box { flex: 1; border: 1.5px solid #1a1a1a; border-radius: 8px; padding: 10px 14px; }
+  .meta-label { font-size: 9pt; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #ff5000; margin-bottom: 6px; }
+  .meta-line { border-bottom: 1.5px solid #ccc; height: 18px; margin-top: 4px; }
+
+  /* SEÇÕES */
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: 18pt; color: #1a1a1a; letter-spacing: 1px; margin: 20px 0 10px; padding-bottom: 4px; border-bottom: 1.5px solid #ff5000; }
+  .section-title span { color: #ff5000; }
+
+  /* CHECKLIST */
+  .check-list { list-style: none; }
+  .check-list li { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 1px dashed #eee; font-size: 11pt; line-height: 1.5; }
+  .check-list li::before { display: none; }
+  .checkbox { flex-shrink: 0; width: 18px; height: 18px; border: 1.5px solid #1a1a1a; border-radius: 4px; margin-top: 2px; }
+  .check-list strong { color: #1a1a1a; font-weight: 700; }
+
+  /* OBJECTIVE BOX */
+  .objective-box { background: #fff5ef; border: 2px solid #ff5000; border-radius: 10px; padding: 16px 20px; margin: 16px 0; }
+  .objective-box .obj-label { font-size: 9pt; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #ff5000; margin-bottom: 6px; }
+  .obj-line { border-bottom: 1.5px solid #ccc; height: 24px; margin-top: 6px; }
+
+  /* NOTES PAGE */
+  .notes-title { font-family: 'Bebas Neue', sans-serif; font-size: 32pt; letter-spacing: 1px; text-align: center; margin-bottom: 6px; }
+  .notes-title span { color: #ff5000; }
+  .notes-subtitle { text-align: center; font-size: 11pt; color: #777; font-style: italic; margin-bottom: 30px; }
+  .notes-lines { }
+  .notes-lines .line { border-bottom: 1.5px solid #ddd; height: 32px; }
+  .post-block-box { background: #fff5ef; border-left: 4px solid #ff5000; border-radius: 8px; padding: 14px 18px; margin: 22px 0 14px; }
+  .post-block-box h3 { font-family: 'Bebas Neue', sans-serif; font-size: 16pt; color: #ff5000; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .post-block-box p { font-size: 10pt; color: #555; margin: 0; }
+
+  .footer-note { margin-top: 28px; padding-top: 14px; border-top: 1px solid #eee; text-align: center; font-size: 9pt; color: #999; }
+  .footer-note strong { color: #ff5000; font-style: italic; }
+</style>
+</head>
+<body>
+
+<!-- PÁGINA 1 — CHECKLIST -->
+<div class="page">
+
+  <div class="header">
+    <div class="tag">📄 PDF de Foco · Imprimível</div>
+    <h1>CHECKLIST<br>PRÉ-BLOCO<br>DE <span>FOCO</span></h1>
+    <div class="subtitle">Use antes de cada bloco profundo para garantir que ele renda 10x mais</div>
+  </div>
+
+  <div class="meta-row">
+    <div class="meta-box">
+      <div class="meta-label">Data</div>
+      <div class="meta-line"></div>
+    </div>
+    <div class="meta-box">
+      <div class="meta-label">Horário</div>
+      <div class="meta-line"></div>
+    </div>
+    <div class="meta-box">
+      <div class="meta-label">Duração</div>
+      <div class="meta-line"></div>
+    </div>
+  </div>
+
+  <div class="objective-box">
+    <div class="obj-label">🎯 Objetivo deste bloco</div>
+    <div class="obj-line"></div>
+    <div class="obj-line"></div>
+  </div>
+
+  <div class="section-title">AMBIENTE <span>FÍSICO</span></div>
+  <ul class="check-list">
+    <li><div class="checkbox"></div><span><strong>Mesa limpa</strong> — só o necessário pra esta tarefa</span></li>
+    <li><div class="checkbox"></div><span><strong>Celular em outro cômodo</strong> ou em modo avião</span></li>
+    <li><div class="checkbox"></div><span><strong>Água ao lado</strong> — sede atrapalha o foco</span></li>
+    <li><div class="checkbox"></div><span><strong>Banheiro feito</strong> antes de começar</span></li>
+    <li><div class="checkbox"></div><span><strong>Temperatura agradável</strong> — nem frio nem calor</span></li>
+    <li><div class="checkbox"></div><span><strong>Iluminação adequada</strong> — preferência por luz natural</span></li>
+  </ul>
+
+  <div class="section-title">AMBIENTE <span>DIGITAL</span></div>
+  <ul class="check-list">
+    <li><div class="checkbox"></div><span><strong>Notificações desligadas</strong> no computador</span></li>
+    <li><div class="checkbox"></div><span><strong>Abas desnecessárias fechadas</strong> no navegador</span></li>
+    <li><div class="checkbox"></div><span><strong>Apenas o app necessário aberto</strong></span></li>
+    <li><div class="checkbox"></div><span><strong>Modo "Não perturbe" ativado</strong></span></li>
+  </ul>
+
+  <div class="section-title">CORPO E <span>MENTE</span></div>
+  <ul class="check-list">
+    <li><div class="checkbox"></div><span><strong>Alimentada</strong> — não com fome nem cheia demais</span></li>
+    <li><div class="checkbox"></div><span><strong>Hidratada</strong> — copo de água antes de começar</span></li>
+    <li><div class="checkbox"></div><span><strong>3 respirações profundas</strong> antes de iniciar</span></li>
+    <li><div class="checkbox"></div><span><strong>Timer configurado</strong> com o tempo do bloco</span></li>
+    <li><div class="checkbox"></div><span><strong>Objetivo lido em voz alta</strong> — alinha cérebro e corpo</span></li>
+  </ul>
+
+  <div class="footer-note">
+    Material exclusivo · <strong>Rotina Focada</strong> por Andressa Guimarães · Imprimível
+  </div>
+</div>
+
+<!-- PÁGINA 2 — ANOTAÇÕES E REVISÃO PÓS-BLOCO -->
+<div class="page" style="page-break-before: always;">
+
+  <div class="notes-title">ANOTAÇÕES <span>DO BLOCO</span></div>
+  <div class="notes-subtitle">Use este espaço durante o bloco para capturar ideias, distrações e insights</div>
+
+  <div class="notes-lines">
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+  </div>
+
+  <div class="post-block-box">
+    <h3>✓ APÓS O BLOCO — RESPONDA</h3>
+    <p>1. O que avançou neste bloco?</p>
+    <div class="line"></div>
+    <div class="line"></div>
+    <p style="margin-top:10px;">2. Qual é o próximo passo concreto?</p>
+    <div class="line"></div>
+    <div class="line"></div>
+    <p style="margin-top:10px;">3. Nota de foco (1 a 10): _____ &nbsp;&nbsp;&nbsp; Energia atual: _____</p>
+  </div>
+
+  <div class="footer-note">
+    Material exclusivo · <strong>Rotina Focada</strong> por Andressa Guimarães · Imprimível
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Manual do desvício digital · Rotina Focada</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 18mm 16mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; color: #1a1a1a; line-height: 1.6; font-size: 11pt; background: #fff; }
+  .page { padding: 20px 10px; page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+
+  .cover { text-align: center; padding: 80px 30px; background: linear-gradient(180deg, #fff 0%, #fff5ef 100%); }
+  .cover .tag { display: inline-block; background: rgba(255,80,0,0.1); border: 1px solid rgba(255,80,0,0.4); color: #ff5000; font-size: 10pt; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; padding: 6px 16px; border-radius: 100px; margin-bottom: 30px; }
+  .cover h1 { font-family: 'Bebas Neue', sans-serif; font-size: 50pt; line-height: 0.95; letter-spacing: 1px; margin-bottom: 14px; }
+  .cover h1 span { color: #ff5000; }
+  .cover .subtitle { font-size: 14pt; color: #555; margin: 18px 0 40px; font-style: italic; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.45; }
+  .cover .ornament { font-size: 18pt; color: #ff5000; letter-spacing: 8px; margin: 40px 0; }
+  .cover .author { font-size: 10pt; color: #888; letter-spacing: 1px; }
+  .cover .author strong { color: #ff5000; font-size: 12pt; }
+
+  .eyebrow { font-size: 10pt; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: #ff5000; margin-bottom: 10px; display: block; }
+  h2 { font-family: 'Bebas Neue', sans-serif; font-size: 28pt; color: #1a1a1a; letter-spacing: 0.5px; margin: 8px 0 18px; line-height: 1.05; page-break-after: avoid; }
+  h2 span { color: #ff5000; }
+  h3 { font-family: 'Inter', sans-serif; font-size: 14pt; font-weight: 700; color: #1a1a1a; margin: 22px 0 6px; }
+  p { margin-bottom: 12px; font-size: 11pt; line-height: 1.7; color: #2a2a2a; }
+  strong { color: #1a1a1a; font-weight: 600; }
+  ul, ol { padding-left: 0; list-style: none; margin: 10px 0 16px; }
+  li { padding: 8px 0 8px 28px; position: relative; font-size: 11pt; line-height: 1.6; }
+  li::before { content: '▸'; position: absolute; left: 8px; color: #ff5000; font-weight: 700; }
+
+  .callout { background: #fff5ef; border-left: 4px solid #ff5000; border-radius: 8px; padding: 16px 22px; margin: 16px 0; font-style: italic; font-size: 13pt; color: #4a2515; line-height: 1.5; page-break-inside: avoid; }
+  .stat-card { display: inline-block; background: #1a1a1a; color: #fff; padding: 18px 26px; border-radius: 12px; margin: 10px 8px; text-align: center; min-width: 140px; }
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 36pt; color: #ff5000; line-height: 1; }
+  .stat-label { font-size: 10pt; color: #ccc; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 4px; }
+  .stats-row { text-align: center; margin: 24px 0; }
+  .protocol-day { background: #fffaf5; border: 1px solid #ffdcc4; border-radius: 10px; padding: 18px 22px; margin-bottom: 10px; page-break-inside: avoid; }
+  .protocol-day-num { font-family: 'Bebas Neue', sans-serif; font-size: 18pt; color: #ff5000; letter-spacing: 1px; margin-bottom: 4px; }
+  .protocol-day-title { font-family: 'Inter', sans-serif; font-size: 12pt; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
+  .protocol-day-body { font-size: 10.5pt; color: #555; line-height: 1.55; }
+  .footer-page { margin-top: 40px; padding-top: 16px; border-top: 1px solid #eee; text-align: center; font-size: 9pt; color: #999; }
+  .footer-page strong { color: #ff5000; font-style: italic; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="tag">📄 PDF de Foco · Material 03</div>
+  <h1>MANUAL DO<br>DESVÍCIO<br><span>DIGITAL</span></h1>
+  <div class="subtitle">Recupere a sua atenção do palma da sua mão — e descubra o quanto da sua vida estava do outro lado da tela.</div>
+  <div class="ornament">· · ·</div>
+  <div class="author">Material exclusivo da<br><strong>Biblioteca Anti Procrastinação</strong></div>
+</div>
+
+<div class="page">
+  <span class="eyebrow">Por que estamos viciadas</span>
+  <h2>Você não é fraca.<br>O <span>jogo é desleal</span>.</h2>
+  <p>O celular não foi feito pra você usar — foi feito pra te usar. Cada cor, cada vibração, cada notificação foi projetada por times de neurocientistas que estudam exatamente como prender sua atenção. E eles são MUITO bons no que fazem.</p>
+  <p>Entender isso é libertador: você não está fraca. O ambiente foi desenhado pra fazer com que você falhe. Reconhecer o inimigo é o primeiro passo pra vencer.</p>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-num">4h</div>
+      <div class="stat-label">por dia<br>(média)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">2.6k</div>
+      <div class="stat-label">toques<br>diários</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">96x</div>
+      <div class="stat-label">olhadas<br>no celular</div>
+    </div>
+  </div>
+
+  <p style="text-align: center; font-style: italic; color: #888; font-size: 10pt; margin-top: 8px;">Dados médios de adultos com smartphone, segundo pesquisas independentes.</p>
+
+  <div class="callout">"4 horas por dia = 60 dias por ano = 5 anos da sua vida olhando uma tela." — Anônimo</div>
+</div>
+
+<div class="page">
+  <span class="eyebrow">Como o cérebro reage</span>
+  <h2>A <span>dopamina</span> que te aprisiona</h2>
+  <p>Cada notificação dispara uma micro-dose de <strong>dopamina</strong> no seu cérebro. Esse é o neurotransmissor que regula desejo, recompensa e busca. O problema: o cérebro se adapta. Quanto mais você recebe, mais precisa pra sentir o mesmo prazer.</p>
+  <p>Em pouco tempo, você não consegue mais ficar sem o celular — porque o nível "normal" da sua dopamina virou o que era "elevado" antes. É exatamente como funciona qualquer vício.</p>
+
+  <h3>Os sinais que mostram que você está viciada</h3>
+  <ul>
+    <li>Sente ansiedade quando o celular não está com você</li>
+    <li>Olha a tela "sem motivo" várias vezes ao dia</li>
+    <li>Pega o celular no banheiro, na fila, no semáforo</li>
+    <li>Dorme com o celular ao lado da cama</li>
+    <li>Confere o celular na primeira coisa ao acordar</li>
+    <li>Sente entediada sem estímulo digital constante</li>
+  </ul>
+
+  <p>Marcou 3 ou mais? Você precisa desse manual. A boa notícia: o cérebro também se desadaptada. Em 7 a 14 dias de redução consciente, sua sensibilidade volta ao normal.</p>
+</div>
+
+<div class="page">
+  <span class="eyebrow">Faxina digital</span>
+  <h2>As <span>3 limpezas</span> que vão te libertar</h2>
+
+  <h3>1. Faxina de notificações (faça HOJE)</h3>
+  <p>Vá nas configurações do celular e DESLIGUE todas as notificações que não são essenciais. Só mantenha:</p>
+  <ul>
+    <li>Ligações telefônicas</li>
+    <li>Mensagens diretas de pessoas reais (não grupos)</li>
+    <li>Calendário/agenda</li>
+    <li>Aplicativos de família ou emergência</li>
+  </ul>
+  <p>Notícias, redes sociais, jogos, e-mail, lojas, apps de comida — TUDO fora.</p>
+
+  <h3>2. Faxina de apps (faça nos próximos 3 dias)</h3>
+  <p>Olhe cada aplicativo do seu celular. Pergunta pra cada um: <em>"Esse app me serve, ou eu sirvo ele?"</em>. Se a resposta for a segunda — apaga.</p>
+  <p>Os apps que ficam, você organiza assim:</p>
+  <ul>
+    <li><strong>Tela inicial:</strong> só os essenciais (telefone, mensagem, mapa, câmera)</li>
+    <li><strong>Segunda tela:</strong> ferramentas (banco, lembretes, notion)</li>
+    <li><strong>Pasta "Reflexão":</strong> redes sociais (escondidas, exigem 2 cliques)</li>
+  </ul>
+
+  <h3>3. Faxina de tempo (faça toda semana)</h3>
+  <p>Aos domingos, abra o relatório de uso do seu celular. Olhe quanto tempo você passou em cada app. Aceite a realidade. Defina uma meta de redução pra próxima semana (10-15% por vez).</p>
+</div>
+
+<div class="page">
+  <span class="eyebrow">Aplicativos vilões</span>
+  <h2>Os <span>maiores ladrões</span> de atenção</h2>
+  <p>Esses são os apps que mais sugam tempo, em ordem de gravidade. Eles foram projetados especificamente pra isso. Saber é se proteger.</p>
+
+  <h3>1. TikTok e Reels (Instagram/Facebook)</h3>
+  <p>O algoritmo é tão poderoso que prende mesmo quem "só ia ver um vídeo". Vídeo curto + scroll infinito + variabilidade de conteúdo = vício máximo.</p>
+  <p><strong>O que fazer:</strong> apague o app pelos próximos 30 dias OU coloque um time limit de 15 min/dia no próprio celular.</p>
+
+  <h3>2. Instagram (feed + Stories)</h3>
+  <p>Combinação perfeita: comparação social + dopamina visual + curiosidade pela vida alheia.</p>
+  <p><strong>O que fazer:</strong> remova das telas iniciais, esconda em pasta, defina horário pra entrar (ex: só depois das 20h).</p>
+
+  <h3>3. WhatsApp grupos</h3>
+  <p>Não é o WhatsApp em si — são os grupos. Cada mensagem nova é uma micro-distração. Em grupos de 30+ pessoas, você é interrompida 50x por dia.</p>
+  <p><strong>O que fazer:</strong> silencie TODOS os grupos. Você confere quando quiser, não quando alguém escreve.</p>
+
+  <h3>4. E-mail</h3>
+  <p>Notificação de e-mail é uma das piores invenções. Cria a falsa sensação de urgência onde não tem.</p>
+  <p><strong>O que fazer:</strong> abra e-mail apenas 2 vezes ao dia (10h e 16h). Crie filtros. Cancele inscrições inúteis.</p>
+</div>
+
+<div class="page">
+  <span class="eyebrow">Substituições saudáveis</span>
+  <h2>O que <span>fazer</span> em vez do celular</h2>
+  <p>A maioria pega o celular por puro hábito — sem motivo. Pra romper isso, você precisa preencher o vazio com outra coisa. Aqui está uma lista de substituições reais.</p>
+
+  <h3>Quando dá vontade de pegar o celular...</h3>
+  <ul>
+    <li><strong>...no banheiro:</strong> deixa o celular do lado de fora. Leva 5 min de gratidão mental.</li>
+    <li><strong>...na fila:</strong> respira fundo. Observe ao seu redor. Reflita sobre o seu dia.</li>
+    <li><strong>...no elevador:</strong> postura ereta. 3 respirações conscientes.</li>
+    <li><strong>...na mesa:</strong> bebe um copo d'água. Conversa com quem está ao lado.</li>
+    <li><strong>...ao acordar:</strong> alongamento de 5 min. 3 frases de intenção pro dia.</li>
+    <li><strong>...antes de dormir:</strong> leia 5 páginas de um livro físico. Escreva 3 gratidões.</li>
+  </ul>
+
+  <div class="callout">Cada vez que você não pega o celular, está reprogramando o cérebro. Em 21 dias, o impulso diminui drasticamente.</div>
+</div>
+
+<div class="page">
+  <span class="eyebrow">Protocolo de 7 dias</span>
+  <h2>O <span>cronograma</span> da desintoxicação</h2>
+  <p>Esse protocolo te leva do vício à liberdade em 1 semana. Não é fácil. Mas funciona. Marque cada dia que você completar.</p>
+
+  <div class="protocol-day">
+    <div class="protocol-day-num">DIA 1</div>
+    <div class="protocol-day-title">Faxina de notificações</div>
+    <div class="protocol-day-body">Desligue HOJE todas as notificações desnecessárias. Só mantenha o essencial. Esse passo sozinho já reduz 40% das interrupções.</div>
+  </div>
+
+  <div class="protocol-day">
+    <div class="protocol-day-num">DIA 2</div>
+    <div class="protocol-day-title">Apague 5 apps</div>
+    <div class="protocol-day-body">Identifique os 5 apps que mais sugam seu tempo (relatório do celular mostra). Apague hoje. Você pode reinstalar depois — se realmente precisar.</div>
+  </div>
+
+  <div class="protocol-day">
+    <div class="protocol-day-num">DIA 3</div>
+    <div class="protocol-day-title">Manhã sem tela</div>
+    <div class="protocol-day-body">Primeira hora do dia, sem celular. Coloca um relógio analógico ao lado da cama pra acordar. Café da manhã, alongamento, leitura. Só depois a tela.</div>
+  </div>
+
+  <div class="protocol-day">
+    <div class="protocol-day-num">DIA 4</div>
+    <div class="protocol-day-title">Quarto livre de telas</div>
+    <div class="protocol-day-body">A partir de hoje, o celular não entra no quarto. Compre um carregador pra outro cômodo. Despertador analógico. O sono vai melhorar imediatamente.</div>
+  </div>
+
+  <div class="protocol-day">
+    <div class="protocol-day-num">DIA 5</div>
+    <div class="protocol-day-title">Horários definidos para redes</div>
+    <div class="protocol-day-body">Defina 2 janelas no dia pra acessar redes sociais (ex: 12h-12h30 e 19h-19h30). Fora desses horários, não abre. Use timer pra cumprir.</div>
+  </div>
+
+  <div class="protocol-day">
+    <div class="protocol-day-num">DIA 6</div>
+    <div class="protocol-day-title">1 dia inteiro sem redes</div>
+    <div class="protocol-day-body">Hoje você não abre NENHUMA rede social. Sentirá ansiedade. Vai passar. No final do dia, anote como você se sentiu. Isso é dado importante.</div>
+  </div>
+
+  <div class="protocol-day">
+    <div class="protocol-day-num">DIA 7</div>
+    <div class="protocol-day-title">Plano de manutenção</div>
+    <div class="protocol-day-body">Defina as regras permanentes que você vai seguir daqui pra frente. Escreva. Imprima. Cole na mesa. Você não vai voltar pro nível antigo de uso.</div>
+  </div>
+
+  <div class="footer-page">
+    Material exclusivo · <strong>Rotina Focada</strong> por Andressa Guimarães
+  </div>
+</div>
+
+</body>
+</html>

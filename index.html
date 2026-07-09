@@ -3,229 +3,87 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Iscas Digitais — Rotina Focada</title>
+  <title>Rotina Focada</title>
+  <meta http-equiv="refresh" content="0; url=rotina-focada-membros/login.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      background: #0f0f1a;
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #ffffff;
+      color: #1a1a1a;
       min-height: 100vh;
-      padding: 40px 20px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
     }
-
-    .header {
+    .loading {
       text-align: center;
-      margin-bottom: 48px;
+      max-width: 360px;
     }
-
-    .header .logo {
-      font-size: 28px;
-      font-weight: 900;
-      color: #fff;
+    .brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 44px;
+      font-weight: 600;
       letter-spacing: -0.5px;
       margin-bottom: 8px;
     }
-
-    .header .logo span {
-      color: #a78bfa;
+    .brand .accent {
+      font-style: italic;
+      color: #d4476f;
     }
-
-    .header p {
-      font-size: 15px;
+    .subtitle {
+      font-size: 13px;
+      color: #888;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 36px;
+    }
+    .spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid #ececec;
+      border-top-color: #d4476f;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 18px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .msg {
+      font-style: italic;
+      color: #888;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+    }
+    .fallback {
+      margin-top: 30px;
+      font-size: 13px;
       color: #888;
     }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .card {
-      background: #1a1a2e;
-      border-radius: 20px;
-      overflow: hidden;
+    .fallback a {
+      color: #d4476f;
+      font-weight: 600;
       text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
-      display: block;
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    }
-
-    .card-hero {
-      padding: 28px 24px 24px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card-hero::before {
-      content: '';
-      position: absolute;
-      top: -40px; right: -40px;
-      width: 120px; height: 120px;
-      background: rgba(255,255,255,0.06);
-      border-radius: 50%;
-    }
-
-    .card .badge {
-      display: inline-block;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      padding: 4px 12px;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.15);
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.25);
-      margin-bottom: 12px;
-    }
-
-    .card .icon { font-size: 40px; display: block; margin-bottom: 12px; }
-
-    .card h2 {
-      color: #fff;
-      font-size: 16px;
-      font-weight: 800;
-      line-height: 1.35;
-      margin-bottom: 8px;
-    }
-
-    .card p {
-      color: rgba(255,255,255,0.75);
-      font-size: 13px;
-      line-height: 1.55;
-    }
-
-    .card-footer {
-      padding: 16px 24px;
-      background: rgba(0,0,0,0.2);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .card-footer .cta {
-      font-size: 13px;
-      font-weight: 700;
-      color: #fff;
-    }
-
-    .card-footer .arrow {
-      font-size: 18px;
-      color: rgba(255,255,255,0.5);
-      transition: transform 0.2s;
-    }
-
-    .card:hover .arrow { transform: translateX(4px); }
-
-    /* Cores por isca */
-    .isca1 .card-hero { background: linear-gradient(135deg, #1a7a55, #25a870); }
-    .isca1 .card-footer .cta { color: #4ade80; }
-
-    .isca2 .card-hero { background: linear-gradient(135deg, #283593, #3949ab); }
-    .isca2 .card-footer .cta { color: #818cf8; }
-
-    .isca3 .card-hero { background: linear-gradient(135deg, #c2410c, #ea580c); }
-    .isca3 .card-footer .cta { color: #fb923c; }
-
-    .isca4 .card-hero { background: linear-gradient(135deg, #6d28d9, #7c3aed); }
-    .isca4 .card-footer .cta { color: #c084fc; }
-
-    .footer {
-      text-align: center;
-      margin-top: 48px;
-      font-size: 12px;
-      color: #555;
-    }
-
-    .footer strong { color: #888; }
-
-    @media (max-width: 480px) {
-      body { padding: 28px 16px 48px; }
-      .header { margin-bottom: 32px; }
     }
   </style>
 </head>
 <body>
-
-  <div class="header">
-    <div class="logo">Rotina <span>Focada</span></div>
-    <p>Materiais gratuitos de Andressa Guimarães</p>
-    <p style="margin-top:14px;"><a href="membros/login.html" style="color:#a78bfa; text-decoration:none; font-weight:600; font-size:13px; border:1px solid rgba(167,139,250,0.4); padding:8px 16px; border-radius:100px; display:inline-block;">🔒 Já é aluna? Acessar área de membros →</a></p>
+  <div class="loading">
+    <div class="brand">Rotina <span class="accent">Focada</span></div>
+    <div class="subtitle">Área de Membros</div>
+    <div class="spinner"></div>
+    <div class="msg">Te levando até o seu acesso...</div>
+    <div class="fallback">
+      Não foi redirecionada automaticamente?<br/>
+      <a href="rotina-focada-membros/login.html">Clique aqui para entrar →</a>
+    </div>
   </div>
-
-  <div class="grid">
-
-    <!-- ISCA 1 -->
-    <a class="card isca1" href="isca1_checklist_7dias.html">
-      <div class="card-hero">
-        <span class="badge">✅ Material Gratuito</span>
-        <span class="icon">📚</span>
-        <h2>Checklist: 7 Dias para Criar o Hábito da Leitura</h2>
-        <p>Desenvolva foco, disciplina e consistência com um desafio prático dia a dia.</p>
-      </div>
-      <div class="card-footer">
-        <span class="cta">Quero o checklist gratuito</span>
-        <span class="arrow">→</span>
-      </div>
-    </a>
-
-    <!-- ISCA 2 -->
-    <a class="card isca2" href="isca2_ficha_leitura_ativa.html">
-      <div class="card-hero">
-        <span class="badge">📋 Template Gratuito</span>
-        <span class="icon">🧠</span>
-        <h2>Ficha de Leitura Ativa</h2>
-        <p>Leia com intenção e foco total — retenha mais e aplique o que aprendeu.</p>
-      </div>
-      <div class="card-footer">
-        <span class="cta">Quero o template gratuito</span>
-        <span class="arrow">→</span>
-      </div>
-    </a>
-
-    <!-- ISCA 3 -->
-    <a class="card isca3" href="isca3_mini_guia_8020.html">
-      <div class="card-hero">
-        <span class="badge">⚡ Guia Gratuito</span>
-        <span class="icon">🎯</span>
-        <h2>Mini Guia: Suas 3 Ações de Alto Impacto (80/20)</h2>
-        <p>Descubra as ações certas para multiplicar sua produtividade com menos esforço.</p>
-      </div>
-      <div class="card-footer">
-        <span class="cta">Quero o mini guia gratuito</span>
-        <span class="arrow">→</span>
-      </div>
-    </a>
-
-    <!-- ISCA 4 -->
-    <a class="card isca4" href="isca4_aula_habitos.html">
-      <div class="card-hero">
-        <span class="badge">🎓 Aula Gratuita</span>
-        <span class="icon">✨</span>
-        <h2>Aula: Como Ser Constante nos Bons Hábitos</h2>
-        <p>Crie consistência de verdade — sem depender de força de vontade.</p>
-      </div>
-      <div class="card-footer">
-        <span class="cta">Quero assistir à aula gratuita</span>
-        <span class="arrow">→</span>
-      </div>
-    </a>
-
-  </div>
-
-  <div class="footer">
-    Criado por <strong>Andressa Guimarães</strong> · Rotina Focada
-  </div>
-
+  <script>
+    // Redirect JS (mais rápido que meta refresh)
+    window.location.replace("rotina-focada-membros/login.html");
+  </script>
 </body>
 </html>

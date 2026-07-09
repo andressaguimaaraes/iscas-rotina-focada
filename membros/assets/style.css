@@ -2274,24 +2274,28 @@ body.dark-dashboard {
 }
 .lesson-row::-webkit-scrollbar-thumb:hover { background: rgba(0, 0, 0, 0.3); }
 
-/* Lesson cards (Netflix style) */
+/* ============================================
+   LESSON CARDS — Estilo aesthetic (foto + sombra preta + texto branco + coração rosa)
+   ============================================ */
+
 .lesson-card {
   flex-shrink: 0;
-  width: 290px;
-  height: 175px;
-  border-radius: 12px;
+  width: 280px;
+  height: 380px;
+  border-radius: 18px;
   position: relative;
   overflow: hidden;
   cursor: pointer;
   text-decoration: none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   display: block;
   background: #1a1a1a;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .lesson-card:hover {
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25), 0 0 0 2px rgba(212, 71, 111, 0.5);
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.45), 0 8px 20px rgba(0, 0, 0, 0.2);
   z-index: 10;
 }
 
@@ -2299,6 +2303,14 @@ body.dark-dashboard {
   position: absolute;
   inset: 0;
   z-index: 1;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 0.6s ease;
+}
+
+.lesson-card:hover .lesson-card-bg {
+  transform: scale(1.08);
 }
 
 .lesson-card-overlay {
@@ -2306,16 +2318,17 @@ body.dark-dashboard {
   inset: 0;
   z-index: 2;
   background: linear-gradient(180deg,
-    rgba(0,0,0,0) 30%,
-    rgba(0,0,0,0.4) 55%,
-    rgba(0,0,0,0.92) 100%);
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,0) 35%,
+    rgba(0,0,0,0.55) 65%,
+    rgba(0,0,0,0.95) 100%);
 }
 
 .lesson-card-content {
   position: relative;
   z-index: 3;
   height: 100%;
-  padding: 18px;
+  padding: 20px 22px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -2325,33 +2338,43 @@ body.dark-dashboard {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  gap: 10px;
 }
 
 .lesson-card-num {
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(8px);
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: #fff;
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: 1.5px;
+  letter-spacing: 2px;
   text-transform: uppercase;
-  padding: 5px 10px;
+  padding: 6px 12px;
   border-radius: 100px;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.25);
+}
+
+.lesson-card-heart {
+  font-size: 20px;
+  color: #d4476f;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+  line-height: 1;
 }
 
 .lesson-card-status {
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(8px);
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 12px;
-  border: 1px solid rgba(255,255,255,0.15);
-  color: rgba(255,255,255,0.85);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #fff;
 }
 
 .lesson-card.done .lesson-card-status {
@@ -2365,57 +2388,64 @@ body.dark-dashboard {
   color: #fff;
   font-size: 22px;
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.22;
   letter-spacing: -0.015em;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.7), 0 1px 3px rgba(0,0,0,0.5);
 }
 
 .lesson-card-tagline {
   margin-top: 8px;
-  font-size: 13px;
-  color: rgba(255,255,255,0.85);
-  font-family: 'Inter', system-ui, sans-serif;
-  font-weight: 400;
-  line-height: 1.45;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: rgba(255,255,255,0.92);
+  font-weight: 500;
+  line-height: 1.35;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
 }
 
-/* Card backgrounds (gradients únicos por módulo) */
-.lesson-card.mod1 .lesson-card-bg { background: linear-gradient(135deg, #6b3014 0%, #d4476f 60%, #f5b5c8 100%); }
-.lesson-card.mod2 .lesson-card-bg { background: linear-gradient(135deg, #1a3a4a 0%, #2e5d6c 60%, #5e9ba8 100%); }
-.lesson-card.mod3 .lesson-card-bg { background: linear-gradient(135deg, #3a2a1a 0%, #7a4e2e 60%, #c08b5a 100%); }
-.lesson-card.mod4 .lesson-card-bg { background: linear-gradient(135deg, #2a1a3a 0%, #5e3a7a 60%, #a07bc4 100%); }
-.lesson-card.mod5 .lesson-card-bg { background: linear-gradient(135deg, #1a3a2a 0%, #3e6c4a 60%, #7ba883 100%); }
-.lesson-card.mod6 .lesson-card-bg { background: linear-gradient(135deg, #4a1a1a 0%, #8a3a2a 60%, #d08060 100%); }
+/* Fallback gradients quando NÃO tem imagem (combinam com cada módulo) */
+.lesson-card.mod1:not(.has-image) .lesson-card-bg { background: linear-gradient(135deg, #d4476f 0%, #f5b5c8 50%, #fce7e0 100%); }
+.lesson-card.mod2:not(.has-image) .lesson-card-bg { background: linear-gradient(135deg, #b48a4f 0%, #d4a574 50%, #f0d9b5 100%); }
+.lesson-card.mod3:not(.has-image) .lesson-card-bg { background: linear-gradient(135deg, #c08b5a 0%, #e0c19a 50%, #f5e7d5 100%); }
+.lesson-card.mod4:not(.has-image) .lesson-card-bg { background: linear-gradient(135deg, #a07bc4 0%, #c4a9d4 50%, #e8d8e8 100%); }
+.lesson-card.mod5:not(.has-image) .lesson-card-bg { background: linear-gradient(135deg, #7ba883 0%, #a8c4a8 50%, #d8e4d0 100%); }
+.lesson-card.mod6:not(.has-image) .lesson-card-bg { background: linear-gradient(135deg, #d08060 0%, #e0a890 50%, #f0d4c4 100%); }
 
-/* Decorative elements in cards */
-.lesson-card-bg::before {
+.lesson-card:not(.has-image) .lesson-card-bg::before {
   content: '';
   position: absolute;
   top: -30%;
   right: -20%;
   width: 60%;
   height: 80%;
-  background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 60%);
+  background: radial-gradient(circle, rgba(255,255,255,0.25), transparent 60%);
 }
 
-.lesson-card-bg::after {
+.lesson-card:not(.has-image) .lesson-card-bg::after {
   content: '';
   position: absolute;
   bottom: -40%;
   left: -20%;
   width: 70%;
   height: 80%;
-  background: radial-gradient(circle, rgba(0,0,0,0.3), transparent 60%);
+  background: radial-gradient(circle, rgba(0,0,0,0.2), transparent 60%);
 }
 
 .lesson-card-emoji {
   position: absolute;
-  top: 50%;
+  top: 38%;
   left: 50%;
-  transform: translate(-50%, -65%);
+  transform: translate(-50%, -50%);
   font-size: 56px;
-  opacity: 0.18;
+  opacity: 0.25;
   z-index: 1;
   pointer-events: none;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+}
+
+.lesson-card.has-image .lesson-card-emoji {
+  display: none;
 }
 
 /* Notion card (special card for Module 6) */

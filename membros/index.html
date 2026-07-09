@@ -87,15 +87,20 @@
 
       const cardsHTML = module.lessons.map((lesson) => {
         const isDone = completedSet.has(lesson.id);
+        const hasImage = !!lesson.image;
+        const bgStyle = hasImage ? `style="background-image: url('${lesson.image}');"` : '';
         return `
-          <a class="lesson-card mod${module.id} ${isDone ? 'done' : ''}" href="aula.html?id=${lesson.id}">
-            <div class="lesson-card-bg"></div>
+          <a class="lesson-card mod${module.id} ${isDone ? 'done' : ''} ${hasImage ? 'has-image' : ''}" href="aula.html?id=${lesson.id}">
+            <div class="lesson-card-bg" ${bgStyle}></div>
             <div class="lesson-card-emoji">${module.emoji}</div>
             <div class="lesson-card-overlay"></div>
             <div class="lesson-card-content">
               <div class="lesson-card-top">
                 <span class="lesson-card-num">Aula ${lesson.number}</span>
-                <span class="lesson-card-status">${isDone ? '✓' : '▶'}</span>
+                <div style="display:flex; gap:8px; align-items:center;">
+                  <span class="lesson-card-heart">♥</span>
+                  <span class="lesson-card-status">${isDone ? '✓' : '▶'}</span>
+                </div>
               </div>
               <div>
                 <div class="lesson-card-title">${lesson.title}</div>

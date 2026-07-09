@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boas-vindas · Juliana Nunes</title>
+<style>
+  :root{
+    --creme:#fbf6ec;
+    --creme-card:#fffdf8;
+    --amarelo:#ffd84d;
+    --amarelo-suave:#fff2c2;
+    --rosa:#d17c4e;
+    --rosa-suave:#f5e2d1;
+    --tinta:#4a4238;
+    --tinta-suave:#8a8072;
+    --linha:#efe7d6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    background:var(--creme);
+    color:var(--tinta);
+    line-height:1.55;
+    padding:48px 20px 80px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px;margin:0 auto}
+
+  /* Cabeçalho */
+  header{text-align:center;margin-bottom:44px}
+  .logo{
+    display:inline-flex;align-items:center;gap:11px;
+    background:var(--creme-card);border:1px solid var(--linha);
+    padding:9px 18px 9px 11px;border-radius:100px;margin-bottom:22px;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .logo:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(74,66,56,.12);border-color:var(--amarelo)}
+  .logo svg{display:block}
+  .logo-txt{display:flex;flex-direction:column;align-items:flex-start;line-height:1.05}
+  .logo-nome{font-size:19px;font-weight:750;letter-spacing:-.01em;color:var(--tinta)}
+  .logo-sub{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--tinta-suave)}
+  .kicker{
+    display:inline-block;
+    font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--tinta-suave);
+    background:var(--amarelo-suave);
+    padding:6px 16px;border-radius:100px;margin-bottom:18px;
+  }
+  header h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
+  header p{color:var(--tinta-suave);font-size:17px}
+  .traco{width:52px;height:5px;border-radius:100px;background:var(--rosa);margin:20px auto 0}
+
+  /* Seções */
+  .secao-titulo{
+    display:flex;align-items:center;gap:12px;
+    font-size:15px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--tinta-suave);
+    margin:40px 0 16px;
+  }
+  .secao-titulo .bolinha{width:12px;height:12px;border-radius:50%}
+  .bolinha.rosa{background:var(--rosa)}
+  .bolinha.amarelo{background:var(--amarelo)}
+
+  /* Cards estilo Notas */
+  .card{
+    background:var(--creme-card);
+    border:1px solid var(--linha);
+    border-radius:20px;
+    padding:22px 24px;
+    margin-bottom:14px;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 30px rgba(74,66,56,.10);
+    border-color:var(--amarelo);
+  }
+  .card h3{font-size:18px;font-weight:650;margin-bottom:6px}
+  .card p{color:var(--tinta-suave);font-size:15px}
+
+  /* Perfil - mini grid */
+  .perfil{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;
+  }
+  .stat{
+    background:var(--creme-card);border:1px solid var(--linha);border-radius:18px;
+    padding:20px;text-align:center;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .stat:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(74,66,56,.10);background:var(--amarelo-suave)}
+  .stat .num{font-size:26px;font-weight:750;letter-spacing:-.02em}
+  .stat .rot{font-size:13px;color:var(--tinta-suave);margin-top:4px}
+
+  /* Lista de dores / passos */
+  .item{
+    display:flex;gap:16px;align-items:flex-start;
+    background:var(--creme-card);border:1px solid var(--linha);border-radius:18px;
+    padding:18px 22px;margin-bottom:12px;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .item:hover{transform:translateX(4px);box-shadow:0 10px 26px rgba(74,66,56,.09);border-color:var(--rosa)}
+  .item .ico{
+    flex-shrink:0;width:38px;height:38px;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;font-size:19px;
+    background:var(--rosa-suave);
+  }
+  .item.passo .ico{background:var(--amarelo-suave);font-weight:750;color:var(--tinta);font-size:16px}
+  .item .txt h4{font-size:16px;font-weight:650;margin-bottom:2px}
+  .item .txt p{font-size:14.5px;color:var(--tinta-suave)}
+
+  /* Destaque sonho */
+  .sonho{
+    background:linear-gradient(135deg,var(--amarelo-suave),var(--rosa-suave));
+    border:none;border-radius:22px;padding:30px 30px;text-align:center;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .sonho:hover{transform:translateY(-3px);box-shadow:0 16px 36px rgba(255,143,177,.28)}
+  .sonho .emoji{font-size:30px}
+  .sonho p{font-size:19px;font-weight:600;color:var(--tinta);margin-top:8px;line-height:1.5}
+
+  footer{text-align:center;margin-top:50px;color:var(--tinta-suave);font-size:14px}
+  footer strong{color:var(--tinta)}
+
+  @media(max-width:600px){
+    header h1{font-size:30px}
+    body{padding:32px 16px 60px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="logo" aria-label="Winner">
+      <svg viewBox="0 0 44 44" width="44" height="44" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+        <rect x="1" y="1" width="42" height="42" rx="13" fill="#4a4238"/>
+        <path d="M11 13 L16 31 L22 19 L28 31 L33 13" fill="none" stroke="#ffd84d" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="22" cy="12" r="2.4" fill="#d17c4e"/>
+      </svg>
+      <div class="logo-txt">
+        <span class="logo-nome">Winner</span>
+        <span class="logo-sub">Mentoria</span>
+      </div>
+    </div>
+    <span class="kicker">Reunião de boas-vindas · 08 jul 2026</span>
+    <h1>Juliana Nunes</h1>
+    <p>Resumo da nossa conversa e os próximos passos</p>
+    <div class="traco"></div>
+  </header>
+
+  <!-- QUEM É -->
+  <div class="secao-titulo"><span class="bolinha rosa"></span>Quem é a Juliana</div>
+  <div class="card">
+    <h3>Rev Ops na W1 · BU Patrimonial</h3>
+    <p>Maior empresa de consultoria e planejamento financeiro da América Latina. A Juliana cuida sozinha da frente de dados e operações do planejamento sucessório — um negócio novo (3 anos) dentro da empresa.</p>
+  </div>
+
+  <div class="perfil" style="margin-top:14px">
+    <div class="stat"><div class="num">R$ 3,5 mi</div><div class="rot">faturamento médio/mês</div></div>
+    <div class="stat"><div class="num">20</div><div class="rot">comerciais no time</div></div>
+    <div class="stat"><div class="num">35</div><div class="rot">offices no Brasil</div></div>
+    <div class="stat"><div class="num">5 / 10</div><div class="rot">maturidade digital hoje</div></div>
+  </div>
+
+  <!-- DORES -->
+  <div class="secao-titulo"><span class="bolinha rosa"></span>O que mais trava hoje</div>
+
+  <div class="item">
+    <div class="ico">⛏️</div>
+    <div class="txt">
+      <h4>Muito tempo minerando dados</h4>
+      <p>Dados espalhados em várias planilhas. Ela gasta mais tempo buscando e limpando do que analisando e decidindo.</p>
+    </div>
+  </div>
+  <div class="item">
+    <div class="ico">📝</div>
+    <div class="txt">
+      <h4>Entrada de propostas manual</h4>
+      <p>Processo muito manual, sem sistema — inclusive na hora de liberar o boleto/pagamento pro cliente. É o gargalo nº 1.</p>
+    </div>
+  </div>
+  <div class="item">
+    <div class="ico">📊</div>
+    <div class="txt">
+      <h4>Relatórios e apresentações demoram</h4>
+      <p>Montar o funil de cada office consome horas. Hoje os indicadores só são atualizados 2x por semana.</p>
+    </div>
+  </div>
+
+  <!-- SONHO -->
+  <div class="secao-titulo"><span class="bolinha amarelo"></span>Onde ela quer chegar</div>
+  <div class="sonho">
+    <div class="emoji">🔮</div>
+    <p>Ter uma <strong>visão em tempo real</strong> da operação —<br>parar de olhar pro retrovisor e passar a olhar pra frente.</p>
+  </div>
+
+  <!-- PROJETO -->
+  <div class="secao-titulo"><span class="bolinha amarelo"></span>Foco da mentoria</div>
+  <div class="card">
+    <h3>Um projeto, do começo ao fim ✨</h3>
+    <p>No caso da Juliana faz mais sentido escolher <strong>um projeto</strong> em vez de dividir por setores. A aposta: começar pela <strong>entrada de propostas</strong> (benefício rápido e tangível) e, sobrando tempo, avançar pra <strong>visão real-time da operação</strong>. A ferramenta principal vai ser o <strong>Claude</strong>.</p>
+  </div>
+
+  <!-- PRÓXIMOS PASSOS -->
+  <div class="secao-titulo"><span class="bolinha rosa"></span>Próximos passos</div>
+
+  <div class="item passo">
+    <div class="ico">1</div>
+    <div class="txt">
+      <h4>Juliana assiste o curso “Claude sem código”</h4>
+      <p>Acesso já liberado. Vale ver o manual do aluno também (senha: programaea2026).</p>
+    </div>
+  </div>
+  <div class="item passo">
+    <div class="ico">2</div>
+    <div class="txt">
+      <h4>Migrar do chat pro Claude Pro</h4>
+      <p>Sair só do chat e usar o Claude de verdade — o resultado fica muito melhor.</p>
+    </div>
+  </div>
+  <div class="item passo">
+    <div class="ico">3</div>
+    <div class="txt">
+      <h4>Andressa alinha com o time</h4>
+      <p>Lucas, Gui e Diogo desenham a proposta de projeto (com nome) e trazem pra validar com a Juliana.</p>
+    </div>
+  </div>
+  <div class="item passo">
+    <div class="ico">4</div>
+    <div class="txt">
+      <h4>Agendar a 1ª consultoria (estratégica)</h4>
+      <p>Momento de definir o plano. Depois vêm as tutorias, que são técnicas, pra executar o que foi planejado.</p>
+    </div>
+  </div>
+
+  <footer>
+    Mentoria de <strong>3 meses</strong> · Consultorias são estratégicas, tutorias são técnicas.<br>
+    Dúvidas de Claude → Diogo, Gui e Lucas · Estratégia e mentoria → Andressa 💛
+  </footer>
+
+</div>
+</body>
+</html>

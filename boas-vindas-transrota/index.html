@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transrota — Programa de Aceleração em IA · winner.ia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ============================================
+     winner.ia — Brand System v1.0
+     Onyx · Signature Gold · Warm Paper
+     ============================================ */
+  :root {
+    --onyx: #0A0A0B;
+    --onyx-soft: #15151A;
+    --onyx-line: rgba(242, 235, 221, 0.08);
+    --gold: #C8A24A;
+    --gold-deep: #8C6E22;
+    --paper: #F2EBDD;
+    --sand: #E6DDC8;
+    --paper-line: rgba(10, 10, 11, 0.10);
+    --paper-text: #2A2622;
+    --paper-muted: #6B6258;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--onyx);
+    color: var(--paper);
+    line-height: 1.55;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* TAGS MONOESPAÇADAS — sempre uppercase, JetBrains Mono */
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--paper);
+    opacity: 0.55;
+    font-weight: 400;
+  }
+  .tag-gold { color: var(--gold); opacity: 1; }
+
+  /* GRID HEAD (topo institucional) ----------------- */
+  .head-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    padding: 28px 48px 0;
+    gap: 24px;
+  }
+  .head-bar .left { display: flex; flex-direction: column; gap: 2px; }
+  .head-bar .right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+  }
+
+  /* HERO INSTITUCIONAL (fundo onyx) ---------------- */
+  .hero {
+    padding: 80px 48px 96px;
+    min-height: 86vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, var(--onyx-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--onyx-line) 1px, transparent 1px);
+    background-size: 96px 96px;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    width: 100%;
+    padding-top: 80px;
+  }
+
+  .hero-kicker {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.1s forwards;
+  }
+
+  .hero-kicker .line {
+    flex: 0 0 64px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  h1.display {
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.8rem, 7vw, 6rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--paper);
+    margin-bottom: 32px;
+    max-width: 1100px;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.2s forwards;
+  }
+
+  h1.display em {
+    font-style: normal;
+    color: var(--gold);
+  }
+
+  .hero-lede {
+    font-size: clamp(1rem, 1.4vw, 1.18rem);
+    line-height: 1.6;
+    max-width: 620px;
+    color: var(--paper);
+    opacity: 0.7;
+    margin-bottom: 56px;
+    opacity: 0;
+    animation: fadeUpDim 0.9s ease 0.35s forwards;
+  }
+
+  @keyframes fadeUpDim {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 0.7; transform: translateY(0); }
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+    padding-top: 32px;
+    border-top: 1px solid var(--onyx-line);
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.5s forwards;
+  }
+
+  .hero-meta .item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .hero-meta .item .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--paper);
+    opacity: 0.5;
+  }
+  .hero-meta .item .value {
+    font-size: 0.95rem;
+    color: var(--paper);
+    font-weight: 500;
+  }
+
+  /* LOGO V· em SVG ---------------------------------- */
+  .logo-v {
+    display: inline-block;
+    width: 28px;
+    height: 32px;
+    color: var(--paper);
+  }
+  .logo-v svg { display: block; width: 100%; height: 100%; }
+
+  .brand-stack {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .brand-stack .wordmark {
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: -0.02em;
+  }
+  .brand-stack .wordmark .ia { color: var(--gold); }
+
+  /* SEÇÃO RECURSOS (fundo papel) ------------------- */
+  .resources {
+    background: var(--paper);
+    color: var(--paper-text);
+    padding: 96px 48px 88px;
+    position: relative;
+  }
+
+  .resources-head {
+    max-width: 1280px;
+    margin: 0 auto 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--paper-line);
+  }
+
+  .resources-head .left { display: flex; flex-direction: column; gap: 12px; }
+
+  .resources-head h2 {
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 3.6vw, 3rem);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    color: var(--onyx);
+    max-width: 560px;
+  }
+  .resources-head .right {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--paper-muted);
+    max-width: 460px;
+    align-self: end;
+  }
+
+  .resources .tag { color: var(--paper-text); opacity: 0.55; }
+
+  /* GRID DE CARDS ------------------------------------ */
+  .card-grid {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 16px;
+  }
+
+  .card {
+    grid-column: span 4;
+    position: relative;
+    background: var(--sand);
+    border: 1px solid var(--paper-line);
+    padding: 32px 28px 28px;
+    text-decoration: none;
+    color: var(--paper-text);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 280px;
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+                background 0.35s ease, border-color 0.35s ease,
+                box-shadow 0.35s ease;
+    cursor: pointer;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: cardIn 0.6s ease forwards;
+  }
+
+  .card:nth-child(1) { animation-delay: 0.10s; }
+  .card:nth-child(2) { animation-delay: 0.18s; }
+  .card:nth-child(3) { animation-delay: 0.26s; }
+  .card:nth-child(4) { animation-delay: 0.34s; }
+  .card:nth-child(5) { animation-delay: 0.42s; }
+  .card:nth-child(6) { animation-delay: 0.50s; }
+
+  .card:hover:not(.locked) {
+    background: var(--onyx);
+    color: var(--paper);
+    border-color: var(--onyx);
+    transform: translateY(-4px);
+    box-shadow: 0 24px 60px rgba(10, 10, 11, 0.22);
+  }
+
+  .card:hover:not(.locked) .card-num { color: var(--gold); opacity: 1; }
+  .card:hover:not(.locked) .card-desc { color: var(--paper); opacity: 0.75; }
+  .card:hover:not(.locked) .card-meta { color: var(--paper); opacity: 0.55; border-color: var(--onyx-line); }
+  .card:hover:not(.locked) .card-meta strong { color: var(--gold); }
+  .card:hover:not(.locked) .card-arrow { color: var(--gold); transform: translateX(4px); }
+
+  .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .card-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--paper-text);
+    opacity: 0.5;
+    transition: color 0.3s ease, opacity 0.3s ease;
+  }
+
+  .card-arrow {
+    color: var(--paper-text);
+    opacity: 0.4;
+    transition: color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .card:hover:not(.locked) .card-arrow { opacity: 1; }
+
+  .card-title {
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 600;
+    font-size: 1.45rem;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    color: inherit;
+    margin-top: auto;
+  }
+
+  .card-desc {
+    font-size: 0.94rem;
+    line-height: 1.5;
+    color: var(--paper-muted);
+    transition: color 0.3s ease;
+  }
+
+  .card-meta {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid var(--paper-line);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--paper-text);
+    opacity: 0.55;
+    transition: color 0.3s ease, opacity 0.3s ease, border-color 0.3s ease;
+  }
+  .card-meta strong {
+    color: var(--gold-deep);
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  /* CARD LOCKED — Mapa do Negócio em construção */
+  .card.locked {
+    cursor: not-allowed;
+    background: transparent;
+    border-style: dashed;
+    border-color: rgba(10, 10, 11, 0.18);
+  }
+  .card.locked .card-title,
+  .card.locked .card-desc,
+  .card.locked .card-num { opacity: 0.45; }
+  .card.locked .card-arrow { display: none; }
+  .card.locked .card-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    font-weight: 500;
+  }
+  .card.locked .card-badge svg { width: 11px; height: 11px; }
+
+  /* FOOTER ONYX -------------------------------------- */
+  footer {
+    background: var(--onyx);
+    color: var(--paper);
+    padding: 64px 48px 36px;
+    border-top: 1px solid var(--onyx-line);
+  }
+
+  .footer-grid {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 32px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--onyx-line);
+  }
+
+  .footer-grid .brand-stack { margin-bottom: 16px; }
+  .footer-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--paper);
+    opacity: 0.5;
+  }
+  .footer-tag.gold { color: var(--gold); opacity: 1; }
+  .footer-lede {
+    font-size: 0.95rem;
+    color: var(--paper);
+    opacity: 0.7;
+    margin-top: 12px;
+    max-width: 320px;
+  }
+
+  .footer-bottom {
+    max-width: 1280px;
+    margin: 24px auto 0;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* RESPONSIVO --------------------------------------- */
+  @media (max-width: 960px) {
+    .card { grid-column: span 6; }
+    .resources-head { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .head-bar, .hero, .resources, footer { padding-left: 24px; padding-right: 24px; }
+    .card { grid-column: span 12; }
+    .hero-meta { gap: 24px; }
+    .resources-head .right { text-align: left; }
+  }
+
+  /* ANIMATIONS -------------------------------------- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ==============================================
+       HERO INSTITUCIONAL — fundo onyx
+       ============================================== -->
+  <section class="hero">
+    <div class="hero-grid-bg"></div>
+
+    <div class="head-bar" style="padding-left:0;padding-right:0">
+      <div class="left">
+        <span class="tag">winner.ia &nbsp;—&nbsp; programa de aceleração em ia</span>
+        <span class="tag">cliente · transrota</span>
+      </div>
+      <div class="right">
+        <span class="tag">v 1.0 / 2026</span>
+        <span class="tag">01 / 06</span>
+      </div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-kicker">
+        <span class="line"></span>
+        <span class="tag tag-gold">posicionamento · 2026</span>
+      </div>
+
+      <h1 class="display">
+        Inteligência artificial<br>
+        com propósito de negócio.<br>
+        <em>Sua aceleração começa agora.</em>
+      </h1>
+
+      <p class="hero-lede">
+        Bem-vindo, Transrota. Tudo o que você precisa para extrair o máximo do programa está aqui. Comece pelo curso, conheça o método e use os recursos abaixo para acelerar sua transportadora com IA — da operação à decisão.
+      </p>
+
+      <div class="hero-meta">
+        <div class="item">
+          <span class="label">cliente</span>
+          <span class="value">Transrota · Transportadora</span>
+        </div>
+        <div class="item">
+          <span class="label">segmento</span>
+          <span class="value">Logística &amp; transporte</span>
+        </div>
+        <div class="item">
+          <span class="label">início</span>
+          <span class="value">20 / 05 / 2026</span>
+        </div>
+        <div class="item">
+          <span class="label">duração</span>
+          <span class="value">6 meses</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="head-bar" style="padding-top:32px">
+      <div class="left brand-stack">
+        <span class="logo-v">
+          <svg viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true">
+            <path d="M 8 6 L 32 6 L 52 70 L 38 92 L 18 28 Z"/>
+            <path d="M 38 92 L 50 110 L 62 92 L 50 70 Z"/>
+            <path d="M 50 70 L 62 92 L 92 6 L 68 6 Z"/>
+            <circle cx="91" cy="9" r="6"/>
+          </svg>
+        </span>
+        <span class="wordmark">winner<span class="ia">.ia</span></span>
+      </div>
+      <div class="right">
+        <span class="tag">↓ navegue pelos recursos</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================
+       RECURSOS — fundo papel
+       ============================================== -->
+  <section class="resources">
+    <div class="resources-head">
+      <div class="left">
+        <span class="tag">02 — recursos</span>
+        <h2>Tudo que você acessa<br>durante a mentoria.</h2>
+      </div>
+      <div class="right">
+        Comece pelo curso, leia o manual, preencha o formulário de diagnóstico e conheça os arquivos compartilhados. O Mapa do Negócio vai aparecer aqui assim que o diagnóstico estiver pronto.
+      </div>
+    </div>
+
+    <div class="card-grid">
+
+      <!-- 01 — CURSO -->
+      <a href="https://members.kiwify.com/?club=04f64c9d-075c-4543-b44f-5fdeca907f51" target="_blank" rel="noopener" class="card">
+        <div class="card-head">
+          <span class="card-num">01 / curso</span>
+          <span class="card-arrow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </span>
+        </div>
+        <h3 class="card-title">Claude<br>Sem Código</h3>
+        <p class="card-desc">Comece por aqui. O treinamento-base para dominar o Claude na prática — direto ao ponto.</p>
+        <div class="card-meta">acesso · <strong>seu login Kiwify</strong></div>
+      </a>
+
+      <!-- 02 — MANUAL -->
+      <a href="https://materialalunos.winneria.com.br/" target="_blank" rel="noopener" class="card">
+        <div class="card-head">
+          <span class="card-num">02 / manual</span>
+          <span class="card-arrow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </span>
+        </div>
+        <h3 class="card-title">Manual<br>do Mentorado</h3>
+        <p class="card-desc">Como funciona o programa, o que esperar e como extrair o máximo de cada reunião.</p>
+        <div class="card-meta">senha · <strong>programaia2026</strong></div>
+      </a>
+
+      <!-- 03 — DRIVE -->
+      <a href="https://drive.google.com/drive/folders/1DzUJYNDr5n6cInGml4rD7SL98vEaSl9x?usp=drive_link" target="_blank" rel="noopener" class="card">
+        <div class="card-head">
+          <span class="card-num">03 / arquivos</span>
+          <span class="card-arrow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </span>
+        </div>
+        <h3 class="card-title">Drive<br>Compartilhado</h3>
+        <p class="card-desc">Arquivos, templates e materiais da mentoria — atualizados a cada reunião.</p>
+        <div class="card-meta">exclusivo · <strong>Transrota</strong></div>
+      </a>
+
+      <!-- 04 — FORMULÁRIO MAPA ESTRATÉGICO -->
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSc5ecOuqW7LSJVboXmm_FwTZLfCp_kBeAqaUi3JNi4pW6uXoA/viewform" target="_blank" rel="noopener" class="card">
+        <div class="card-head">
+          <span class="card-num">04 / diagnóstico</span>
+          <span class="card-arrow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </span>
+        </div>
+        <h3 class="card-title">Mapa<br>Estratégico de IA</h3>
+        <p class="card-desc">12 perguntas para abrirmos a operação da Transrota. Quanto mais honesto, mais cirúrgico o plano que vamos desenhar juntos.</p>
+        <div class="card-meta">tempo · <strong>25 a 40 min</strong></div>
+      </a>
+
+      <!-- 05 — MAPA DO NEGÓCIO (LOCKED) -->
+      <div class="card locked" aria-disabled="true">
+        <div class="card-head">
+          <span class="card-num">05 / em construção</span>
+          <span class="card-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            em breve
+          </span>
+        </div>
+        <h3 class="card-title">Mapa do Negócio<br>Personalizado</h3>
+        <p class="card-desc">Seu diagnóstico em 6 áreas, com gargalos identificados e o plano dos próximos 6 meses. Aparece aqui assim que recebermos o formulário.</p>
+        <div class="card-meta">aguardando · <strong>preenchimento do formulário</strong></div>
+      </div>
+
+      <!-- 06 — WHATSAPP -->
+      <a href="https://chat.whatsapp.com/G2Wj7Y2vnDREHfBZbHHeic?mode=gi_t" target="_blank" rel="noopener" class="card">
+        <div class="card-head">
+          <span class="card-num">06 / comunidade</span>
+          <span class="card-arrow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </span>
+        </div>
+        <h3 class="card-title">Suporte &amp; Comunidade<br>WhatsApp</h3>
+        <p class="card-desc">Dúvidas, avanços, travamentos — acesso direto ao suporte da mentoria. Sua equipe e a equipe Winner no mesmo grupo.</p>
+        <div class="card-meta">grupo exclusivo · <strong>resposta rápida</strong></div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ==============================================
+       FOOTER — fundo onyx
+       ============================================== -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="brand-stack">
+          <span class="logo-v">
+            <svg viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true">
+              <path d="M 8 6 L 32 6 L 52 70 L 38 92 L 18 28 Z"/>
+              <path d="M 38 92 L 50 110 L 62 92 L 50 70 Z"/>
+              <path d="M 50 70 L 62 92 L 92 6 L 68 6 Z"/>
+              <circle cx="91" cy="9" r="6"/>
+            </svg>
+          </span>
+          <span class="wordmark">winner<span class="ia">.ia</span></span>
+        </div>
+        <p class="footer-lede">
+          Consultoria estratégica em I.A para empresários. Vencer não é tendência — é decisão.
+        </p>
+      </div>
+      <div>
+        <div class="footer-tag">programa</div>
+        <p style="font-size:0.95rem;color:var(--paper);opacity:0.75;margin-top:8px">Aceleração em IA<br>Edição 2026</p>
+      </div>
+      <div>
+        <div class="footer-tag">contato</div>
+        <p style="font-size:0.95rem;margin-top:8px"><a href="http://winneria.com.br" style="color:var(--gold);text-decoration:none">winneria.com.br</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-tag">© 2026 · winner.ia · brand system v 1.0</span>
+      <span class="footer-tag">cliente · transrota · transportadora</span>
+    </div>
+  </footer>
+
+</body>
+</html>

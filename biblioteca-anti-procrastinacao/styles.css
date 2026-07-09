@@ -1,0 +1,632 @@
+/* =========================================================
+   Biblioteca Anti-Procrastinação — Landing
+   Design system: rose primary (#E91E63), cream background,
+   Playfair Display (títulos) + Inter (corpo) + Caveat (acentos).
+   ========================================================= */
+
+:root {
+  /* Paleta */
+  --rose: #E91E63;
+  --rose-deep: #BE185D;
+  --rose-soft: #FCE7F3;
+  --ink: #1a1a2e;
+  --cream: #FAF7F2;
+  --paper: #FFFBF7;
+  --text: #2C2C2C;
+  --text-soft: #7A6F66;
+  --border: #EDE6DC;
+
+  /* Tipografia */
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-script: 'Caveat', cursive;
+
+  /* Raios */
+  --r-card: 16px;
+  --r-pill: 999px;
+
+  /* Sombras suaves */
+  --shadow-sm: 0 2px 8px rgba(26, 26, 46, 0.04);
+  --shadow-md: 0 8px 24px rgba(26, 26, 46, 0.08);
+  --shadow-lg: 0 24px 60px rgba(26, 26, 46, 0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--text);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img { max-width: 100%; display: block; }
+
+a {
+  color: var(--rose-deep);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+a:hover { color: var(--rose); }
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--rose);
+  outline-offset: 2px;
+}
+
+/* ====== Tipografia ====== */
+
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+h1 { font-size: clamp(2rem, 5vw + 0.5rem, 3.5rem); }
+h2 { font-size: clamp(1.6rem, 3vw + 0.5rem, 2.4rem); margin-bottom: 0.6em; }
+h3 { font-size: 1.2rem; margin-bottom: 0.4em; }
+
+.eyebrow {
+  font-family: var(--font-script);
+  font-size: 1.5rem;
+  color: var(--rose-deep);
+  line-height: 1;
+  display: inline-block;
+  margin-bottom: 0.6em;
+}
+
+.script {
+  font-family: var(--font-script);
+  color: var(--rose-deep);
+}
+
+/* ====== Layout ====== */
+
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+section {
+  padding: 80px 0;
+}
+
+@media (max-width: 720px) {
+  section { padding: 56px 0; }
+}
+
+/* ====== Botão primário ====== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--rose);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 16px 32px;
+  border: none;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: var(--shadow-sm);
+  width: 100%;
+  text-align: center;
+}
+
+.btn:hover {
+  background: var(--rose-deep);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn:active { transform: translateY(0); }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--ink);
+  box-shadow: none;
+}
+
+.btn--ghost:hover {
+  background: var(--ink);
+  color: #fff;
+}
+
+/* ====== Seção 1 — Hero ====== */
+
+.hero {
+  background: var(--cream);
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+@media (min-width: 920px) {
+  .hero__grid {
+    grid-template-columns: 1.05fr 1fr;
+    gap: 64px;
+  }
+}
+
+.hero h1 { margin-bottom: 24px; }
+
+.hero__sub {
+  font-size: 1.1rem;
+  color: var(--text-soft);
+  margin-bottom: 32px;
+  max-width: 30em;
+}
+
+.hero__form-wrap {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+}
+
+.hero__form-wrap h3 {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.hero__form-wrap p.hint {
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  margin-bottom: 16px;
+}
+
+/* ====== Mockup do PDF ====== */
+
+.pdf-mockup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1200px;
+}
+
+.pdf-mockup__book {
+  width: min(320px, 80%);
+  aspect-ratio: 3 / 4;
+  background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+  border-radius: 6px 14px 14px 6px;
+  box-shadow:
+    -4px 0 0 rgba(0, 0, 0, 0.06) inset,
+    var(--shadow-lg);
+  transform: rotateY(-8deg) rotateZ(-4deg);
+  padding: 40px 32px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.pdf-mockup__book::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 14px;
+  background: linear-gradient(90deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0) 100%);
+  border-radius: 6px 0 0 6px;
+}
+
+.pdf-mockup__label {
+  font-family: var(--font-script);
+  font-size: 1.4rem;
+  opacity: 0.9;
+}
+
+.pdf-mockup__title {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  line-height: 1.1;
+  font-weight: 600;
+}
+
+.pdf-mockup__meta {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+@media (max-width: 720px) {
+  .pdf-mockup__book {
+    width: min(260px, 70%);
+    padding: 32px 24px;
+  }
+  .pdf-mockup__title { font-size: 1.6rem; }
+}
+
+/* ====== Iframe do Matte ====== */
+
+.matte-iframe-wrap {
+  background: var(--paper);
+  border-radius: 12px;
+  overflow: hidden;
+  /* Altura definida pelo data-height do iframe.
+     732px é o padrão do form atual. Ajustar se trocar a quantidade de campos. */
+  min-height: 480px;
+}
+
+.matte-iframe-wrap iframe {
+  width: 100%;
+  border: none;
+  display: block;
+}
+
+/* ====== Seção 2 — O que tem dentro ====== */
+
+.dentro {
+  background: var(--paper);
+}
+
+.dentro__intro {
+  text-align: center;
+  max-width: 36em;
+  margin: 0 auto 56px;
+}
+
+.dentro__intro p {
+  font-size: 1.1rem;
+  color: var(--text-soft);
+  margin-top: 12px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 720px) {
+  .cards { grid-template-columns: repeat(3, 1fr); }
+}
+
+.card {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  padding: 32px 28px;
+  text-align: left;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.card__num {
+  font-family: var(--font-script);
+  font-size: 3.2rem;
+  line-height: 1;
+  color: var(--rose);
+  display: block;
+  margin-bottom: 12px;
+}
+
+.card h3 {
+  margin-bottom: 8px;
+  font-size: 1.3rem;
+}
+
+.card p {
+  color: var(--text-soft);
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+/* ====== Seção 3 — Pra quem é ====== */
+
+.praquem {
+  background: var(--cream);
+}
+
+.praquem__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 820px) {
+  .praquem__grid { grid-template-columns: 1fr 1fr; gap: 48px; }
+}
+
+.praquem__col {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  padding: 36px 32px;
+}
+
+.praquem__col h3 {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+
+.praquem__col--no h3 { color: var(--text-soft); }
+
+.praquem__list { list-style: none; }
+
+.praquem__list li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 14px;
+  color: var(--text);
+  line-height: 1.55;
+}
+
+.praquem__list li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 10px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--rose);
+}
+
+.praquem__col--no .praquem__list li::before {
+  background: var(--text-soft);
+  opacity: 0.5;
+}
+
+/* ====== Seção 4 — Sobre ====== */
+
+.sobre {
+  background: var(--paper);
+}
+
+.sobre__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+@media (min-width: 820px) {
+  .sobre__grid { grid-template-columns: 280px 1fr; gap: 56px; }
+}
+
+.sobre__foto {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--rose-soft) 0%, #fbcfe8 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-script);
+  font-size: 4rem;
+  color: var(--rose-deep);
+  margin: 0 auto;
+  overflow: hidden;
+  box-shadow: var(--shadow-md), 0 0 0 6px var(--paper);
+}
+
+.sobre__foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sobre__texto h2 { margin-bottom: 16px; }
+
+.sobre__texto p {
+  color: var(--text);
+  font-size: 1.05rem;
+  margin-bottom: 16px;
+}
+
+.sobre__assinatura {
+  font-family: var(--font-script);
+  font-size: 1.8rem;
+  color: var(--rose-deep);
+  margin-top: 8px;
+  display: inline-block;
+}
+
+/* ====== Seção 5 — Última chamada (ink) ====== */
+
+.cta-final {
+  background: var(--ink);
+  color: #fff;
+}
+
+.cta-final h2 {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.cta-final__intro {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 32em;
+  margin: 0 auto 40px;
+  font-size: 1.05rem;
+}
+
+.cta-final__form {
+  max-width: 520px;
+  margin: 0 auto;
+  background: var(--paper);
+  border-radius: var(--r-card);
+  padding: 24px;
+  color: var(--text);
+}
+
+/* ====== Footer ====== */
+
+.site-footer {
+  background: var(--cream);
+  border-top: 1px solid var(--border);
+  padding: 40px 0 32px;
+  text-align: center;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+}
+
+.site-footer__brand {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.site-footer__tag {
+  font-family: var(--font-script);
+  font-size: 1.2rem;
+  color: var(--rose-deep);
+  margin-bottom: 16px;
+}
+
+.site-footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 20px;
+  margin-bottom: 20px;
+}
+
+.site-footer__links a { color: var(--text-soft); }
+.site-footer__links a:hover { color: var(--rose-deep); }
+
+.site-footer__copy {
+  font-size: 0.8rem;
+  color: var(--text-soft);
+  opacity: 0.7;
+}
+
+/* ====== Página de obrigado ====== */
+
+.obrigado {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 24px;
+  background: var(--cream);
+}
+
+.obrigado__card {
+  max-width: 560px;
+  width: 100%;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 56px 40px;
+  box-shadow: var(--shadow-md);
+}
+
+.obrigado__icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 24px;
+  border-radius: 50%;
+  background: var(--rose-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rose-deep);
+  font-family: var(--font-script);
+  font-size: 2.5rem;
+}
+
+.obrigado h1 {
+  font-size: clamp(1.8rem, 4vw + 0.5rem, 2.5rem);
+  margin-bottom: 16px;
+}
+
+.obrigado p {
+  color: var(--text-soft);
+  margin-bottom: 24px;
+  font-size: 1.05rem;
+}
+
+.obrigado__despedida {
+  font-family: var(--font-script);
+  font-size: 1.5rem;
+  color: var(--rose-deep);
+  margin-top: 32px;
+}
+
+@media (max-width: 560px) {
+  .obrigado__card { padding: 40px 24px; }
+}
+
+/* ====== Política de privacidade ====== */
+
+.legal {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 64px 24px;
+}
+
+.legal h1 { margin-bottom: 8px; }
+.legal h2 {
+  font-size: 1.3rem;
+  margin-top: 32px;
+  margin-bottom: 12px;
+}
+.legal p, .legal li {
+  color: var(--text);
+  margin-bottom: 12px;
+}
+.legal ul { padding-left: 24px; }
+.legal .updated {
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  margin-bottom: 32px;
+}
+
+/* ====== Animação suave (fade-in) ====== */
+
+@media (prefers-reduced-motion: no-preference) {
+  .fade-in {
+    opacity: 0;
+    transform: translateY(8px);
+    animation: fadeIn 0.6s ease forwards;
+  }
+  .fade-in.d1 { animation-delay: 0.1s; }
+  .fade-in.d2 { animation-delay: 0.2s; }
+  .fade-in.d3 { animation-delay: 0.3s; }
+
+  @keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+}

@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mentoria Autoridade Digital · Painel da Aluna</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --bg:#0b0b0c;
+    --bg-soft:#141416;
+    --line:#26262b;
+    --ink:#f5f3ee;
+    --muted:#a2a09a;
+    --gold:#d4af37;
+    --gold-soft:#f0d97a;
+    --gold-bright:#f7e07f;
+  }
+  body{
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+    min-height:100vh;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:48px 24px 96px}
+
+  /* HERO */
+  .hero{
+    text-align:center;
+    padding:48px 16px 56px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:64px;
+    position:relative;
+  }
+  .hero::before{
+    content:'';
+    position:absolute;
+    top:0;left:50%;
+    transform:translateX(-50%);
+    width:280px;height:280px;
+    background:radial-gradient(circle, rgba(212,175,55,0.18), transparent 70%);
+    pointer-events:none;
+  }
+  .eyebrow{
+    display:inline-block;
+    font-size:11px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:20px;
+    font-weight:600;
+    position:relative;
+  }
+  .eyebrow::before,.eyebrow::after{
+    content:'';
+    display:inline-block;
+    width:32px;height:1px;
+    background:var(--gold);
+    vertical-align:middle;
+    margin:0 14px;
+  }
+  h1{
+    font-family:'Playfair Display',serif;
+    font-size:clamp(38px,5.8vw,68px);
+    font-weight:600;
+    line-height:1.05;
+    margin-bottom:18px;
+    position:relative;
+  }
+  h1 em{
+    font-style:italic;
+    color:var(--gold-soft);
+    font-weight:400;
+  }
+  .hero p{
+    font-size:17px;
+    color:var(--muted);
+    max-width:620px;
+    margin:0 auto;
+    position:relative;
+  }
+  .hero .sig{
+    margin-top:24px;
+    font-size:13px;
+    color:var(--gold);
+    letter-spacing:2px;
+    text-transform:uppercase;
+    position:relative;
+  }
+
+  /* SECTION TITLE */
+  .section-title{
+    display:flex;
+    align-items:baseline;
+    gap:16px;
+    margin-bottom:32px;
+    padding-bottom:14px;
+    border-bottom:1px solid var(--line);
+  }
+  .section-title h2{
+    font-family:'Playfair Display',serif;
+    font-size:28px;
+    font-weight:600;
+  }
+  .section-title .label{
+    font-size:11px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:600;
+  }
+
+  /* CARDS DAS AULAS */
+  .lessons{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:20px;
+    margin-bottom:80px;
+  }
+  .lesson{
+    background:var(--bg-soft);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:32px 28px;
+    text-decoration:none;
+    color:inherit;
+    display:flex;
+    flex-direction:column;
+    min-height:280px;
+    transition:transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+    position:relative;
+    overflow:hidden;
+  }
+  .lesson::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(135deg, rgba(212,175,55,0.08) 0%, transparent 60%);
+    opacity:0;
+    transition:opacity .35s ease;
+    pointer-events:none;
+  }
+  .lesson:hover{
+    transform:translateY(-6px);
+    border-color:var(--gold);
+    box-shadow:0 20px 50px rgba(212,175,55,0.12);
+  }
+  .lesson:hover::before{opacity:1}
+  .lesson:hover .lesson-cta{color:var(--gold-bright);gap:14px}
+
+  .lesson-num{
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    font-size:54px;
+    color:var(--gold);
+    line-height:1;
+    margin-bottom:18px;
+    font-weight:400;
+  }
+  .lesson-tag{
+    font-size:10px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:10px;
+    font-weight:600;
+  }
+  .lesson h3{
+    font-family:'Playfair Display',serif;
+    font-size:24px;
+    font-weight:600;
+    line-height:1.2;
+    margin-bottom:14px;
+  }
+  .lesson p{
+    font-size:14px;
+    color:var(--muted);
+    margin-bottom:24px;
+    flex-grow:1;
+  }
+  .lesson-cta{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-size:12px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:600;
+    margin-top:auto;
+    transition:gap .35s ease, color .35s ease;
+  }
+  .lesson-cta::after{content:'→';font-size:18px;line-height:1}
+
+  /* CRONOGRAMA */
+  .schedule{
+    background:linear-gradient(180deg, rgba(212,175,55,0.04), transparent);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:48px 40px;
+    margin-bottom:64px;
+  }
+  .schedule-intro{
+    text-align:center;
+    max-width:580px;
+    margin:0 auto 40px;
+  }
+  .schedule-intro h2{
+    font-family:'Playfair Display',serif;
+    font-size:32px;
+    font-weight:600;
+    margin-bottom:12px;
+  }
+  .schedule-intro p{
+    color:var(--muted);
+    font-size:15px;
+  }
+  .weeks{
+    display:grid;
+    gap:18px;
+  }
+  .week{
+    display:grid;
+    grid-template-columns:140px 1fr;
+    gap:28px;
+    padding:24px;
+    background:var(--bg-soft);
+    border:1px solid var(--line);
+    border-radius:12px;
+    transition:border-color .25s ease;
+  }
+  .week:hover{border-color:rgba(212,175,55,0.4)}
+  .week-meta{
+    border-right:1px solid var(--line);
+    padding-right:24px;
+  }
+  .week-num{
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    font-size:18px;
+    color:var(--gold);
+    margin-bottom:6px;
+  }
+  .week-name{
+    font-size:13px;
+    font-weight:600;
+    color:var(--ink);
+    line-height:1.3;
+  }
+  .week-tasks{
+    list-style:none;
+    padding:0;
+  }
+  .week-tasks li{
+    position:relative;
+    padding-left:24px;
+    padding-bottom:10px;
+    font-size:14px;
+    color:var(--ink);
+    line-height:1.55;
+  }
+  .week-tasks li:last-child{padding-bottom:0}
+  .week-tasks li::before{
+    content:'';
+    position:absolute;
+    left:0;top:9px;
+    width:8px;height:8px;
+    border:1.5px solid var(--gold);
+    border-radius:2px;
+  }
+  .week-tasks li strong{color:var(--gold-soft);font-weight:600}
+
+  /* COMO USAR */
+  .how{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    margin-bottom:48px;
+  }
+  .how-card{
+    padding:24px;
+    background:var(--bg-soft);
+    border:1px solid var(--line);
+    border-radius:12px;
+  }
+  .how-card .step{
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    font-size:24px;
+    color:var(--gold);
+    margin-bottom:8px;
+  }
+  .how-card h4{
+    font-size:15px;
+    font-weight:600;
+    margin-bottom:8px;
+  }
+  .how-card p{
+    font-size:13px;
+    color:var(--muted);
+    line-height:1.55;
+  }
+
+  /* FOOTER */
+  footer{
+    text-align:center;
+    padding-top:48px;
+    border-top:1px solid var(--line);
+    color:var(--muted);
+    font-size:12px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+  }
+  footer span{color:var(--gold)}
+
+  @media (max-width:640px){
+    .wrap{padding:32px 18px 64px}
+    .hero{padding:24px 8px 40px;margin-bottom:48px}
+    .eyebrow::before,.eyebrow::after{width:18px;margin:0 8px}
+    .schedule{padding:32px 20px}
+    .week{grid-template-columns:1fr;gap:14px}
+    .week-meta{border-right:none;border-bottom:1px solid var(--line);padding:0 0 14px}
+  }
+  @media print{
+    body{background:#fff;color:#000}
+    .lesson:hover{transform:none}
+  }
+
+  /* CARD COMO BOTÃO */
+  button.lesson{
+    font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%;
+    appearance:none;-webkit-appearance:none;
+  }
+
+  /* MODAL */
+  .modal-backdrop{
+    position:fixed;inset:0;
+    background:rgba(8,8,9,0.78);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    z-index:100;
+    display:flex;align-items:center;justify-content:center;
+    padding:24px;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .25s ease;
+  }
+  .modal-backdrop.open{opacity:1;pointer-events:auto}
+  .modal{
+    background:var(--bg-soft);
+    border:1px solid var(--line);
+    border-radius:18px;
+    max-width:620px;width:100%;
+    padding:48px 44px 40px;
+    position:relative;
+    transform:translateY(20px) scale(.98);
+    transition:transform .35s cubic-bezier(.2,.9,.3,1);
+    box-shadow:0 30px 80px rgba(0,0,0,0.6);
+  }
+  .modal-backdrop.open .modal{transform:translateY(0) scale(1)}
+  .modal-close{
+    position:absolute;top:18px;right:18px;
+    background:transparent;border:none;color:var(--muted);
+    font-size:22px;width:36px;height:36px;border-radius:50%;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;
+    transition:background .2s ease, color .2s ease;
+  }
+  .modal-close:hover{background:rgba(212,175,55,0.12);color:var(--gold)}
+  .modal-num{
+    font-family:'Playfair Display',serif;
+    font-style:italic;font-size:42px;
+    color:var(--gold);line-height:1;margin-bottom:8px;
+  }
+  .modal-tag{
+    font-size:10px;letter-spacing:3px;text-transform:uppercase;
+    color:var(--muted);font-weight:600;margin-bottom:8px;
+  }
+  .modal h3{
+    font-family:'Playfair Display',serif;
+    font-size:30px;font-weight:600;line-height:1.15;margin-bottom:12px;
+  }
+  .modal-desc{
+    color:var(--muted);font-size:14px;margin-bottom:28px;
+  }
+  .modal-options{
+    display:grid;grid-template-columns:1fr 1fr;gap:14px;
+  }
+  .option-card{
+    background:var(--bg);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:22px 20px 24px;
+    text-decoration:none;color:inherit;
+    display:flex;flex-direction:column;gap:6px;
+    transition:transform .25s ease, border-color .25s ease, background .25s ease;
+  }
+  .option-card:hover{
+    transform:translateY(-3px);
+    border-color:var(--gold);
+    background:#1a1a1c;
+  }
+  .option-card.primary{
+    background:linear-gradient(135deg, rgba(212,175,55,0.14), rgba(212,175,55,0.04));
+    border-color:rgba(212,175,55,0.45);
+  }
+  .option-card.primary:hover{background:linear-gradient(135deg, rgba(212,175,55,0.24), rgba(212,175,55,0.08))}
+  .option-icon{font-size:22px;margin-bottom:6px}
+  .option-title{
+    font-family:'Playfair Display',serif;
+    font-size:17px;font-weight:600;line-height:1.2;color:var(--ink);
+  }
+  .option-desc{
+    font-size:12px;color:var(--muted);line-height:1.45;
+  }
+  .option-arrow{
+    margin-top:10px;font-size:10px;letter-spacing:2px;
+    text-transform:uppercase;color:var(--gold);font-weight:600;
+  }
+  .option-arrow::after{content:' →'}
+  body.modal-open{overflow:hidden}
+
+  @media (max-width:540px){
+    .modal{padding:36px 24px 28px}
+    .modal h3{font-size:24px}
+    .modal-options{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Mentoria Autoridade Digital</div>
+    <h1>O painel da sua <em>jornada</em></h1>
+    <p>Tudo o que você precisa para transformar conhecimento em autoridade, autoridade em comunidade e comunidade em receita previsível no Instagram.</p>
+    <div class="sig">por Andressa Guimarães</div>
+  </header>
+
+  <!-- AULAS -->
+  <div class="section-title">
+    <span class="label">Etapa 01</span>
+    <h2>As 4 aulas da mentoria</h2>
+  </div>
+
+  <div class="lessons">
+
+    <button type="button" class="lesson" data-lesson="1">
+      <div class="lesson-num">01</div>
+      <div class="lesson-tag">Fundamento</div>
+      <h3>Jornada do Avatar</h3>
+      <p>As 10 perguntas que constroem sua avatar e os 4 estágios da jornada dela: contexto, conflito, fundo do poço e topo da montanha.</p>
+      <span class="lesson-cta">Abrir aula</span>
+    </button>
+
+    <button type="button" class="lesson" data-lesson="2">
+      <div class="lesson-num">02</div>
+      <div class="lesson-tag">Estratégia</div>
+      <h3>Criação de Roteiros Infalíveis</h3>
+      <p>Tópico, tema interessante, moral da história, CTA e a estrutura AIDA — para vídeos que param o scroll e convertem de verdade.</p>
+      <span class="lesson-cta">Abrir aula</span>
+    </button>
+
+    <button type="button" class="lesson" data-lesson="3">
+      <div class="lesson-num">03</div>
+      <div class="lesson-tag">Conversão</div>
+      <h3>Stories Magnéticos</h3>
+      <p>Os 3 pilares inegociáveis — conexão, valor e conversão — pontos de contato diários e rituais que criam intimidade com a audiência.</p>
+      <span class="lesson-cta">Abrir aula</span>
+    </button>
+
+    <button type="button" class="lesson" data-lesson="4">
+      <div class="lesson-num">04</div>
+      <div class="lesson-tag">Legado</div>
+      <h3>Audiência Fria em Comunidade Apaixonada</h3>
+      <p>Bandeiras, heróis e vilões, os 100 true fans, o círculo interno e os rituais que transformam seguidores em tribo.</p>
+      <span class="lesson-cta">Abrir aula</span>
+    </button>
+
+  </div>
+
+  <!-- CRONOGRAMA -->
+  <section class="schedule">
+    <div class="schedule-intro">
+      <div class="eyebrow">Cronograma sugerido</div>
+      <h2>4 semanas para aplicar tudo</h2>
+      <p>Uma aula por semana. Estude na segunda, aplique até sexta, revise no domingo. Você não precisa fazer tudo de uma vez — precisa fazer todos os dias.</p>
+    </div>
+
+    <div class="weeks">
+
+      <div class="week">
+        <div class="week-meta">
+          <div class="week-num">Semana 01</div>
+          <div class="week-name">Avatar &amp; Perfil</div>
+        </div>
+        <ul class="week-tasks">
+          <li><strong>Seg–Ter:</strong> Assistir Aula 01 + responder as 10 perguntas do avatar no papel (não na cabeça)</li>
+          <li><strong>Qua:</strong> Mapear os 4 estágios da jornada da sua avatar (contexto, conflito, fundo do poço, topo da montanha)</li>
+          <li><strong>Qui:</strong> Escrever 3 versões da bio com as fórmulas e pedir para alguém escolher a mais clara</li>
+          <li><strong>Sex:</strong> Publicar perfil otimizado: foto, nome, bio e destaques (Sobre Mim + Comece Aqui)</li>
+          <li><strong>Dom:</strong> Revisar e listar 10 ideias de conteúdo conectadas aos 4 estágios</li>
+        </ul>
+      </div>
+
+      <div class="week">
+        <div class="week-meta">
+          <div class="week-num">Semana 02</div>
+          <div class="week-name">Roteiros &amp; Conteúdo</div>
+        </div>
+        <ul class="week-tasks">
+          <li><strong>Seg–Ter:</strong> Assistir Aula 02 + escolher 3 tópicos conectados à dor ativa da avatar</li>
+          <li><strong>Qua:</strong> Aplicar a estrutura completa: Tópico → Tema interessante → Moral → CTA</li>
+          <li><strong>Qui:</strong> Escrever 3 roteiros completos seguindo o AIDA (Atenção, Interesse, Desejo, Ação)</li>
+          <li><strong>Sex:</strong> Gravar e publicar o primeiro vídeo. Sem ensaio infinito. Publicar é o método.</li>
+          <li><strong>Dom:</strong> Aplicar o checklist do roteiro estratégico nos próximos 2 que vai postar na semana</li>
+        </ul>
+      </div>
+
+      <div class="week">
+        <div class="week-meta">
+          <div class="week-num">Semana 03</div>
+          <div class="week-name">Stories &amp; Presença</div>
+        </div>
+        <ul class="week-tasks">
+          <li><strong>Seg:</strong> Assistir Aula 03 + escolher seu ritual de abertura e o mantra que vai repetir</li>
+          <li><strong>Ter–Sáb:</strong> Postar todos os dias seguindo os 3 pilares: 1 conexão + 1 valor + 1 conversão</li>
+          <li><strong>Diário:</strong> Usar pelo menos 1 recurso interativo (enquete, caixinha, quiz) por dia</li>
+          <li><strong>Diário:</strong> Responder cada mensagem com áudio — sair do texto, ir para a voz</li>
+          <li><strong>Dom:</strong> Anotar quais stories tiveram mais resposta e por quê (banco de insights da avatar)</li>
+        </ul>
+      </div>
+
+      <div class="week">
+        <div class="week-meta">
+          <div class="week-num">Semana 04</div>
+          <div class="week-name">Comunidade &amp; Tribo</div>
+        </div>
+        <ul class="week-tasks">
+          <li><strong>Seg–Ter:</strong> Assistir Aula 04 + definir suas bandeiras, heróis e vilões</li>
+          <li><strong>Qua:</strong> Selecionar de 50 a 100 seguidoras mais engajadas e dar um nome à sua tribo</li>
+          <li><strong>Qui:</strong> Criar canal de transmissão e enviar a primeira mensagem tratando elas como sócias do movimento</li>
+          <li><strong>Sex:</strong> Pedir a opinião delas sobre um novo projeto (validação real, não suposição)</li>
+          <li><strong>Dom:</strong> Revisar o mês inteiro e responder: o que funcionou? O que vou repetir? O que vou cortar?</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- COMO USAR -->
+  <div class="section-title">
+    <span class="label">Como aplicar</span>
+    <h2>Seu ritual de estudo</h2>
+  </div>
+
+  <div class="how">
+    <div class="how-card">
+      <div class="step">01</div>
+      <h4>Assista</h4>
+      <p>Veja a aula da semana com caneta e caderno em mãos. Sem celular, sem aba aberta.</p>
+    </div>
+    <div class="how-card">
+      <div class="step">02</div>
+      <h4>Escolha</h4>
+      <p>Clique no card da aula. Você pode rever a <strong style="color:var(--gold-soft)">apresentação em PDF</strong> ou abrir o <strong style="color:var(--gold-soft)">documento de exercícios</strong>.</p>
+    </div>
+    <div class="how-card">
+      <div class="step">03</div>
+      <h4>Imprima ou preencha</h4>
+      <p>Use o botão "Imprimir / Salvar como PDF" no topo de cada documento. Preencher à mão fixa mais do que digitar.</p>
+    </div>
+    <div class="how-card">
+      <div class="step">04</div>
+      <h4>Execute na semana</h4>
+      <p>Siga o cronograma. Não pule etapa. Cada aula é fundação para a próxima.</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>Mentoria <span>Autoridade Digital</span> · Andressa Guimarães</p>
+  </footer>
+
+</div>
+
+<!-- MODAL: escolha entre apresentação ou exercícios -->
+<div class="modal-backdrop" id="modalBackdrop" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" aria-label="Fechar">✕</button>
+    <div class="modal-num" id="modalNum"></div>
+    <div class="modal-tag" id="modalTag"></div>
+    <h3 id="modalTitle"></h3>
+    <p class="modal-desc" id="modalDesc"></p>
+    <div class="modal-options">
+      <a class="option-card" id="optionPdf" target="_blank" rel="noopener">
+        <span class="option-icon">🎬</span>
+        <span class="option-title">Apresentação da aula</span>
+        <span class="option-desc">Slides completos em PDF. Para rever a teoria com calma.</span>
+        <span class="option-arrow">Abrir PDF</span>
+      </a>
+      <a class="option-card primary" id="optionDoc">
+        <span class="option-icon">📝</span>
+        <span class="option-title">Documento de exercícios</span>
+        <span class="option-desc">Aplique, responda e pesquise. Pronto para imprimir.</span>
+        <span class="option-arrow">Abrir documento</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const lessons = {
+    1:{num:'01', tag:'Fundamento', title:'Jornada do Avatar',
+       desc:'Escolha como quer revisar essa aula:',
+       doc:'aula01-exercicios.html', pdf:'aula01-apresentacao.pdf'},
+    2:{num:'02', tag:'Estratégia', title:'Criação de Roteiros Infalíveis',
+       desc:'Escolha como quer revisar essa aula:',
+       doc:'aula02-exercicios.html', pdf:'aula02-apresentacao.pdf'},
+    3:{num:'03', tag:'Conversão', title:'Stories Magnéticos',
+       desc:'Escolha como quer revisar essa aula:',
+       doc:'aula03-exercicios.html', pdf:'aula03-apresentacao.pdf'},
+    4:{num:'04', tag:'Legado', title:'Audiência Fria em Comunidade Apaixonada',
+       desc:'Escolha como quer revisar essa aula:',
+       doc:'aula04-exercicios.html', pdf:'aula04-apresentacao.pdf'}
+  };
+
+  const backdrop = document.getElementById('modalBackdrop');
+  const closeBtn = document.getElementById('modalClose');
+  const elNum = document.getElementById('modalNum');
+  const elTag = document.getElementById('modalTag');
+  const elTitle = document.getElementById('modalTitle');
+  const elDesc = document.getElementById('modalDesc');
+  const optDoc = document.getElementById('optionDoc');
+  const optPdf = document.getElementById('optionPdf');
+
+  function openModal(id){
+    const l = lessons[id]; if(!l) return;
+    elNum.textContent = l.num;
+    elTag.textContent = l.tag;
+    elTitle.textContent = l.title;
+    elDesc.textContent = l.desc;
+    optDoc.href = l.doc;
+    optPdf.href = l.pdf;
+    backdrop.hidden = false;
+    requestAnimationFrame(()=> backdrop.classList.add('open'));
+    document.body.classList.add('modal-open');
+  }
+  function closeModal(){
+    backdrop.classList.remove('open');
+    document.body.classList.remove('modal-open');
+    setTimeout(()=> backdrop.hidden = true, 250);
+  }
+
+  document.querySelectorAll('.lesson').forEach(btn=>{
+    btn.addEventListener('click', ()=> openModal(btn.dataset.lesson));
+  });
+  closeBtn.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', e=>{ if(e.target === backdrop) closeModal(); });
+  document.addEventListener('keydown', e=>{ if(e.key === 'Escape') closeModal(); });
+</script>
+
+</body>
+</html>

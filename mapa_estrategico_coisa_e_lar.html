@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa Estratégico — Coisa e Lar · winner.ia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --onyx: #0A0A0B;
+    --onyx-soft: #15151A;
+    --onyx-mid: #1F1E1A;
+    --onyx-line: rgba(242, 235, 221, 0.10);
+    --gold: #C8A24A;
+    --gold-deep: #8C6E22;
+    --paper: #F2EBDD;
+    --sand: #E6DDC8;
+    --paper-line: rgba(10, 10, 11, 0.10);
+    --paper-text: #2A2622;
+    --paper-muted: #6B6258;
+    --diff-low: #6B7F4B;
+    --diff-mid: #B58A3C;
+    --diff-high: #A8553C;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--paper);
+    color: var(--paper-text);
+    line-height: 1.55;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: currentColor;
+    opacity: 0.55;
+    font-weight: 400;
+  }
+  .tag-gold { color: var(--gold); opacity: 1; }
+
+  /* HERO ONYX ---------------------------------------- */
+  .hero {
+    background: var(--onyx);
+    color: var(--paper);
+    padding: 28px 48px 96px;
+    position: relative;
+  }
+
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, var(--onyx-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--onyx-line) 1px, transparent 1px);
+    background-size: 96px 96px;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  .head-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: 24px;
+    margin-bottom: 80px;
+    position: relative;
+    z-index: 1;
+  }
+  .head-bar .left { display: flex; flex-direction: column; gap: 2px; }
+  .head-bar .right { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+
+  .back-link {
+    color: var(--paper);
+    opacity: 0.65;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: opacity 0.25s ease, gap 0.25s ease, color 0.25s ease;
+  }
+  .back-link:hover { opacity: 1; color: var(--gold); gap: 12px; }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .hero-kicker {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+  .hero-kicker .line { width: 64px; height: 1px; background: var(--gold); }
+
+  h1.display {
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.4rem, 6vw, 5rem);
+    line-height: 0.96;
+    letter-spacing: -0.025em;
+    color: var(--paper);
+    margin-bottom: 28px;
+    max-width: 1050px;
+  }
+  h1.display em { font-style: normal; color: var(--gold); }
+
+  .hero-lede {
+    font-size: clamp(1rem, 1.3vw, 1.12rem);
+    line-height: 1.6;
+    max-width: 720px;
+    opacity: 0.7;
+    margin-bottom: 56px;
+  }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 24px;
+    padding-top: 32px;
+    border-top: 1px solid var(--onyx-line);
+  }
+  .hero-meta .item { display: flex; flex-direction: column; gap: 4px; }
+  .hero-meta .item .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+  .hero-meta .item .value { font-size: 0.95rem; font-weight: 500; }
+
+  /* SEÇÃO BLOCOS — fundo papel ---------------------- */
+  .blocks-section {
+    padding: 96px 48px 80px;
+    background: var(--paper);
+  }
+
+  .section-head {
+    max-width: 1280px;
+    margin: 0 auto 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--paper-line);
+  }
+  .section-head .left { display: flex; flex-direction: column; gap: 12px; }
+  .section-head h2 {
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 3.4vw, 2.8rem);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    color: var(--onyx);
+    max-width: 560px;
+  }
+  .section-head .right {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--paper-muted);
+    max-width: 460px;
+    align-self: end;
+  }
+
+  /* GRID 2x3 DE BLOCOS ------------------------------ */
+  .blocks-grid {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .block {
+    position: relative;
+    background: var(--sand);
+    border: 1px solid var(--paper-line);
+    padding: 32px 28px 28px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 240px;
+    transition: background 0.35s ease, border-color 0.35s ease,
+                color 0.35s ease, transform 0.35s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: cardIn 0.6s ease forwards;
+  }
+  .block:nth-child(1) { animation-delay: 0.08s; }
+  .block:nth-child(2) { animation-delay: 0.16s; }
+  .block:nth-child(3) { animation-delay: 0.24s; }
+  .block:nth-child(4) { animation-delay: 0.32s; }
+  .block:nth-child(5) { animation-delay: 0.40s; }
+  .block:nth-child(6) { animation-delay: 0.48s; }
+
+  .block:hover, .block.active {
+    background: var(--onyx);
+    color: var(--paper);
+    border-color: var(--onyx);
+  }
+  .block:hover .card-num, .block.active .card-num { color: var(--gold); opacity: 1; }
+  .block:hover .card-desc, .block.active .card-desc { color: var(--paper); opacity: 0.7; }
+  .block:hover .card-arrow, .block.active .card-arrow { color: var(--gold); opacity: 1; }
+
+  .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .card-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--paper-text);
+    opacity: 0.5;
+    transition: color 0.3s ease, opacity 0.3s ease;
+  }
+  .card-arrow {
+    color: var(--paper-text);
+    opacity: 0.4;
+    transition: color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+  }
+  .block.active .card-arrow svg { transform: rotate(45deg); }
+
+  .block-title {
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 600;
+    font-size: 1.35rem;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    margin-top: auto;
+  }
+  .card-desc {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: var(--paper-muted);
+    transition: color 0.3s ease;
+  }
+
+  /* PAINEL EXPANDIDO -------------------------------- */
+  .panel {
+    grid-column: 1 / -1;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.55s ease, padding 0.55s ease, margin 0.4s ease;
+    background: var(--onyx);
+    color: var(--paper);
+    border: 1px solid transparent;
+  }
+  .panel.open {
+    max-height: 12000px;
+    padding: 56px 48px 64px;
+    margin-top: 4px;
+    border-color: var(--onyx);
+  }
+
+  .panel-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 32px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--onyx-line);
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+  }
+
+  .panel-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .panel h2 {
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--paper);
+    max-width: 720px;
+  }
+
+  .panel .panel-intro {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--paper);
+    opacity: 0.7;
+    max-width: 720px;
+    margin-bottom: 40px;
+  }
+
+  .panel h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--gold);
+    margin: 40px 0 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--onyx-line);
+  }
+  .panel h3:first-of-type { margin-top: 0; }
+
+  .panel p { margin-bottom: 14px; font-size: 0.96rem; line-height: 1.65; color: var(--paper); opacity: 0.82; }
+  .panel p strong { color: var(--gold); font-weight: 500; opacity: 1; }
+
+  .panel ul { list-style: none; margin-bottom: 14px; }
+  .panel ul li {
+    position: relative;
+    padding-left: 22px;
+    margin-bottom: 10px;
+    font-size: 0.96rem;
+    line-height: 1.6;
+    color: var(--paper);
+    opacity: 0.82;
+  }
+  .panel ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    opacity: 1;
+  }
+  .panel ul li strong { color: var(--paper); font-weight: 600; opacity: 1; }
+
+  /* DIAGRAM CONTAINER ------------------------------- */
+  .diagram {
+    background: var(--onyx-soft);
+    border: 1px solid var(--onyx-line);
+    padding: 28px;
+    margin: 24px 0 32px;
+    overflow-x: auto;
+  }
+  .diagram svg {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    height: auto;
+  }
+
+  /* SVG STYLES -------------------------------------- */
+  .svg-line { fill: none; stroke: var(--paper); stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; opacity: 0.85; }
+  .svg-line-gold { fill: none; stroke: var(--gold); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+  .svg-line-thin { stroke-width: 0.8; opacity: 0.4; }
+  .svg-dashed { stroke-dasharray: 4 4; opacity: 0.55; }
+  .svg-fill-soft { fill: rgba(242, 235, 221, 0.04); stroke: var(--paper); stroke-width: 1.1; }
+  .svg-fill-gold { fill: rgba(200, 162, 74, 0.12); stroke: var(--gold); stroke-width: 1.2; }
+  .svg-text {
+    fill: var(--paper);
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+  }
+  .svg-text-small {
+    fill: var(--paper);
+    opacity: 0.55;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .svg-text-gold {
+    fill: var(--gold);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* AREA CARDS DENTRO DO PAINEL --------------------- */
+  .area-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px;
+    margin: 20px 0 32px;
+  }
+  .area-card {
+    background: var(--onyx-soft);
+    border: 1px solid var(--onyx-line);
+    padding: 20px 22px;
+  }
+  .area-card-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .area-card-title {
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--paper);
+    margin-bottom: 8px;
+  }
+  .area-card p {
+    font-size: 0.88rem;
+    color: var(--paper);
+    opacity: 0.7;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* GARGALO BOX ------------------------------------- */
+  .gargalo {
+    background: var(--onyx-soft);
+    border-left: 2px solid var(--gold);
+    padding: 24px 28px;
+    margin-bottom: 20px;
+  }
+  .gargalo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .gargalo-title {
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--paper);
+  }
+  .gargalo-setor {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+  .gargalo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin: 14px 0;
+  }
+  .gargalo-grid > div {
+    background: var(--onyx);
+    padding: 12px 14px;
+    border: 1px solid var(--onyx-line);
+  }
+  .gargalo-grid strong {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    margin-bottom: 6px;
+    opacity: 1;
+  }
+  .gargalo-grid span.value {
+    font-size: 0.88rem;
+    color: var(--paper);
+    opacity: 0.85;
+  }
+  .diff {
+    display: inline-block;
+    padding: 3px 10px;
+    border: 1px solid currentColor;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .diff.baixa { color: var(--diff-low); }
+  .diff.media { color: var(--diff-mid); }
+  .diff.alta { color: var(--diff-high); }
+
+  .passos {
+    background: var(--onyx);
+    border: 1px dashed var(--onyx-line);
+    padding: 16px 22px;
+    margin-top: 14px;
+  }
+  .passos-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .passos ol { margin-left: 18px; font-size: 0.9rem; }
+  .passos ol li { margin-bottom: 6px; color: var(--paper); opacity: 0.82; line-height: 1.5; }
+
+  /* TIMELINE MONTH GRID ----------------------------- */
+  .month-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+    margin-top: 20px;
+  }
+  .month-card {
+    background: var(--onyx-soft);
+    border: 1px solid var(--onyx-line);
+    padding: 22px 24px 20px;
+    position: relative;
+  }
+  .month-card-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .month-card-title {
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 600;
+    color: var(--paper);
+    font-size: 1.08rem;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .month-card .row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+  .month-card .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    flex: 0 0 90px;
+    padding-top: 3px;
+  }
+  .month-card .value { color: var(--paper); opacity: 0.82; }
+
+  /* METRIC ------------------------------------------- */
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .metric-card {
+    background: var(--onyx-soft);
+    border: 1px solid var(--onyx-line);
+    padding: 20px 22px;
+  }
+  .metric-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .metric-name {
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 600;
+    color: var(--paper);
+    font-size: 1.02rem;
+    margin-bottom: 6px;
+  }
+  .metric-card p { font-size: 0.88rem; opacity: 0.7; margin: 0 0 12px; line-height: 1.5; }
+  .metric-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+  .metric-meta span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid var(--onyx-line);
+    padding: 3px 8px;
+    color: var(--paper);
+    opacity: 0.7;
+  }
+  .metric-meta span.meta-gold {
+    color: var(--gold);
+    border-color: var(--gold-deep);
+    opacity: 1;
+  }
+
+  /* ROI --------------------------------------------- */
+  .roi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .roi-card {
+    background: var(--onyx-soft);
+    border: 1px solid var(--onyx-line);
+    padding: 28px 24px;
+  }
+  .roi-card .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .roi-value {
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 700;
+    color: var(--paper);
+    font-size: 2.2rem;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .roi-card p { font-size: 0.86rem; opacity: 0.7; margin: 0; line-height: 1.5; }
+
+  .premissas {
+    background: var(--onyx-soft);
+    border-left: 2px solid var(--gold);
+    padding: 22px 26px;
+    margin: 20px 0;
+  }
+  .premissas .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .premissas p { font-size: 0.92rem; margin-bottom: 10px; }
+
+  /* FOOTER ------------------------------------------ */
+  footer {
+    background: var(--onyx);
+    color: var(--paper);
+    padding: 64px 48px 36px;
+    border-top: 1px solid var(--onyx-line);
+  }
+  .footer-grid {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 32px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid var(--onyx-line);
+  }
+  .footer-grid p { font-size: 0.95rem; opacity: 0.7; margin-top: 8px; max-width: 320px; line-height: 1.55; }
+  .footer-grid a { color: var(--gold); text-decoration: none; }
+
+  .footer-bottom {
+    max-width: 1280px;
+    margin: 24px auto 0;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  footer .tag, footer .footer-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--paper);
+    opacity: 0.5;
+  }
+  footer .footer-tag.gold { color: var(--gold); opacity: 1; }
+
+  .logo-v {
+    display: inline-block;
+    width: 28px;
+    height: 32px;
+    color: var(--paper);
+  }
+  .logo-v svg { display: block; width: 100%; height: 100%; }
+  .brand-stack {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .brand-stack .wordmark {
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: -0.02em;
+  }
+  .brand-stack .wordmark .ia { color: var(--gold); }
+
+  /* RESPONSIVO -------------------------------------- */
+  @media (max-width: 1000px) {
+    .blocks-grid { grid-template-columns: repeat(2, 1fr); }
+    .section-head { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .hero, .blocks-section, footer, .panel.open { padding-left: 24px; padding-right: 24px; }
+    .blocks-grid { grid-template-columns: 1fr; }
+    .head-bar { grid-template-columns: 1fr; }
+    .head-bar .right { align-items: flex-start; }
+  }
+
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ==============================================
+       HERO ONYX
+       ============================================== -->
+  <section class="hero">
+    <div class="hero-grid-bg"></div>
+
+    <div class="head-bar">
+      <div class="left">
+        <a href="boas-vindas-coisa-e-lar.html" class="back-link">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          voltar à dashboard
+        </a>
+      </div>
+      <div class="right">
+        <span class="tag">winner.ia · mapa estratégico</span>
+        <span class="tag">v 1.0 / 2026</span>
+      </div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-kicker">
+        <span class="hero-kicker-line" style="width:64px;height:1px;background:var(--gold)"></span>
+        <span class="tag tag-gold">diagnóstico · coisa e lar</span>
+      </div>
+
+      <h1 class="display">
+        Mapa estratégico de IA.<br>
+        <em>Seu plano dos próximos 6 meses.</em>
+      </h1>
+
+      <p class="hero-lede">
+        Diagnóstico personalizado para a Coisa e Lar — construído a partir das respostas do formulário e da call de boas-vindas de 18/05. 6 áreas mapeadas, gargalos identificados e o plano executivo da mentoria.
+      </p>
+
+      <div class="hero-meta">
+        <div class="item">
+          <span class="label">cliente</span>
+          <span class="value">Coisa e Lar</span>
+        </div>
+        <div class="item">
+          <span class="label">segmento</span>
+          <span class="value">E-commerce · Cama, mesa &amp; banho</span>
+        </div>
+        <div class="item">
+          <span class="label">faturamento</span>
+          <span class="value">R$ 650–700k / mês</span>
+        </div>
+        <div class="item">
+          <span class="label">equipe</span>
+          <span class="value">8 pessoas · 3 CNPJs</span>
+        </div>
+        <div class="item">
+          <span class="label">gerado em</span>
+          <span class="value">21 / 05 / 2026</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================
+       BLOCOS — fundo papel
+       ============================================== -->
+  <section class="blocks-section">
+    <div class="section-head">
+      <div class="left">
+        <span class="tag">02 — os 6 blocos</span>
+        <h2>Clique para abrir<br>cada área do diagnóstico.</h2>
+      </div>
+      <div class="right">
+        Cada bloco abre um painel com diagramas, gargalos, métricas e plano de execução. Construído com base na realidade da operação — não em templates genéricos.
+      </div>
+    </div>
+
+    <div class="blocks-grid" id="grid">
+
+      <article class="block" data-panel="panel-1">
+        <div class="card-head">
+          <span class="card-num">01 / mapeamento</span>
+          <span class="card-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+        </div>
+        <h3 class="block-title">Mapeamento<br>do negócio</h3>
+        <p class="card-desc">Áreas, pessoas, ferramentas e como cada setor se conecta hoje.</p>
+      </article>
+
+      <article class="block" data-panel="panel-2">
+        <div class="card-head">
+          <span class="card-num">02 / gargalos</span>
+          <span class="card-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+        </div>
+        <h3 class="block-title">Gargalos &amp;<br>onde aplicar IA</h3>
+        <p class="card-desc">6 gargalos identificados — do Full ao financeiro, com solução IA para cada.</p>
+      </article>
+
+      <article class="block" data-panel="panel-3">
+        <div class="card-head">
+          <span class="card-num">03 / plano</span>
+          <span class="card-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+        </div>
+        <h3 class="block-title">Plano de ação<br>&amp; treinamentos</h3>
+        <p class="card-desc">Os 6 meses da mentoria — foco, treinamento e entregável por mês.</p>
+      </article>
+
+      <article class="block" data-panel="panel-4">
+        <div class="card-head">
+          <span class="card-num">04 / métricas</span>
+          <span class="card-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+        </div>
+        <h3 class="block-title">Dashboard<br>de métricas</h3>
+        <p class="card-desc">7 indicadores que importam para a Coisa e Lar — com metas para 6 meses.</p>
+      </article>
+
+      <article class="block" data-panel="panel-5">
+        <div class="card-head">
+          <span class="card-num">05 / cronograma</span>
+          <span class="card-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+        </div>
+        <h3 class="block-title">Cronograma<br>da mentoria</h3>
+        <p class="card-desc">6 reuniões e 12 tutorias distribuídas no semestre. Marcos críticos.</p>
+      </article>
+
+      <article class="block" data-panel="panel-6">
+        <div class="card-head">
+          <span class="card-num">06 / roi</span>
+          <span class="card-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+        </div>
+        <h3 class="block-title">ROI<br>estimado</h3>
+        <p class="card-desc">Horas economizadas, recuperação de faturamento e projeção 6 / 12 meses.</p>
+      </article>
+
+      <!-- ============= PAINEL 01 ============= -->
+      <section class="panel" id="panel-1">
+        <div class="panel-head">
+          <div>
+            <div class="panel-tag">01 / 06 · mapeamento do negócio</div>
+            <h2 style="margin-top:14px">Áreas, pessoas, ferramentas e fluxo de hoje.</h2>
+          </div>
+          <span class="tag">↑ clique no bloco para fechar</span>
+        </div>
+
+        <p class="panel-intro">A Coisa e Lar é um e-commerce de 6 anos que opera em 3 CNPJs, com presença em Mercado Livre, Shopee, TikTok Shop e Amazon. Produto principal: mantas para sofá. Hoje, 8 pessoas tocam uma operação de <strong>R$ 650–700k/mês</strong> — mas o crescimento veio rápido e a estrutura ainda não acompanhou.</p>
+
+        <h3>Fluxo do negócio</h3>
+        <div class="diagram">
+          <svg viewBox="0 0 880 380" xmlns="http://www.w3.org/2000/svg">
+            <!-- Direção -->
+            <rect class="svg-fill-gold" x="370" y="20" width="140" height="50"/>
+            <text class="svg-text" x="440" y="44" text-anchor="middle">Direção</text>
+            <text class="svg-text-small" x="440" y="58" text-anchor="middle">Cayque · Gabriel</text>
+
+            <path class="svg-line svg-dashed" d="M 440 70 L 440 110 L 160 110 L 160 140"/>
+            <path class="svg-line svg-dashed" d="M 440 70 L 440 140"/>
+            <path class="svg-line svg-dashed" d="M 440 70 L 440 110 L 720 110 L 720 140"/>
+
+            <rect class="svg-fill-soft" x="90" y="140" width="140" height="50"/>
+            <text class="svg-text" x="160" y="164" text-anchor="middle">Gerência</text>
+            <text class="svg-text-small" x="160" y="178" text-anchor="middle">Isabela</text>
+
+            <rect class="svg-fill-soft" x="370" y="140" width="140" height="50"/>
+            <text class="svg-text" x="440" y="164" text-anchor="middle">Projeto IA</text>
+            <text class="svg-text-small" x="440" y="178" text-anchor="middle">Gil · líder</text>
+
+            <rect class="svg-fill-soft" x="650" y="140" width="140" height="50"/>
+            <text class="svg-text" x="720" y="164" text-anchor="middle">Financeiro</text>
+            <text class="svg-text-small" x="720" y="178" text-anchor="middle">Carla</text>
+
+            <path class="svg-line svg-dashed" d="M 160 190 L 160 220 L 250 220 L 250 250"/>
+            <path class="svg-line svg-dashed" d="M 160 190 L 160 220 L 440 220 L 440 250"/>
+            <path class="svg-line svg-dashed" d="M 160 190 L 160 220 L 630 220 L 630 250"/>
+
+            <rect class="svg-fill-soft" x="180" y="250" width="140" height="50"/>
+            <text class="svg-text" x="250" y="274" text-anchor="middle">Expedição</text>
+            <text class="svg-text-small" x="250" y="288" text-anchor="middle">Embalagem</text>
+
+            <rect class="svg-fill-soft" x="370" y="250" width="140" height="50"/>
+            <text class="svg-text" x="440" y="274" text-anchor="middle">Marketing / ADS</text>
+            <text class="svg-text-small" x="440" y="288" text-anchor="middle">ML · Shopee · TikTok</text>
+
+            <rect class="svg-fill-soft" x="560" y="250" width="140" height="50"/>
+            <text class="svg-text" x="630" y="274" text-anchor="middle">Estoque / Full</text>
+            <text class="svg-text-small" x="630" y="288" text-anchor="middle">CD em BH</text>
+
+            <ellipse class="svg-line-gold" cx="800" cy="275" rx="60" ry="28"/>
+            <text class="svg-text" x="800" y="272" text-anchor="middle" style="fill:var(--gold)">Cliente</text>
+            <text class="svg-text-small" x="800" y="286" text-anchor="middle" style="fill:var(--gold);opacity:0.8">marketplaces</text>
+
+            <ellipse class="svg-line" cx="80" cy="275" rx="60" ry="28"/>
+            <text class="svg-text" x="80" y="272" text-anchor="middle">Artesãos</text>
+            <text class="svg-text-small" x="80" y="286" text-anchor="middle">fornecedores</text>
+
+            <path class="svg-line" d="M 140 275 L 175 275" marker-end="url(#arrowend)"/>
+            <path class="svg-line-gold" d="M 700 275 L 735 275" marker-end="url(#arrowend-gold)"/>
+
+            <text class="svg-text-gold" x="440" y="340" text-anchor="middle">3 CNPJs · Hub conecta marketplaces e distribui estoque</text>
+
+            <defs>
+              <marker id="arrowend" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <path d="M 0 0 L 6 4 L 0 8" fill="none" stroke="#F2EBDD" stroke-width="1.2"/>
+              </marker>
+              <marker id="arrowend-gold" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <path d="M 0 0 L 6 4 L 0 8" fill="none" stroke="#C8A24A" stroke-width="1.4"/>
+              </marker>
+            </defs>
+          </svg>
+        </div>
+
+        <h3>Principais áreas</h3>
+        <div class="area-grid">
+          <div class="area-card">
+            <div class="area-card-tag">2 sócios</div>
+            <div class="area-card-title">Direção</div>
+            <p>Cayque (negócio, ADS, decisões) e Gabriel (operação, suporte à Isa). Tomada de decisão hoje muito no feeling.</p>
+          </div>
+          <div class="area-card">
+            <div class="area-card-tag">1 pessoa · Isabela</div>
+            <div class="area-card-title">Gerência geral</div>
+            <p>Centro nervoso da operação. Hoje sobrecarregada com Full, anúncios, suporte, imagens e expedição.</p>
+          </div>
+          <div class="area-card">
+            <div class="area-card-tag">1 pessoa · Gil (novo)</div>
+            <div class="area-card-title">Projeto IA</div>
+            <p>Contratado há poucos dias para liderar a implementação. Ponte entre Winner e a equipe.</p>
+          </div>
+          <div class="area-card">
+            <div class="area-card-tag">1 pessoa · Carla</div>
+            <div class="area-card-title">Financeiro</div>
+            <p>Controla contas a pagar e libera pagamentos com o Cayque. Já usa Claude no dia a dia.</p>
+          </div>
+          <div class="area-card">
+            <div class="area-card-tag">equipe operacional</div>
+            <div class="area-card-title">Expedição / Operação</div>
+            <p>Embala e envia para o centro de distribuição (Mercado Livre e Shopee, ambos em BH).</p>
+          </div>
+          <div class="area-card">
+            <div class="area-card-tag">Cayque + Isa</div>
+            <div class="area-card-title">Marketing / ADS</div>
+            <p>Anúncios e campanhas em 4 marketplaces. Estética boa, gestão de ADS travada.</p>
+          </div>
+        </div>
+
+        <h3>Stack atual</h3>
+        <ul>
+          <li><strong>Claude (plano Team)</strong> — toda a equipe tem acesso. Uso atual sem método.</li>
+          <li><strong>ERP em transição</strong> — Bling sendo trocado por outro ERP mais robusto.</li>
+          <li><strong>Hub multi-CNPJ</strong> — conecta os 3 CNPJs aos marketplaces. Intenção: substituir.</li>
+          <li><strong>Planilhas (Excel/Google Sheets)</strong> — base do financeiro e do estoque.</li>
+          <li><strong>OneDrive</strong> — migrou do Google Drive recentemente.</li>
+          <li><strong>Marketplaces</strong>: Mercado Livre · Shopee · TikTok Shop · Amazon.</li>
+        </ul>
+      </section>
+
+      <!-- ============= PAINEL 02 ============= -->
+      <section class="panel" id="panel-2">
+        <div class="panel-head">
+          <div>
+            <div class="panel-tag">02 / 06 · gargalos &amp; onde aplicar ia</div>
+            <h2 style="margin-top:14px">6 gargalos. 6 projetos de IA com impacto direto no resultado.</h2>
+          </div>
+        </div>
+
+        <p class="panel-intro">Cada um dos gargalos identificados vira um projeto da mentoria — com solução em IA específica, impacto estimado e dificuldade de execução.</p>
+
+        <h3>Mapa de gargalos por setor</h3>
+        <div class="diagram">
+          <svg viewBox="0 0 880 380" xmlns="http://www.w3.org/2000/svg">
+            <circle class="svg-fill-gold" cx="440" cy="190" r="60"/>
+            <text class="svg-text" x="440" y="186" text-anchor="middle" style="font-weight:600">Coisa e Lar</text>
+            <text class="svg-text-small" x="440" y="202" text-anchor="middle">6 gargalos</text>
+
+            <path class="svg-line svg-dashed" d="M 400 150 L 200 80"/>
+            <rect class="svg-fill-soft" x="60" y="50" width="160" height="60"/>
+            <text class="svg-text" x="140" y="74" text-anchor="middle">Financeiro</text>
+            <text class="svg-text-small" x="140" y="92" text-anchor="middle">sem previsibilidade</text>
+
+            <path class="svg-line svg-dashed" d="M 480 150 L 680 80"/>
+            <rect class="svg-fill-soft" x="660" y="50" width="160" height="60"/>
+            <text class="svg-text" x="740" y="74" text-anchor="middle">Full / Estoque</text>
+            <text class="svg-text-small" x="740" y="92" text-anchor="middle">ruptura −R$ 217k</text>
+
+            <path class="svg-line svg-dashed" d="M 380 190 L 200 190"/>
+            <rect class="svg-fill-soft" x="40" y="160" width="160" height="60"/>
+            <text class="svg-text" x="120" y="184" text-anchor="middle">ADS / Promoções</text>
+            <text class="svg-text-small" x="120" y="202" text-anchor="middle">central ML no feeling</text>
+
+            <path class="svg-line svg-dashed" d="M 500 190 L 680 190"/>
+            <rect class="svg-fill-soft" x="680" y="160" width="160" height="60"/>
+            <text class="svg-text" x="760" y="184" text-anchor="middle">Comunicação</text>
+            <text class="svg-text-small" x="760" y="202" text-anchor="middle">info perdida</text>
+
+            <path class="svg-line svg-dashed" d="M 400 230 L 200 300"/>
+            <rect class="svg-fill-soft" x="60" y="280" width="160" height="60"/>
+            <text class="svg-text" x="140" y="304" text-anchor="middle">Imagens</text>
+            <text class="svg-text-small" x="140" y="322" text-anchor="middle">método Isa lento</text>
+
+            <path class="svg-line svg-dashed" d="M 480 230 L 680 300"/>
+            <rect class="svg-fill-soft" x="660" y="280" width="160" height="60"/>
+            <text class="svg-text" x="740" y="304" text-anchor="middle">Anúncios / SEO</text>
+            <text class="svg-text-small" x="740" y="322" text-anchor="middle">análise manual</text>
+          </svg>
+        </div>
+
+        <!-- GARGALO 1 -->
+        <div class="gargalo">
+          <div class="gargalo-header">
+            <div class="gargalo-title">Gargalo 1 — Financeiro sem previsibilidade</div>
+            <div class="gargalo-setor">Carla · Cayque</div>
+          </div>
+          <p><strong>Problema:</strong> Hoje o financeiro só controla contas a pagar. Não há conciliação bancária, nem previsão de recebíveis dos marketplaces (que pagam em datas diferentes). A empresa passa por dificuldade de caixa sem visibilidade.</p>
+          <p><strong>Solução com IA:</strong> Dashboard de fluxo de caixa + Claude lendo extratos e relatórios de repasses. Agente projeta entradas dos próximos 30 dias com base no histórico.</p>
+          <div class="gargalo-grid">
+            <div><strong>Economia</strong><span class="value">~15h/mês da Carla + decisões com base em dados</span></div>
+            <div><strong>Impacto</strong><span class="value">Negociação melhor com fornecedores · evita juros</span></div>
+            <div><strong>Dificuldade</strong><span class="diff media">Média</span></div>
+          </div>
+          <div class="passos">
+            <div class="passos-title">Como vamos resolver</div>
+            <ol>
+              <li>Exportar extratos bancários + relatórios de repasse de cada marketplace.</li>
+              <li>Criar planilha-modelo de fluxo de caixa (entradas previstas × contas a pagar).</li>
+              <li>Configurar Claude Project com instruções claras de parsing.</li>
+              <li>Agente roda toda segunda e atualiza o dashboard com a próxima quinzena.</li>
+              <li>Carla revisa e adiciona pagamentos novos. Cayque visualiza o caixa em 1 clique.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- GARGALO 2 -->
+        <div class="gargalo">
+          <div class="gargalo-header">
+            <div class="gargalo-title">Gargalo 2 — Ruptura no Full e compra no feeling</div>
+            <div class="gargalo-setor">Isa · Cayque</div>
+          </div>
+          <p><strong>Problema:</strong> Em março/26 perderam <strong>R$ 217 mil</strong> em faturamento potencial por ruptura no Full. A Isa gasta meio dia analisando planilhas (em inglês, no caso da Shopee) para decidir o que enviar. As compras de artesãos são no feeling.</p>
+          <p><strong>Solução com IA:</strong> Agente Claude conectado ao histórico de vendas dos últimos 90 dias. Calcula curva de venda por SKU, identifica produtos em crescimento, sinaliza ruptura iminente e sugere quantidade ideal de envio ao Full.</p>
+          <div class="gargalo-grid">
+            <div><strong>Economia</strong><span class="value">~60h/mês da Isa · sai do operacional</span></div>
+            <div><strong>Impacto</strong><span class="value">Recuperação parcial dos R$ 217k de março</span></div>
+            <div><strong>Dificuldade</strong><span class="diff alta">Alta</span></div>
+          </div>
+          <div class="passos">
+            <div class="passos-title">Como vamos resolver</div>
+            <ol>
+              <li>Exportar histórico de vendas (90d) por SKU em cada marketplace.</li>
+              <li>Cruzar com estoque atual da casa + estoque no Full.</li>
+              <li>Claude calcula velocidade de venda, projeção e ponto de pedido.</li>
+              <li>Gera lista semanal de envio ao Full + lista de compra para artesãos.</li>
+              <li>Isa vira revisora estratégica, não executora.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- GARGALO 3 -->
+        <div class="gargalo">
+          <div class="gargalo-header">
+            <div class="gargalo-title">Gargalo 3 — Central de promoções no feeling</div>
+            <div class="gargalo-setor">Cayque · Marketing</div>
+          </div>
+          <p><strong>Problema:</strong> Em março as visualizações triplicaram, mas a conversão foi péssima. A central de promoções do ML é personalizada e o algoritmo cobra participação — só que hoje a escolha é no feeling, sem histórico.</p>
+          <p><strong>Solução com IA:</strong> Histórico de promoções em uma base. Claude compara cada nova oferta da central contra o histórico e recomenda aceitar/recusar com justificativa.</p>
+          <div class="gargalo-grid">
+            <div><strong>Economia</strong><span class="value">Decisões em minutos, não horas</span></div>
+            <div><strong>Impacto</strong><span class="value">+20% a +40% de conversão estimado</span></div>
+            <div><strong>Dificuldade</strong><span class="diff media">Média</span></div>
+          </div>
+          <div class="passos">
+            <div class="passos-title">Como vamos resolver</div>
+            <ol>
+              <li>Montar planilha de histórico: promoção × período × visitas × conversão × receita.</li>
+              <li>Toda nova promoção da central é registrada com data e tipo.</li>
+              <li>Claude lê e dá um "score" + recomendação com base no histórico.</li>
+              <li>Após 60 dias, o agente vira preditivo — sugere quais ofertas buscar ativamente.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- GARGALO 4 -->
+        <div class="gargalo">
+          <div class="gargalo-header">
+            <div class="gargalo-title">Gargalo 4 — Comunicação interna fragmentada</div>
+            <div class="gargalo-setor">Equipe toda</div>
+          </div>
+          <p><strong>Problema:</strong> WhatsApp caótico, ClickUp abandonado por complexidade, informação que vive na cabeça da Isa. Funcionário novo se perdeu por falta de processo.</p>
+          <p><strong>Solução com IA:</strong> Um único hub simples (Notion ou Drive estruturado) com 5 áreas fixas. Claude faz resumo semanal automatizado do WhatsApp + status de cada área.</p>
+          <div class="gargalo-grid">
+            <div><strong>Economia</strong><span class="value">~10h/semana da equipe em retrabalho</span></div>
+            <div><strong>Impacto</strong><span class="value">Indireto, mas alto · destrava execução</span></div>
+            <div><strong>Dificuldade</strong><span class="diff baixa">Baixa</span></div>
+          </div>
+          <div class="passos">
+            <div class="passos-title">Como vamos resolver</div>
+            <ol>
+              <li>Escolher UMA ferramenta (recomendação: Notion ou Drive estruturado).</li>
+              <li>Definir 5 áreas fixas e 1 dono por área.</li>
+              <li>Reunião semanal de 30min (segunda-feira) revisando status.</li>
+              <li>Claude resume a reunião e atualiza o hub automaticamente.</li>
+              <li>Gil é o guardião do processo nos primeiros 60 dias.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- GARGALO 5 -->
+        <div class="gargalo">
+          <div class="gargalo-header">
+            <div class="gargalo-title">Gargalo 5 — Imagens de produto demoradas</div>
+            <div class="gargalo-setor">Isa</div>
+          </div>
+          <p><strong>Problema:</strong> A Isa desenvolveu um estilo autoral de imagens realistas — mas cada uma leva tempo. É um diferencial de conversão e hoje é gargalo para lançar produto novo.</p>
+          <p><strong>Solução com IA:</strong> Construir um agente de "estilo Isa" usando geração de imagens (Nano Banana / Gemini Image / Claude com referências). Isa vira diretora de arte.</p>
+          <div class="gargalo-grid">
+            <div><strong>Economia</strong><span class="value">~80% do tempo por imagem</span></div>
+            <div><strong>Impacto</strong><span class="value">Velocidade de lançamento de novos SKUs</span></div>
+            <div><strong>Dificuldade</strong><span class="diff media">Média</span></div>
+          </div>
+          <div class="passos">
+            <div class="passos-title">Como vamos resolver</div>
+            <ol>
+              <li>Catalogar 20 imagens "estilo Isa" como referência.</li>
+              <li>Criar prompt-mestre que reproduz o estilo.</li>
+              <li>Isa testa, ajusta, valida em 3 produtos.</li>
+              <li>Pipeline: foto do produto → prompt → imagem → Isa aprova.</li>
+              <li>Bonus: Claude gera descrição + bullets do anúncio na mesma rodada.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- GARGALO 6 -->
+        <div class="gargalo">
+          <div class="gargalo-header">
+            <div class="gargalo-title">Gargalo 6 — Análise de anúncios e palavras-chave</div>
+            <div class="gargalo-setor">Isa · Cayque</div>
+          </div>
+          <p><strong>Problema:</strong> Hoje a Isa abre anúncio por anúncio para ver visitas e vendas. No Mercado Livre tem catálogo, duplicatas, palavras-chave — tudo manual. Demora dias.</p>
+          <p><strong>Solução com IA:</strong> Conectar via API do Mercado Livre com Claude. Painel semanal de performance + sugestão automática de keywords.</p>
+          <div class="gargalo-grid">
+            <div><strong>Economia</strong><span class="value">~90% do tempo de análise</span></div>
+            <div><strong>Impacto</strong><span class="value">Mais conversão · ranking orgânico</span></div>
+            <div><strong>Dificuldade</strong><span class="diff alta">Alta</span></div>
+          </div>
+          <div class="passos">
+            <div class="passos-title">Como vamos resolver</div>
+            <ol>
+              <li>Configurar acesso à API do Mercado Livre (Gil + Winner).</li>
+              <li>Script Claude Code que extrai visitas, conversão e estoque por SKU.</li>
+              <li>Relatório automático: "10 anúncios pra atacar" + sugestão de keywords.</li>
+              <li>Mesmo padrão depois para Shopee e TikTok Shop.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============= PAINEL 03 ============= -->
+      <section class="panel" id="panel-3">
+        <div class="panel-head">
+          <div>
+            <div class="panel-tag">03 / 06 · plano de ação &amp; treinamentos</div>
+            <h2 style="margin-top:14px">Caixa primeiro. Full em seguida. Marketing depois. Imagens no fim.</h2>
+          </div>
+        </div>
+
+        <p class="panel-intro">A priorização parte do princípio: resolver caixa e Full primeiro (impacto maior e mais imediato), depois marketing/ADS, depois imagens. Comunicação é base — começa no mês 1.</p>
+
+        <h3>Timeline dos 6 meses</h3>
+        <div class="diagram">
+          <svg viewBox="0 0 880 220" xmlns="http://www.w3.org/2000/svg">
+            <path class="svg-line-gold" d="M 40 110 L 840 110"/>
+
+            <g>
+              <circle class="svg-fill-soft" cx="100" cy="110" r="22"/>
+              <text class="svg-text" x="100" y="115" text-anchor="middle" style="font-weight:600">M1</text>
+              <text class="svg-text-small" x="100" y="60" text-anchor="middle">Junho</text>
+              <text class="svg-text-gold" x="100" y="160" text-anchor="middle">Fundação</text>
+            </g>
+            <g>
+              <circle class="svg-fill-soft" cx="240" cy="110" r="22"/>
+              <text class="svg-text" x="240" y="115" text-anchor="middle" style="font-weight:600">M2</text>
+              <text class="svg-text-small" x="240" y="60" text-anchor="middle">Julho</text>
+              <text class="svg-text-gold" x="240" y="160" text-anchor="middle">Financeiro</text>
+            </g>
+            <g>
+              <circle class="svg-fill-gold" cx="380" cy="110" r="22"/>
+              <text class="svg-text" x="380" y="115" text-anchor="middle" style="font-weight:600;fill:var(--gold)">M3</text>
+              <text class="svg-text-small" x="380" y="60" text-anchor="middle">Agosto</text>
+              <text class="svg-text-gold" x="380" y="160" text-anchor="middle">Full / Estoque</text>
+            </g>
+            <g>
+              <circle class="svg-fill-soft" cx="520" cy="110" r="22"/>
+              <text class="svg-text" x="520" y="115" text-anchor="middle" style="font-weight:600">M4</text>
+              <text class="svg-text-small" x="520" y="60" text-anchor="middle">Setembro</text>
+              <text class="svg-text-gold" x="520" y="160" text-anchor="middle">ADS / Promos</text>
+            </g>
+            <g>
+              <circle class="svg-fill-soft" cx="660" cy="110" r="22"/>
+              <text class="svg-text" x="660" y="115" text-anchor="middle" style="font-weight:600">M5</text>
+              <text class="svg-text-small" x="660" y="60" text-anchor="middle">Outubro</text>
+              <text class="svg-text-gold" x="660" y="160" text-anchor="middle">Imagens</text>
+            </g>
+            <g>
+              <circle class="svg-fill-soft" cx="800" cy="110" r="22"/>
+              <text class="svg-text" x="800" y="115" text-anchor="middle" style="font-weight:600">M6</text>
+              <text class="svg-text-small" x="800" y="60" text-anchor="middle">Novembro</text>
+              <text class="svg-text-gold" x="800" y="160" text-anchor="middle">Consolidação</text>
+            </g>
+
+            <text class="svg-text-small" x="440" y="200" text-anchor="middle">do caixa ao crescimento — uma onda por mês</text>
+          </svg>
+        </div>
+
+        <div class="month-grid">
+          <div class="month-card">
+            <div class="month-card-tag">Mês 1 · Junho</div>
+            <div class="month-card-title">Fundação · Claude para todos</div>
+            <div class="row"><span class="label">treinamento</span><span class="value">Claude Sem Código, Cowork, Projects, organização de prompts.</span></div>
+            <div class="row"><span class="label">entregável</span><span class="value">Hub central da empresa + projeto Claude por área.</span></div>
+            <div class="row"><span class="label">ia</span><span class="value">Claude Cowork + Projects.</span></div>
+          </div>
+          <div class="month-card">
+            <div class="month-card-tag">Mês 2 · Julho</div>
+            <div class="month-card-title">Financeiro inteligente</div>
+            <div class="row"><span class="label">treinamento</span><span class="value">Claude + planilhas, conciliação, parsing de CSV.</span></div>
+            <div class="row"><span class="label">entregável</span><span class="value">Dashboard de fluxo de caixa com previsão.</span></div>
+            <div class="row"><span class="label">ia</span><span class="value">Claude Projects + Excel/Sheets.</span></div>
+          </div>
+          <div class="month-card">
+            <div class="month-card-tag">Mês 3 · Agosto</div>
+            <div class="month-card-title">Full e estoque sob controle</div>
+            <div class="row"><span class="label">treinamento</span><span class="value">Análise de dados de venda, curva de SKU, previsão de demanda.</span></div>
+            <div class="row"><span class="label">entregável</span><span class="value">Sistema semanal de decisão de envio ao Full.</span></div>
+            <div class="row"><span class="label">ia</span><span class="value">Claude + planilha de estoque + APIs.</span></div>
+          </div>
+          <div class="month-card">
+            <div class="month-card-tag">Mês 4 · Setembro</div>
+            <div class="month-card-title">ADS e central de promoções</div>
+            <div class="row"><span class="label">treinamento</span><span class="value">API Mercado Livre, agentes analíticos.</span></div>
+            <div class="row"><span class="label">entregável</span><span class="value">Painel de decisão de promoções + análise semanal.</span></div>
+            <div class="row"><span class="label">ia</span><span class="value">Claude Code + API ML.</span></div>
+          </div>
+          <div class="month-card">
+            <div class="month-card-tag">Mês 5 · Outubro</div>
+            <div class="month-card-title">Imagens e conteúdo</div>
+            <div class="row"><span class="label">treinamento</span><span class="value">Nano Banana / Gemini, prompt-mestre, pipeline visual.</span></div>
+            <div class="row"><span class="label">entregável</span><span class="value">Agente "estilo Isa" + pipeline foto→anúncio.</span></div>
+            <div class="row"><span class="label">ia</span><span class="value">Claude + Gemini Image / Nano Banana.</span></div>
+          </div>
+          <div class="month-card">
+            <div class="month-card-tag">Mês 6 · Novembro</div>
+            <div class="month-card-title">Consolidação e fabricação</div>
+            <div class="row"><span class="label">treinamento</span><span class="value">Visão estratégica, mapa de fornecedores.</span></div>
+            <div class="row"><span class="label">entregável</span><span class="value">Mapa consolidado + plano 12 meses.</span></div>
+            <div class="row"><span class="label">ia</span><span class="value">Claude estratégico + agentes integrados.</span></div>
+          </div>
+        </div>
+
+        <h3>Por que essa ordem?</h3>
+        <ul>
+          <li><strong>Financeiro primeiro</strong> — sem caixa, qualquer outra melhoria fica em segundo plano.</li>
+          <li><strong>Full em seguida</strong> — impacto é o maior (R$ 217k perdidos) e libera a Isa.</li>
+          <li><strong>ADS no mês 4</strong> — depende dos dados que já vão estar organizados.</li>
+          <li><strong>Imagens no mês 5</strong> — importante, mas não trava operação como os outros.</li>
+          <li><strong>Comunicação é transversal</strong> — começa no mês 1 e continua até o fim.</li>
+        </ul>
+      </section>
+
+      <!-- ============= PAINEL 04 ============= -->
+      <section class="panel" id="panel-4">
+        <div class="panel-head">
+          <div>
+            <div class="panel-tag">04 / 06 · dashboard de métricas</div>
+            <h2 style="margin-top:14px">7 números que importam para a Coisa e Lar.</h2>
+          </div>
+        </div>
+
+        <p class="panel-intro">Cada indicador está amarrado a um gargalo do bloco 2 — para que cada projeto tenha um número que comprova resultado.</p>
+
+        <h3>Radar atual vs meta</h3>
+        <div class="diagram">
+          <svg viewBox="0 0 600 440" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(300,220)">
+              <circle class="svg-line svg-line-thin" r="40"/>
+              <circle class="svg-line svg-line-thin" r="80"/>
+              <circle class="svg-line svg-line-thin" r="120"/>
+              <circle class="svg-line svg-line-thin" r="160"/>
+
+              <g class="svg-line svg-line-thin">
+                <line x1="0" y1="0" x2="0" y2="-170"/>
+                <line x1="0" y1="0" x2="133" y2="-106"/>
+                <line x1="0" y1="0" x2="166" y2="38"/>
+                <line x1="0" y1="0" x2="106" y2="133"/>
+                <line x1="0" y1="0" x2="-42" y2="165"/>
+                <line x1="0" y1="0" x2="-152" y2="78"/>
+                <line x1="0" y1="0" x2="-150" y2="-80"/>
+              </g>
+
+              <polygon class="svg-fill-soft" points="0,-60 50,-40 60,15 35,45 -15,55 -55,30 -60,-30" opacity="0.5"/>
+              <polygon class="svg-line-gold" points="0,-140 110,-90 140,30 90,115 -35,135 -125,65 -125,-65" fill="none" stroke-dasharray="5 4"/>
+
+              <text class="svg-text" x="0" y="-185" text-anchor="middle">Receita</text>
+              <text class="svg-text" x="155" y="-115" text-anchor="middle">Ruptura ↓</text>
+              <text class="svg-text" x="185" y="50" text-anchor="middle">Conversão</text>
+              <text class="svg-text" x="125" y="155" text-anchor="middle">Previsão $</text>
+              <text class="svg-text" x="-55" y="185" text-anchor="middle">Tempo imagem</text>
+              <text class="svg-text" x="-175" y="90" text-anchor="middle">Isa livre</text>
+              <text class="svg-text" x="-170" y="-90" text-anchor="middle">Decisão c/ dados</text>
+
+              <text class="svg-text-gold" y="195" x="0" text-anchor="middle" style="font-size:9px">— atual · - - - meta 6 meses</text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="metric-grid">
+          <div class="metric-card">
+            <div class="metric-num">01 / receita</div>
+            <div class="metric-name">Faturamento mensal</div>
+            <p>Receita líquida somando os 3 CNPJs e todos os marketplaces.</p>
+            <div class="metric-meta"><span>fonte · erp + repasses</span><span>mensal</span><span class="meta-gold">meta · r$ 850k</span></div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-num">02 / ruptura</div>
+            <div class="metric-name">Perda por ruptura no Full</div>
+            <p>R$ deixados na mesa por falta de estoque. Mede direto o gargalo 2.</p>
+            <div class="metric-meta"><span>fonte · ml + shopee</span><span>semanal</span><span class="meta-gold">meta · &lt; r$ 30k</span></div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-num">03 / conversão</div>
+            <div class="metric-name">Taxa de conversão dos marketplaces</div>
+            <p>Visitas que viraram venda. Mede impacto do ADS e da central.</p>
+            <div class="metric-meta"><span>fonte · ml, shopee, tiktok</span><span>semanal</span><span class="meta-gold">meta · +30%</span></div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-num">04 / previsão</div>
+            <div class="metric-name">Acurácia da previsão de caixa</div>
+            <p>O que o dashboard previu vs. o que entrou de fato em 30 dias.</p>
+            <div class="metric-meta"><span>fonte · dashboard</span><span>mensal</span><span class="meta-gold">meta · ≥ 95%</span></div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-num">05 / imagem</div>
+            <div class="metric-name">Tempo de geração de imagem</div>
+            <p>Minutos da foto bruta até imagem final aprovada pela Isa.</p>
+            <div class="metric-meta"><span>fonte · registro isa</span><span>por lançamento</span><span class="meta-gold">meta · −80%</span></div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-num">06 / isa</div>
+            <div class="metric-name">Horas da Isa no operacional</div>
+            <p>Tempo gasto em coisas mecânicas (planilha, expedição, suporte).</p>
+            <div class="metric-meta"><span>fonte · planilha</span><span>semanal</span><span class="meta-gold">meta · −50%</span></div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-num">07 / dados</div>
+            <div class="metric-name">% de decisões com dados</div>
+            <p>Pulse semanal: das decisões da semana, quantas tiveram número?</p>
+            <div class="metric-meta"><span>fonte · pulse semanal</span><span>semanal</span><span class="meta-gold">meta · 70%</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============= PAINEL 05 ============= -->
+      <section class="panel" id="panel-5">
+        <div class="panel-head">
+          <div>
+            <div class="panel-tag">05 / 06 · cronograma da mentoria</div>
+            <h2 style="margin-top:14px">6 reuniões. 12 tutorias. 4 marcos.</h2>
+          </div>
+        </div>
+
+        <p class="panel-intro">6 meses, 6 reuniões individuais com Lucas (1 por mês) e 12 tutorias técnicas (2 por mês). Os marcos abaixo são os pontos onde o programa precisa estar "em verde" para o resultado de 6 meses se realizar.</p>
+
+        <h3>Linha do tempo detalhada</h3>
+        <div class="diagram">
+          <svg viewBox="0 0 880 320" xmlns="http://www.w3.org/2000/svg">
+            <path class="svg-line" d="M 40 160 L 840 160"/>
+
+            <g>
+              <line class="svg-line" x1="100" y1="150" x2="100" y2="170"/>
+              <text class="svg-text" x="100" y="200" text-anchor="middle">Jun</text>
+              <circle class="svg-fill-gold" cx="100" cy="125" r="8"/>
+              <text class="svg-text-gold" x="100" y="105" text-anchor="middle">R1</text>
+              <circle class="svg-fill-soft" cx="80" cy="195" r="5"/>
+              <circle class="svg-fill-soft" cx="120" cy="195" r="5"/>
+              <text class="svg-text-small" x="100" y="225" text-anchor="middle">T1 T2</text>
+            </g>
+            <g>
+              <line class="svg-line" x1="230" y1="150" x2="230" y2="170"/>
+              <text class="svg-text" x="230" y="200" text-anchor="middle">Jul</text>
+              <circle class="svg-fill-gold" cx="230" cy="125" r="8"/>
+              <text class="svg-text-gold" x="230" y="105" text-anchor="middle">R2</text>
+              <circle class="svg-fill-soft" cx="210" cy="195" r="5"/>
+              <circle class="svg-fill-soft" cx="250" cy="195" r="5"/>
+              <text class="svg-text-small" x="230" y="225" text-anchor="middle">T3 T4</text>
+            </g>
+            <g>
+              <line class="svg-line" x1="360" y1="150" x2="360" y2="170"/>
+              <text class="svg-text" x="360" y="200" text-anchor="middle">Ago</text>
+              <circle class="svg-fill-gold" cx="360" cy="125" r="8"/>
+              <text class="svg-text-gold" x="360" y="105" text-anchor="middle">R3</text>
+              <circle class="svg-fill-soft" cx="340" cy="195" r="5"/>
+              <circle class="svg-fill-soft" cx="380" cy="195" r="5"/>
+              <text class="svg-text-small" x="360" y="225" text-anchor="middle">T5 T6</text>
+            </g>
+            <g>
+              <line class="svg-line" x1="490" y1="150" x2="490" y2="170"/>
+              <text class="svg-text" x="490" y="200" text-anchor="middle">Set</text>
+              <circle class="svg-fill-gold" cx="490" cy="125" r="8"/>
+              <text class="svg-text-gold" x="490" y="105" text-anchor="middle">R4</text>
+              <circle class="svg-fill-soft" cx="470" cy="195" r="5"/>
+              <circle class="svg-fill-soft" cx="510" cy="195" r="5"/>
+              <text class="svg-text-small" x="490" y="225" text-anchor="middle">T7 T8</text>
+            </g>
+            <g>
+              <line class="svg-line" x1="620" y1="150" x2="620" y2="170"/>
+              <text class="svg-text" x="620" y="200" text-anchor="middle">Out</text>
+              <circle class="svg-fill-gold" cx="620" cy="125" r="8"/>
+              <text class="svg-text-gold" x="620" y="105" text-anchor="middle">R5</text>
+              <circle class="svg-fill-soft" cx="600" cy="195" r="5"/>
+              <circle class="svg-fill-soft" cx="640" cy="195" r="5"/>
+              <text class="svg-text-small" x="620" y="225" text-anchor="middle">T9 T10</text>
+            </g>
+            <g>
+              <line class="svg-line" x1="750" y1="150" x2="750" y2="170"/>
+              <text class="svg-text" x="750" y="200" text-anchor="middle">Nov</text>
+              <circle class="svg-fill-gold" cx="750" cy="125" r="8"/>
+              <text class="svg-text-gold" x="750" y="105" text-anchor="middle">R6</text>
+              <circle class="svg-fill-soft" cx="730" cy="195" r="5"/>
+              <circle class="svg-fill-soft" cx="770" cy="195" r="5"/>
+              <text class="svg-text-small" x="750" y="225" text-anchor="middle">T11 T12</text>
+            </g>
+
+            <g>
+              <path class="svg-line-gold svg-dashed" d="M 165 50 L 165 160"/>
+              <text class="svg-text-gold" x="165" y="40" text-anchor="middle">★ 1ª automação</text>
+            </g>
+            <g>
+              <path class="svg-line-gold svg-dashed" d="M 360 50 L 360 117"/>
+              <text class="svg-text-gold" x="360" y="40" text-anchor="middle">★ 1º resultado mensurável</text>
+            </g>
+            <g>
+              <path class="svg-line-gold svg-dashed" d="M 555 50 L 555 160"/>
+              <text class="svg-text-gold" x="555" y="40" text-anchor="middle">★ revisão de rota</text>
+            </g>
+            <g>
+              <path class="svg-line-gold svg-dashed" d="M 800 50 L 800 117"/>
+              <text class="svg-text-gold" x="800" y="40" text-anchor="middle">★ apresentação final</text>
+            </g>
+
+            <text class="svg-text-small" x="440" y="280" text-anchor="middle">R = reunião com Lucas · T = tutoria técnica · ★ = marco</text>
+          </svg>
+        </div>
+
+        <h3>Marcos críticos</h3>
+        <ul>
+          <li><strong>Semana 3 — Primeira automação rodando.</strong> Algo pequeno que já entrega valor.</li>
+          <li><strong>Mês 3 — Primeiro resultado mensurável.</strong> Caixa previsto vs. realizado, e queda na perda por ruptura.</li>
+          <li><strong>Mês 4 — Revisão de rota.</strong> Reunião dedicada para ajustar prioridades.</li>
+          <li><strong>Mês 6 — Apresentação final.</strong> Coisa e Lar apresenta o que mudou + plano 12 meses.</li>
+        </ul>
+      </section>
+
+      <!-- ============= PAINEL 06 ============= -->
+      <section class="panel" id="panel-6">
+        <div class="panel-head">
+          <div>
+            <div class="panel-tag">06 / 06 · roi estimado</div>
+            <h2 style="margin-top:14px">Estimativas conservadoras. Premissas explícitas.</h2>
+          </div>
+        </div>
+
+        <p class="panel-intro">Estimativas baseadas no que foi relatado: faturamento de R$ 650–700k/mês, perda de R$ 217k em um único mês por ruptura, Isa gastando metade do dia em tarefas mecânicas. Os números abaixo são premissas — não promessas — e devem ser revistos no marco do mês 4.</p>
+
+        <h3>Projeção mês a mês</h3>
+        <div class="diagram">
+          <svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg">
+            <path class="svg-line" d="M 60 260 L 740 260"/>
+            <path class="svg-line" d="M 60 260 L 60 40"/>
+
+            <line class="svg-line svg-line-thin" x1="60" y1="220" x2="740" y2="220"/>
+            <line class="svg-line svg-line-thin" x1="60" y1="170" x2="740" y2="170"/>
+            <line class="svg-line svg-line-thin" x1="60" y1="120" x2="740" y2="120"/>
+            <line class="svg-line svg-line-thin" x1="60" y1="70" x2="740" y2="70"/>
+
+            <text class="svg-text-small" x="50" y="265" text-anchor="end">R$ 0</text>
+            <text class="svg-text-small" x="50" y="225" text-anchor="end">25k</text>
+            <text class="svg-text-small" x="50" y="175" text-anchor="end">50k</text>
+            <text class="svg-text-small" x="50" y="125" text-anchor="end">100k</text>
+            <text class="svg-text-small" x="50" y="75" text-anchor="end">150k+</text>
+
+            <rect class="svg-fill-soft" x="100" y="240" width="60" height="20"/>
+            <text class="svg-text-small" x="130" y="280" text-anchor="middle">M1</text>
+            <rect class="svg-fill-soft" x="200" y="215" width="60" height="45"/>
+            <text class="svg-text-small" x="230" y="280" text-anchor="middle">M2</text>
+            <rect class="svg-fill-gold" x="300" y="170" width="60" height="90"/>
+            <text class="svg-text-small" x="330" y="280" text-anchor="middle">M3</text>
+            <rect class="svg-fill-gold" x="400" y="135" width="60" height="125"/>
+            <text class="svg-text-small" x="430" y="280" text-anchor="middle">M4</text>
+            <rect class="svg-fill-gold" x="500" y="100" width="60" height="160"/>
+            <text class="svg-text-small" x="530" y="280" text-anchor="middle">M5</text>
+            <rect class="svg-fill-gold" x="600" y="65" width="60" height="195"/>
+            <text class="svg-text-small" x="630" y="280" text-anchor="middle">M6</text>
+
+            <path class="svg-line-gold svg-dashed" d="M 130 245 Q 280 220 430 140 T 730 50"/>
+
+            <text class="svg-text-small" x="400" y="310" text-anchor="middle">Ganho mensal estimado (economia + recuperação de faturamento)</text>
+            <text class="svg-text-gold" x="690" y="55" text-anchor="end">≈ R$ 150k+/mês</text>
+          </svg>
+        </div>
+
+        <div class="roi-grid">
+          <div class="roi-card">
+            <div class="label">horas / mês</div>
+            <div class="roi-value">~80h</div>
+            <p>economizadas com automação (Isa, Carla, Cayque, equipe).</p>
+          </div>
+          <div class="roi-card">
+            <div class="label">por mês</div>
+            <div class="roi-value">R$ 60–100k</div>
+            <p>recuperação parcial de faturamento perdido por ruptura no Full.</p>
+          </div>
+          <div class="roi-card">
+            <div class="label">em 6 meses</div>
+            <div class="roi-value">R$ 500–800k</div>
+            <p>ganho/economia acumulada (estimativa conservadora).</p>
+          </div>
+          <div class="roi-card">
+            <div class="label">em 12 meses</div>
+            <div class="roi-value">R$ 1,2M+</div>
+            <p>com o programa rodando e caminho para fabricação própria.</p>
+          </div>
+        </div>
+
+        <div class="premissas">
+          <div class="label">premissas — para que os números sejam verificáveis</div>
+          <p><strong>Receita base:</strong> R$ 675k/mês (média declarada na call).</p>
+          <p><strong>Custo-hora médio:</strong> R$ 60/h × 80h economizadas = R$ 4,8k/mês de economia direta de tempo.</p>
+          <p><strong>Recuperação de ruptura:</strong> 30–50% da perda de R$ 217k vista em março (média mensal: R$ 60–100k).</p>
+          <p><strong>Ganho de conversão por ADS:</strong> NÃO somado acima para manter conservadorismo — pode adicionar 20–40% no top-line.</p>
+          <p><strong>NÃO foi contado:</strong> ganho com fabricação própria (12m), produtividade dos novos contratados, redução de custo de SaaS abandonado.</p>
+        </div>
+
+        <h3>Comparativo com o investimento</h3>
+        <p>Considerando uma faixa típica de programas executivos de aceleração em IA, o <strong>payback estimado fica entre o mês 2 e o mês 3</strong>. A partir do mês 4, todo o ganho é líquido. Comparativo exato será alinhado com Lucas na primeira reunião estratégica.</p>
+      </section>
+
+    </div>
+  </section>
+
+  <!-- ==============================================
+       FOOTER ONYX
+       ============================================== -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="brand-stack">
+          <span class="logo-v">
+            <svg viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true">
+              <path d="M 8 6 L 32 6 L 52 70 L 38 92 L 18 28 Z"/>
+              <path d="M 38 92 L 50 110 L 62 92 L 50 70 Z"/>
+              <path d="M 50 70 L 62 92 L 92 6 L 68 6 Z"/>
+              <circle cx="91" cy="9" r="6"/>
+            </svg>
+          </span>
+          <span class="wordmark">winner<span class="ia">.ia</span></span>
+        </div>
+        <p>Consultoria estratégica em I.A para empresários. Vencer não é tendência — é decisão.</p>
+      </div>
+      <div>
+        <div class="footer-tag gold">programa</div>
+        <p>Aceleração em IA · Edição 2026 · Coisa e Lar</p>
+      </div>
+      <div>
+        <div class="footer-tag gold">contato</div>
+        <p><a href="http://winneria.com.br" target="_blank" rel="noopener">winneria.com.br</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-tag">© 2026 · winner.ia · brand system v 1.0</span>
+      <span class="footer-tag">mapa estratégico · documento confidencial</span>
+    </div>
+  </footer>
+
+<script>
+  const blocks = document.querySelectorAll('.block');
+  const panels = document.querySelectorAll('.panel');
+
+  function closeAll() {
+    panels.forEach(p => p.classList.remove('open'));
+    blocks.forEach(b => b.classList.remove('active'));
+  }
+
+  blocks.forEach(block => {
+    block.addEventListener('click', () => {
+      const targetId = block.dataset.panel;
+      const target = document.getElementById(targetId);
+      const wasOpen = target.classList.contains('open');
+      closeAll();
+      if (!wasOpen) {
+        target.classList.add('open');
+        block.classList.add('active');
+        setTimeout(() => {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 320);
+      }
+    });
+  });
+</script>
+</body>
+</html>

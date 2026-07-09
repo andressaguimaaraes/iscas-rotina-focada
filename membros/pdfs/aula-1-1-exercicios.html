@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Exercícios · Princípios fundamentais · Rotina Focada</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @page { size: A4; margin: 20mm 18mm 20mm 18mm; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: #2a1a20;
+      background: #ffffff;
+      font-size: 11pt;
+      line-height: 1.6;
+    }
+    .cover {
+      page-break-after: always;
+      padding: 30pt 0 0;
+    }
+    .brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20pt;
+      font-weight: 600;
+      color: #2a1a20;
+      margin-bottom: 4pt;
+    }
+    .brand em { font-style: italic; color: #d4476f; }
+    .sub-brand {
+      font-size: 9pt;
+      letter-spacing: 3pt;
+      text-transform: uppercase;
+      color: #a89098;
+      margin-bottom: 50pt;
+    }
+    .module-tag {
+      display: inline-block;
+      background: #fde8ee;
+      color: #d4476f;
+      padding: 5pt 12pt;
+      border-radius: 999px;
+      font-size: 8.5pt;
+      letter-spacing: 2pt;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 16pt;
+    }
+    h1.cover-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36pt;
+      font-weight: 600;
+      line-height: 1.15;
+      color: #2a1a20;
+      margin-bottom: 10pt;
+      letter-spacing: -0.5pt;
+    }
+    h1.cover-title em { font-style: italic; color: #d4476f; }
+    .cover-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 15pt;
+      color: #8b6b76;
+      margin-bottom: 34pt;
+      max-width: 400pt;
+    }
+    .cover-intro {
+      background: linear-gradient(135deg, #fde8ee, #fdf3f7);
+      border-radius: 12pt;
+      padding: 20pt 22pt;
+      max-width: 460pt;
+      border-left: 3pt solid #d4476f;
+    }
+    .cover-intro p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 13pt;
+      line-height: 1.55;
+      color: #5a3a45;
+    }
+    .cover-instructions {
+      margin-top: 30pt;
+      max-width: 460pt;
+    }
+    .cover-instructions h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 11pt;
+      font-weight: 700;
+      color: #d4476f;
+      letter-spacing: 2pt;
+      text-transform: uppercase;
+      margin-bottom: 10pt;
+    }
+    .cover-instructions p {
+      font-size: 11pt;
+      line-height: 1.7;
+      color: #4a3a40;
+      margin-bottom: 6pt;
+    }
+
+    /* Exercícios */
+    .exercise {
+      page-break-inside: avoid;
+      margin-bottom: 26pt;
+      padding-bottom: 24pt;
+      border-bottom: 1pt dashed #f2b8ca;
+    }
+    .exercise:last-child { border-bottom: none; }
+
+    .ex-header {
+      display: flex;
+      gap: 16pt;
+      align-items: flex-start;
+      margin-bottom: 14pt;
+    }
+    .ex-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 42pt;
+      font-weight: 600;
+      color: #d4476f;
+      line-height: 1;
+      min-width: 60pt;
+    }
+    .ex-heading {
+      flex: 1;
+      padding-top: 6pt;
+    }
+    .ex-eyebrow {
+      font-size: 8pt;
+      letter-spacing: 2.5pt;
+      text-transform: uppercase;
+      color: #d4476f;
+      font-weight: 700;
+      margin-bottom: 4pt;
+    }
+    .ex-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22pt;
+      font-weight: 600;
+      color: #2a1a20;
+      line-height: 1.15;
+    }
+    .ex-desc {
+      font-size: 11pt;
+      line-height: 1.65;
+      color: #4a3a40;
+      margin-bottom: 14pt;
+    }
+    .ex-desc strong { color: #2a1a20; }
+
+    .prompt-block {
+      background: #fdf9fb;
+      border-radius: 10pt;
+      padding: 14pt 18pt;
+      margin-bottom: 10pt;
+      border-left: 3pt solid #f28ba6;
+    }
+    .prompt-label {
+      font-size: 9pt;
+      letter-spacing: 2pt;
+      text-transform: uppercase;
+      color: #d4476f;
+      font-weight: 700;
+      margin-bottom: 4pt;
+    }
+    .prompt-q {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 13pt;
+      color: #2a1a20;
+      line-height: 1.4;
+      margin-bottom: 8pt;
+    }
+    .write-lines {
+      border-bottom: 0.6pt solid #e8d0d8;
+      height: 18pt;
+      margin-bottom: 2pt;
+    }
+
+    .checkbox-list {
+      margin: 8pt 0 0 0;
+      list-style: none;
+    }
+    .checkbox-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8pt;
+      padding: 6pt 0;
+      font-size: 10.5pt;
+      color: #4a3a40;
+      line-height: 1.5;
+    }
+    .checkbox {
+      width: 12pt;
+      height: 12pt;
+      border: 1.2pt solid #d4476f;
+      border-radius: 3pt;
+      display: inline-block;
+      flex-shrink: 0;
+      margin-top: 2pt;
+    }
+    .checkbox-list li strong { color: #2a1a20; }
+
+    .heart-footer {
+      text-align: center;
+      margin-top: 24pt;
+      color: #d4476f;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 11pt;
+    }
+    .tip {
+      background: #fff8fb;
+      border: 1pt dashed #f2b8ca;
+      border-radius: 10pt;
+      padding: 12pt 16pt;
+      margin: 10pt 0;
+      font-size: 10pt;
+      color: #7a4a5a;
+      line-height: 1.55;
+    }
+    .tip strong { color: #d4476f; }
+  </style>
+</head>
+<body>
+
+<!-- CAPA -->
+<div class="cover">
+  <div class="brand">Rotina <em>Focada</em></div>
+  <div class="sub-brand">Template de exercícios</div>
+
+  <span class="module-tag">Módulo 01 · Aula 1</span>
+  <h1 class="cover-title">Exercícios de <em>Princípios fundamentais</em></h1>
+  <div class="cover-tagline">A carta do propósito e as 7 virtudes que te sustentam</div>
+
+  <div class="cover-intro">
+    <p>Não pule esta parte. Aplicar é o que separa quem <em>assiste</em> do que <em>transforma</em> a rotina.</p>
+  </div>
+
+  <div class="cover-instructions">
+    <h3>Como usar este material</h3>
+    <p>São <strong>3 exercícios essenciais</strong>. Cada um foi pensado pra caber em uma sessão tranquila com café + caderno + 20 minutinhos pra você.</p>
+    <p>Imprima este PDF, ou responda direto em um caderno bonitinho. O importante é <strong>escrever à mão</strong> — a mão organiza o que a mente ainda tá bagunçado.</p>
+    <p>Faça um por vez. Não corra. Este é o alicerce de tudo o que vem depois.</p>
+  </div>
+</div>
+
+<!-- EXERCÍCIO 1 -->
+<div class="exercise">
+  <div class="ex-header">
+    <div class="ex-num">01</div>
+    <div class="ex-heading">
+      <div class="ex-eyebrow">Escrita reflexiva · 20 min</div>
+      <div class="ex-title">Escreva sua carta do propósito</div>
+    </div>
+  </div>
+  <p class="ex-desc">
+    Em uma página, responda com o coração: <strong>por que eu quero uma rotina focada?</strong> Para servir a quê? Para construir o quê? Não escreve respostas prontas — escreva o que realmente importa pra você.
+  </p>
+
+  <div class="prompt-block">
+    <div class="prompt-label">Prompt 1</div>
+    <div class="prompt-q">Qual é a mulher que eu quero ser daqui a 5 anos que precisa começar a existir hoje?</div>
+    <div class="write-lines"></div>
+    <div class="write-lines"></div>
+    <div class="write-lines"></div>
+  </div>
+
+  <div class="prompt-block">
+    <div class="prompt-label">Prompt 2</div>
+    <div class="prompt-q">Se minha rotina refletisse meu propósito de verdade, o que estaria diferente na minha semana?</div>
+    <div class="write-lines"></div>
+    <div class="write-lines"></div>
+    <div class="write-lines"></div>
+  </div>
+
+  <div class="prompt-block">
+    <div class="prompt-label">Prompt 3</div>
+    <div class="prompt-q">A quem eu quero servir com essa rotina? (Deus, família, minha missão, meu negócio…)</div>
+    <div class="write-lines"></div>
+    <div class="write-lines"></div>
+    <div class="write-lines"></div>
+  </div>
+
+  <div class="tip">
+    💡 <strong>Dica:</strong> escreva sem editar. O importante desta primeira passada é chegar na verdade, não na frase bonita.
+  </div>
+</div>
+
+<!-- EXERCÍCIO 2 -->
+<div class="exercise">
+  <div class="ex-header">
+    <div class="ex-num">02</div>
+    <div class="ex-heading">
+      <div class="ex-eyebrow">Escolha consciente · 15 min</div>
+      <div class="ex-title">Escolha 3 das 7 virtudes</div>
+    </div>
+  </div>
+  <p class="ex-desc">
+    Quais <strong>3 virtudes</strong> você quer cultivar primeiro? Escreva por que essas e qual situação do seu dia atual elas vão te ajudar a atravessar.
+  </p>
+
+  <ul class="checkbox-list">
+    <li><span class="checkbox"></span><span><strong>Foco</strong> — fazer uma coisa de cada vez, com presença total</span></li>
+    <li><span class="checkbox"></span><span><strong>Constância</strong> — aparecer todo dia, mesmo pequeno</span></li>
+    <li><span class="checkbox"></span><span><strong>Discernimento</strong> — separar o importante do urgente</span></li>
+    <li><span class="checkbox"></span><span><strong>Fé</strong> — confiar no processo antes do resultado</span></li>
+    <li><span class="checkbox"></span><span><strong>Coragem</strong> — fazer o difícil primeiro</span></li>
+    <li><span class="checkbox"></span><span><strong>Humildade</strong> — recomeçar sem se punir</span></li>
+    <li><span class="checkbox"></span><span><strong>Amor</strong> — fazer tudo por quem/pelo que você ama</span></li>
+  </ul>
+
+  <div class="prompt-block" style="margin-top:14pt;">
+    <div class="prompt-label">Por que essas 3?</div>
+    <div class="prompt-q">Descreva uma situação da sua semana em que cada virtude escolhida vai fazer diferença.</div>
+    <div class="write-lines"></div>
+    <div class="write-lines"></div>
+    <div class="write-lines"></div>
+    <div class="write-lines"></div>
+  </div>
+</div>
+
+<!-- EXERCÍCIO 3 -->
+<div class="exercise">
+  <div class="ex-header">
+    <div class="ex-num">03</div>
+    <div class="ex-heading">
+      <div class="ex-eyebrow">Síntese · 10 min</div>
+      <div class="ex-title">Crie sua frase-âncora</div>
+    </div>
+  </div>
+  <p class="ex-desc">
+    Sintetize seu propósito + as 3 virtudes em <strong>UMA frase curta</strong>. Cole na geladeira. Leia toda manhã antes de pegar o celular.
+  </p>
+
+  <div class="prompt-block">
+    <div class="prompt-label">Rascunho 1</div>
+    <div class="write-lines"></div>
+    <div class="write-lines"></div>
+  </div>
+
+  <div class="prompt-block">
+    <div class="prompt-label">Rascunho 2</div>
+    <div class="write-lines"></div>
+    <div class="write-lines"></div>
+  </div>
+
+  <div class="prompt-block">
+    <div class="prompt-label">✨ Versão final da minha frase-âncora</div>
+    <div class="write-lines" style="height: 22pt;"></div>
+    <div class="write-lines" style="height: 22pt;"></div>
+  </div>
+
+  <div class="tip">
+    💡 <strong>Modelo:</strong> "Hoje eu escolho [virtude 1], [virtude 2] e [virtude 3] para servir a [propósito]." Adapte com as suas palavras.
+  </div>
+</div>
+
+<!-- FECHAMENTO -->
+<div class="exercise" style="border-bottom:none;">
+  <div class="ex-header">
+    <div class="ex-num">✦</div>
+    <div class="ex-heading">
+      <div class="ex-eyebrow">Compromisso</div>
+      <div class="ex-title">O sim que eu faço comigo</div>
+    </div>
+  </div>
+  <p class="ex-desc">
+    Escreva à mão, com a data de hoje: <strong>"A partir de hoje, eu escolho ser a mulher que…"</strong> — e continue.
+  </p>
+  <div class="prompt-block">
+    <div class="write-lines" style="height:22pt;"></div>
+    <div class="write-lines" style="height:22pt;"></div>
+    <div class="write-lines" style="height:22pt;"></div>
+    <div class="write-lines" style="height:22pt;"></div>
+    <div style="text-align:right; margin-top:14pt; font-family:'Cormorant Garamond', serif; font-style:italic; color:#8b6b76;">
+      Assinado por mim, em ___/___/______
+    </div>
+  </div>
+</div>
+
+<div class="heart-footer">
+  ♥ Feito com carinho pra você — Andressa
+</div>
+
+</body>
+</html>

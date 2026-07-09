@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Livros recomendados · Princípios fundamentais · Rotina Focada</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css" />
+  <style>
+    body {
+      background: #fdfaf8;
+    }
+    .livros-wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 60px 28px 100px;
+    }
+    .livros-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #d4476f;
+      font-weight: 600;
+      background: #fde8ee;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 22px;
+    }
+    .livros-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 44px;
+      line-height: 1.15;
+      font-weight: 600;
+      color: #2a1a20;
+      margin-bottom: 14px;
+      letter-spacing: -0.5px;
+    }
+    .livros-title em {
+      font-style: italic;
+      color: #d4476f;
+    }
+    .livros-intro {
+      font-size: 17px;
+      line-height: 1.75;
+      color: #4a3a40;
+      margin-bottom: 46px;
+      max-width: 640px;
+    }
+    .livros-intro strong {
+      color: #d4476f;
+    }
+    .book-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 36px 34px;
+      border: 1px solid #f2e4ea;
+      box-shadow: 0 12px 40px rgba(212, 71, 111, 0.08);
+      margin-bottom: 26px;
+      position: relative;
+      overflow: hidden;
+    }
+    .book-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #d4476f, #f28ba6);
+    }
+    .book-tag {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #d4476f;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .book-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
+      line-height: 1.2;
+      font-weight: 600;
+      color: #2a1a20;
+      margin-bottom: 6px;
+    }
+    .book-author {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 17px;
+      color: #8b6b76;
+      margin-bottom: 20px;
+    }
+    .book-desc {
+      font-size: 15.5px;
+      line-height: 1.75;
+      color: #4a3a40;
+      margin-bottom: 22px;
+    }
+    .book-desc strong {
+      color: #2a1a20;
+    }
+    .book-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #d4476f, #b8365a);
+      color: #ffffff;
+      padding: 14px 26px;
+      border-radius: 999px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(212, 71, 111, 0.28);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .book-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(212, 71, 111, 0.36);
+    }
+    .love-note {
+      background: linear-gradient(135deg, #fde8ee, #fdf3f7);
+      border-radius: 20px;
+      padding: 32px 30px;
+      margin: 46px 0 20px;
+      text-align: center;
+      border: 1px dashed #f2b8ca;
+    }
+    .love-note-heart {
+      font-size: 28px;
+      color: #d4476f;
+      margin-bottom: 10px;
+    }
+    .love-note-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 20px;
+      line-height: 1.5;
+      color: #7a4a5a;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #d4476f;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      margin-top: 30px;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+    .lead-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 22px;
+      line-height: 1.5;
+      color: #7a4a5a;
+      padding-left: 20px;
+      border-left: 3px solid #d4476f;
+      margin: 30px 0;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="index.html" style="text-decoration:none;" class="brand">Rotina <span class="accent">Focada</span></a>
+      <div class="user-bar">
+        <a href="aula.html?id=1-1" class="btn-ghost" style="text-decoration:none;">← Voltar para a aula</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="livros-wrap">
+    <span class="livros-eyebrow">Módulo 01 · Aula 1 · Princípios fundamentais</span>
+    <h1 class="livros-title">Livros que eu <em>recomendo de coração</em> pra você aprofundar</h1>
+    <p class="livros-intro">
+      Se você chegou até aqui, é porque quer mais do que uma rotina bonitinha — quer construir <strong>princípios sólidos</strong> que sustentem a sua vida inteira. E olha, sem leitura isso não acontece. Os livros abaixo foram <strong>essenciais</strong> na minha caminhada, e eu recomendo demais pra você que tá começando. 🩷
+    </p>
+
+    <div class="lead-quote">
+      "A pessoa que você será daqui a cinco anos é fruto dos livros que você lê e das pessoas com quem convive."
+    </div>
+
+    <div class="book-card">
+      <span class="book-tag">🌟 Comece por este</span>
+      <div class="book-title">As 16 Leis do Sucesso</div>
+      <div class="book-author">Napoleon Hill · revisto por Jacob Petry</div>
+      <p class="book-desc">
+        Esse livro é um <strong>presente</strong> pra quem tá começando. O Napoleon Hill é um dos maiores autores sobre desenvolvimento pessoal de todos os tempos — só que os livros originais dele têm uma linguagem mais densa, difícil de entrar no primeiro contato.
+      </p>
+      <p class="book-desc">
+        Nesta versão <strong>revisada pelo Jacob Petry</strong>, a linguagem fica muito mais fluida, gostosa de ler, e você absorve os princípios sem esforço. É por aqui que eu recomendo você começar: <strong>propósito, foco, iniciativa, disciplina</strong> — todas as bases que a gente trabalha no Rotina Focada estão aqui, com profundidade.
+      </p>
+      <a href="https://amzn.to/4gWMlYE" target="_blank" rel="noopener" class="book-btn">
+        📖 Ver na Amazon →
+      </a>
+    </div>
+
+    <div class="love-note">
+      <div class="love-note-heart">🩷</div>
+      <div class="love-note-text">
+        Um bom livro na mesinha de cabeceira<br/>vale mais do que mil scrolls no celular.
+      </div>
+    </div>
+
+    <a href="aula.html?id=1-1" class="back-link">← Voltar para a aula de Princípios fundamentais</a>
+  </main>
+
+  <footer class="site-footer">
+    Criado por <strong>Andressa Guimarães</strong> · Rotina Focada
+  </footer>
+</body>
+</html>

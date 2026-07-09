@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Princípios fundamentais · Rotina Focada</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @page { size: A4; margin: 22mm 18mm 22mm 18mm; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: #2a1a20;
+      background: #ffffff;
+      font-size: 11.5pt;
+      line-height: 1.65;
+    }
+    .cover {
+      page-break-after: always;
+      padding: 40pt 0 0;
+    }
+    .brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20pt;
+      font-weight: 600;
+      color: #2a1a20;
+      margin-bottom: 4pt;
+    }
+    .brand em { font-style: italic; color: #d4476f; }
+    .sub-brand {
+      font-size: 9pt;
+      letter-spacing: 3pt;
+      text-transform: uppercase;
+      color: #a89098;
+      margin-bottom: 60pt;
+    }
+    .module-tag {
+      display: inline-block;
+      background: #fde8ee;
+      color: #d4476f;
+      padding: 5pt 12pt;
+      border-radius: 999px;
+      font-size: 8.5pt;
+      letter-spacing: 2pt;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 18pt;
+    }
+    h1.cover-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 40pt;
+      font-weight: 600;
+      line-height: 1.12;
+      color: #2a1a20;
+      margin-bottom: 12pt;
+      letter-spacing: -0.5pt;
+    }
+    h1.cover-title em { font-style: italic; color: #d4476f; }
+    .cover-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 16pt;
+      color: #8b6b76;
+      margin-bottom: 44pt;
+      max-width: 380pt;
+    }
+    .cover-quote {
+      background: linear-gradient(135deg, #fde8ee, #fdf3f7);
+      border-left: 3pt solid #d4476f;
+      padding: 22pt 24pt;
+      border-radius: 12pt;
+      max-width: 460pt;
+    }
+    .cover-quote p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 15pt;
+      line-height: 1.5;
+      color: #5a3a45;
+    }
+    .cover-footer {
+      position: absolute;
+      bottom: 22mm;
+      left: 18mm;
+      right: 18mm;
+      font-size: 9pt;
+      color: #a89098;
+      letter-spacing: 1.5pt;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22pt;
+      font-weight: 600;
+      color: #2a1a20;
+      margin: 30pt 0 12pt;
+      letter-spacing: -0.3pt;
+    }
+    h2 em { font-style: italic; color: #d4476f; }
+    h2 .icon { color: #d4476f; margin-right: 8pt; }
+
+    h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 13pt;
+      font-weight: 600;
+      color: #d4476f;
+      margin: 22pt 0 8pt;
+    }
+    p { margin-bottom: 10pt; }
+    p strong { color: #2a1a20; }
+    ul { margin: 8pt 0 12pt 22pt; }
+    li { margin-bottom: 8pt; line-height: 1.55; }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 9pt;
+      letter-spacing: 3pt;
+      text-transform: uppercase;
+      color: #d4476f;
+      font-weight: 700;
+      margin-bottom: 6pt;
+    }
+    .callout {
+      background: #fdf3f7;
+      border-radius: 12pt;
+      padding: 18pt 22pt;
+      border-left: 3pt solid #d4476f;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 13pt;
+      color: #5a3a45;
+      margin: 18pt 0;
+      line-height: 1.5;
+    }
+    .virtues {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10pt;
+      margin: 12pt 0;
+    }
+    .virtue {
+      background: #ffffff;
+      border: 1pt solid #f2e4ea;
+      border-radius: 10pt;
+      padding: 12pt 14pt;
+      page-break-inside: avoid;
+    }
+    .virtue-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      color: #d4476f;
+      font-size: 13pt;
+      margin-bottom: 4pt;
+    }
+    .virtue-desc { font-size: 10pt; line-height: 1.55; color: #4a3a40; }
+
+    .insight-box {
+      background: #fdf9fb;
+      border-radius: 10pt;
+      padding: 16pt 20pt;
+      margin: 10pt 0;
+      border: 1pt solid #f8e2eb;
+      page-break-inside: avoid;
+    }
+    .insight-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: #d4476f;
+      font-size: 22pt;
+      font-weight: 600;
+      float: left;
+      margin-right: 12pt;
+      line-height: 1;
+    }
+    .insight-text {
+      font-size: 11pt;
+      line-height: 1.6;
+      color: #2a1a20;
+      overflow: hidden;
+    }
+
+    .step-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15pt;
+      font-weight: 600;
+      color: #2a1a20;
+      font-style: italic;
+      margin-bottom: 4pt;
+    }
+    .divider {
+      border: 0;
+      border-top: 1pt dashed #f2b8ca;
+      margin: 22pt 0;
+    }
+
+    .heart-footer {
+      text-align: center;
+      margin-top: 32pt;
+      color: #d4476f;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 12pt;
+    }
+  </style>
+</head>
+<body>
+
+<!-- CAPA -->
+<div class="cover">
+  <div class="brand">Rotina <em>Focada</em></div>
+  <div class="sub-brand">Material da aula</div>
+
+  <span class="module-tag">Módulo 01 · Aula 1</span>
+  <h1 class="cover-title">Princípios <em>fundamentais</em></h1>
+  <div class="cover-tagline">A carta do propósito e as 7 virtudes que te sustentam</div>
+
+  <div class="cover-quote">
+    <p>"Antes da prática, o princípio.<br/>Antes do hábito, a virtude."</p>
+  </div>
+
+  <div class="cover-footer">Andressa Guimarães · Rotina Focada</div>
+</div>
+
+<!-- CONTEÚDO -->
+<section>
+  <span class="eyebrow">Resumo da aula</span>
+  <h2><span class="icon">📖</span>O que você vai entender</h2>
+  <p>Antes de qualquer técnica, ferramenta ou app, é preciso plantar princípios sólidos. Esta aula te apresenta a <strong>carta do propósito</strong> e as <strong>7 virtudes</strong> que vão sustentar todo o método Rotina Focada na sua vida.</p>
+  <p>Sem essa base, qualquer agenda desmorona no primeiro dia difícil. Com ela, você atravessa qualquer semana caótica sem perder o rumo.</p>
+</section>
+
+<section>
+  <span class="eyebrow">O ponto central</span>
+  <h2>Por que <em>princípios</em> antes de qualquer técnica?</h2>
+  <p>A maioria das mulheres começa uma rotina nova pelo lado errado: pela agenda. Baixa um app, compra uma planner, planeja tudo bonitinho — e em uma semana já desistiu.</p>
+  <p>O que falta não é <em>método</em>. É <strong>fundação</strong>.</p>
+  <div class="callout">Você não muda sua rotina mudando o que faz. Muda mudando QUEM você decide ser.</div>
+  <p>Princípios são bússolas. Quando o caminho confunde — e ele vai confundir — eles indicam o norte. É por isso que a Aula 1 do Módulo 1 é <strong>obrigatória</strong> antes de qualquer outra: sem princípios, tudo o mais vira ocupação.</p>
+</section>
+
+<section>
+  <span class="eyebrow">Primeiro pilar</span>
+  <h2><span class="icon">✉️</span>A carta do propósito</h2>
+  <p>A carta do propósito é um exercício simples e transformador. Em uma página, você responde: <strong>por que eu quero uma rotina focada?</strong></p>
+  <p>Não escreva respostas prontas. Escreva o que realmente importa pra você:</p>
+  <ul>
+    <li>Para servir a quem?</li>
+    <li>Para construir o quê?</li>
+    <li>Que mulher você quer ser daqui a 5 anos que precisa começar hoje?</li>
+    <li>Que legado você quer deixar pra sua família?</li>
+  </ul>
+  <p>Escrever essa carta é como <strong>plantar uma âncora</strong>. Nos dias em que a motivação some, ela é o que te segura no caminho.</p>
+</section>
+
+<section>
+  <span class="eyebrow">Segundo pilar</span>
+  <h2><span class="icon">🌸</span>As 7 virtudes do Rotina Focada</h2>
+  <p>Toda rotina que dura é sustentada por virtudes — não por força de vontade. Estas são as sete que formam o alicerce do método:</p>
+
+  <div class="virtues">
+    <div class="virtue">
+      <div class="virtue-name">1. Foco</div>
+      <div class="virtue-desc">Fazer uma coisa de cada vez, com presença total. É a virtude que separa quem termina de quem começa mil coisas.</div>
+    </div>
+    <div class="virtue">
+      <div class="virtue-name">2. Constância</div>
+      <div class="virtue-desc">Aparecer todo dia — mesmo pequeno, mesmo cansada. Constância vence intensidade.</div>
+    </div>
+    <div class="virtue">
+      <div class="virtue-name">3. Discernimento</div>
+      <div class="virtue-desc">Saber o que é importante e o que é só urgente. Escolher onde investir suas horas com clareza.</div>
+    </div>
+    <div class="virtue">
+      <div class="virtue-name">4. Fé</div>
+      <div class="virtue-desc">Confiar no processo mesmo quando o resultado ainda não apareceu. Regar sem ver o broto.</div>
+    </div>
+    <div class="virtue">
+      <div class="virtue-name">5. Coragem</div>
+      <div class="virtue-desc">Fazer o difícil primeiro. Encarar o que te desconforta. Sair do modo automático.</div>
+    </div>
+    <div class="virtue">
+      <div class="virtue-name">6. Humildade</div>
+      <div class="virtue-desc">Reconhecer que você não sabe tudo, que precisa aprender, que pode errar — e recomeçar sem se punir.</div>
+    </div>
+    <div class="virtue">
+      <div class="virtue-name">7. Amor</div>
+      <div class="virtue-desc">Fazer tudo por amor — a Deus, à sua família, ao seu propósito, à mulher que você tá se tornando.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">Pontos-chave</span>
+  <h2><span class="icon">💡</span>Os quatro insights que ficam</h2>
+
+  <div class="insight-box">
+    <div class="insight-num">01</div>
+    <div class="insight-text">Princípios são bússolas — quando o caminho confunde, eles indicam o norte.</div>
+  </div>
+  <div class="insight-box">
+    <div class="insight-num">02</div>
+    <div class="insight-text">As 7 virtudes formam o alicerce: foco, constância, discernimento, fé, coragem, humildade e amor.</div>
+  </div>
+  <div class="insight-box">
+    <div class="insight-num">03</div>
+    <div class="insight-text">Sem propósito claro, qualquer técnica vira ocupação. Com propósito, qualquer hábito vira transformação.</div>
+  </div>
+  <div class="insight-box">
+    <div class="insight-num">04</div>
+    <div class="insight-text">Você não muda sua rotina mudando o que faz — muda mudando QUEM você decide ser.</div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">Para aprofundar</span>
+  <h2><span class="icon">📚</span>Leitura recomendada</h2>
+  <p>Se você quer levar esses princípios pra outro nível, eu recomendo de coração começar por <strong>Napoleon Hill</strong> — um dos maiores autores sobre desenvolvimento pessoal de todos os tempos.</p>
+  <p>Meu ponto de partida favorito é <strong><em>As 16 Leis do Sucesso</em>, revisto por Jacob Petry</strong>. É uma versão com linguagem muito mais fluida e acessível, sem perder a profundidade. Princípios como propósito definido, iniciativa, entusiasmo e autocontrole conversam <strong>direto</strong> com as 7 virtudes que a gente trabalha aqui.</p>
+  <div class="callout">Um bom livro na mesinha de cabeceira vale mais do que mil scrolls no celular.</div>
+</section>
+
+<hr class="divider"/>
+
+<div class="heart-footer">
+  ♥ Feito com carinho pra você — Andressa
+</div>
+
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BI Financeiro · Matheus Freire</title>
+<style>
+  :root{
+    --creme:#fbf6ec;
+    --creme-card:#fffdf8;
+    --amarelo:#ffd84d;
+    --amarelo-suave:#fff2c2;
+    --rosa:#d17c4e;
+    --rosa-suave:#f5e2d1;
+    --tinta:#4a4238;
+    --tinta-suave:#8a8072;
+    --linha:#efe7d6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    background:var(--creme);
+    color:var(--tinta);
+    line-height:1.55;
+    padding:48px 20px 80px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px;margin:0 auto}
+
+  /* Cabeçalho */
+  header{text-align:center;margin-bottom:44px}
+  .logo{
+    display:inline-flex;align-items:center;
+    background:var(--creme-card);border:1px solid var(--linha);
+    padding:10px 24px;border-radius:100px;margin-bottom:22px;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .logo:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(74,66,56,.12);border-color:var(--amarelo)}
+  .logo-txt{display:flex;flex-direction:column;align-items:center;line-height:1.08}
+  .logo-nome{font-size:20px;font-weight:750;letter-spacing:-.01em;color:var(--tinta)}
+  .logo-sub{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--tinta-suave)}
+  .kicker{
+    display:inline-block;
+    font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--tinta-suave);
+    background:var(--amarelo-suave);
+    padding:6px 16px;border-radius:100px;margin-bottom:18px;
+  }
+  header h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
+  header p{color:var(--tinta-suave);font-size:17px}
+  .traco{width:52px;height:5px;border-radius:100px;background:var(--rosa);margin:20px auto 0}
+
+  /* Seções */
+  .secao-titulo{
+    display:flex;align-items:center;gap:12px;
+    font-size:15px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--tinta-suave);
+    margin:40px 0 16px;
+  }
+  .secao-titulo .bolinha{width:12px;height:12px;border-radius:50%}
+  .bolinha.rosa{background:var(--rosa)}
+  .bolinha.amarelo{background:var(--amarelo)}
+
+  /* Cards estilo Notas */
+  .card{
+    background:var(--creme-card);
+    border:1px solid var(--linha);
+    border-radius:20px;
+    padding:22px 24px;
+    margin-bottom:14px;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 30px rgba(74,66,56,.10);
+    border-color:var(--amarelo);
+  }
+  .card h3{font-size:18px;font-weight:650;margin-bottom:6px}
+  .card p{color:var(--tinta-suave);font-size:15px}
+
+  /* Mini grid */
+  .perfil{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;
+  }
+  .stat{
+    background:var(--creme-card);border:1px solid var(--linha);border-radius:18px;
+    padding:20px;text-align:center;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .stat:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(74,66,56,.10);background:var(--amarelo-suave)}
+  .stat .num{font-size:26px;font-weight:750;letter-spacing:-.02em}
+  .stat .rot{font-size:13px;color:var(--tinta-suave);margin-top:4px}
+
+  /* Lista de itens / passos */
+  .item{
+    display:flex;gap:16px;align-items:flex-start;
+    background:var(--creme-card);border:1px solid var(--linha);border-radius:18px;
+    padding:18px 22px;margin-bottom:12px;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .item:hover{transform:translateX(4px);box-shadow:0 10px 26px rgba(74,66,56,.09);border-color:var(--rosa)}
+  .item .ico{
+    flex-shrink:0;width:38px;height:38px;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;font-size:19px;
+    background:var(--rosa-suave);
+  }
+  .item.passo .ico{background:var(--amarelo-suave);font-weight:750;color:var(--tinta);font-size:16px}
+  .item .txt h4{font-size:16px;font-weight:650;margin-bottom:2px}
+  .item .txt p{font-size:14.5px;color:var(--tinta-suave)}
+
+  /* Destaque */
+  .sonho{
+    background:linear-gradient(135deg,var(--amarelo-suave),var(--rosa-suave));
+    border:none;border-radius:22px;padding:30px 30px;text-align:center;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .sonho:hover{transform:translateY(-3px);box-shadow:0 16px 36px rgba(209,124,78,.28)}
+  .sonho .emoji{font-size:30px}
+  .sonho p{font-size:19px;font-weight:600;color:var(--tinta);margin-top:8px;line-height:1.5}
+
+  footer{text-align:center;margin-top:50px;color:var(--tinta-suave);font-size:14px}
+  footer strong{color:var(--tinta)}
+
+  @media(max-width:600px){
+    header h1{font-size:30px}
+    body{padding:32px 16px 60px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="logo" aria-label="Winner Mentoria">
+      <div class="logo-txt">
+        <span class="logo-nome">Winner</span>
+        <span class="logo-sub">Mentoria</span>
+      </div>
+    </div>
+    <span class="kicker">Aprovação da interface · 07 jul 2026</span>
+    <h1>BI Financeiro · Matheus Freire</h1>
+    <p>Resumo da reunião e próximos passos</p>
+    <div class="traco"></div>
+  </header>
+
+  <!-- CONTEXTO -->
+  <div class="secao-titulo"><span class="bolinha rosa"></span>Sobre a reunião</div>
+  <div class="card">
+    <h3>Apresentação do BI para aprovação 🖥️</h3>
+    <p>O Diogo mostrou pro Matheus a primeira versão do BI financeiro — focado nos quatro pontos de faturamento que ele tinha pedido. O objetivo do encontro era validar o design e a interface antes de seguir com o desenvolvimento.</p>
+  </div>
+
+  <!-- O QUE JÁ ESTÁ PRONTO -->
+  <div class="secao-titulo"><span class="bolinha rosa"></span>O que já está pronto</div>
+
+  <div class="item">
+    <div class="ico">🧩</div>
+    <div class="txt">
+      <h4>Três formatos de visualização</h4>
+      <p>Os mesmos dados em <strong>cards</strong>, <strong>gráficos</strong> e <strong>tabelas</strong> — faturamento, não faturado e em aberto.</p>
+    </div>
+  </div>
+  <div class="item">
+    <div class="ico">📈</div>
+    <div class="txt">
+      <h4>Gráficos que se cruzam</h4>
+      <p>Dá pra trocar o estilo do gráfico e, ao clicar em um, os relacionados se destacam automaticamente.</p>
+    </div>
+  </div>
+  <div class="item">
+    <div class="ico">🗂️</div>
+    <div class="txt">
+      <h4>Tabelas detalhadas</h4>
+      <p>Faturamento por filial, não faturado por cliente e em aberto por cliente — com filtro por vencimento.</p>
+    </div>
+  </div>
+  <div class="item">
+    <div class="ico">📅</div>
+    <div class="txt">
+      <h4>Filtro por período e tela livre</h4>
+      <p>Diário, semanal, mensal, anual ou período específico. Cada um monta a tela do jeito que preferir.</p>
+    </div>
+  </div>
+
+  <!-- VISÃO / DESTAQUE -->
+  <div class="secao-titulo"><span class="bolinha amarelo"></span>A visão do Matheus</div>
+  <div class="sonho">
+    <div class="emoji">🎯</div>
+    <p>Centralizar <strong>todo o financeiro</strong> numa única plataforma —<br>cada setor com seu acesso e ele vendo a empresa inteira num só lugar.</p>
+  </div>
+
+  <!-- O QUE ELE PEDIU -->
+  <div class="secao-titulo"><span class="bolinha amarelo"></span>O que ele quer adicionar</div>
+
+  <div class="item">
+    <div class="ico">🔐</div>
+    <div class="txt">
+      <h4>Acesso por perfil</h4>
+      <p>Faturamento vê faturamento, despesas vê despesas, auditoria vê auditoria — e o administrativo enxerga tudo.</p>
+    </div>
+  </div>
+  <div class="item">
+    <div class="ico">🤖</div>
+    <div class="txt">
+      <h4>Copiloto (IA) dentro do BI</h4>
+      <p>Um chat pra perguntar sobre os dados e pedir análises — e um resumo diário da empresa toda no automático.</p>
+    </div>
+  </div>
+  <div class="item">
+    <div class="ico">🔁</div>
+    <div class="txt">
+      <h4>Comparação de períodos</h4>
+      <p>Comparar mês a mês ou ano a ano (ex.: janeiro deste ano vs. do ano passado). Fica para a <strong>Fase 2</strong>.</p>
+    </div>
+  </div>
+
+  <!-- DECISÕES -->
+  <div class="secao-titulo"><span class="bolinha rosa"></span>O que ficou decidido</div>
+  <div class="card">
+    <h3>Design aprovado! ✅</h3>
+    <p>O Matheus aprovou a interface. O projeto segue <strong>por setores</strong>: valida um, ganha clareza e depois ajusta. O comparativo de faturamento por filial já entra agora (é simples); comparações avançadas e o copiloto ficam para a Fase 2.</p>
+  </div>
+
+  <!-- PRÓXIMOS PASSOS -->
+  <div class="secao-titulo"><span class="bolinha amarelo"></span>Próximos passos</div>
+
+  <div class="item passo">
+    <div class="ico">1</div>
+    <div class="txt">
+      <h4>Matheus envia o e-mail dedicado</h4>
+      <p>O João já está criando o acesso com senha própria para liberar a plataforma pra equipe.</p>
+    </div>
+  </div>
+  <div class="item passo">
+    <div class="ico">2</div>
+    <div class="txt">
+      <h4>Diogo cria o banco de dados (Supabase)</h4>
+      <p>Sobe tudo online e manda os acessos certinhos para o time do Matheus.</p>
+    </div>
+  </div>
+  <div class="item passo">
+    <div class="ico">3</div>
+    <div class="txt">
+      <h4>Validar os números</h4>
+      <p>Puxar um relatório do sistema (GW) e comparar com o BI para conferir se os valores batem.</p>
+    </div>
+  </div>
+  <div class="item passo">
+    <div class="ico">4</div>
+    <div class="txt">
+      <h4>Cronograma por lotes</h4>
+      <p>O Diogo monta o cronograma das próximas entregas e vai liberando por lotes, sem esperar tudo ficar pronto.</p>
+    </div>
+  </div>
+
+  <footer>
+    Projeto em <strong>fases</strong> · Fase 1 valida cada setor · Fase 2 traz comparações avançadas e o copiloto de IA.
+  </footer>
+
+</div>
+</body>
+</html>

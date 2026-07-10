@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Winner · Conceitos de símbolo</title>
+<style>
+  :root{
+    --creme:#fbf6ec;
+    --creme-card:#fffdf8;
+    --amarelo:#ffd84d;
+    --amarelo-suave:#fff2c2;
+    --terra:#d17c4e;
+    --terra-suave:#f5e2d1;
+    --tinta:#4a4238;
+    --tinta-suave:#8a8072;
+    --linha:#efe7d6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    background:var(--creme);color:var(--tinta);line-height:1.55;
+    padding:48px 20px 80px;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:900px;margin:0 auto}
+
+  header{text-align:center;margin-bottom:12px}
+  header h1{font-size:36px;font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
+  header p{color:var(--tinta-suave);font-size:17px}
+  .traco{width:52px;height:5px;border-radius:100px;background:var(--terra);margin:20px auto 30px}
+
+  .intro{
+    background:var(--creme-card);border:1px solid var(--linha);border-radius:20px;
+    padding:22px 24px;margin-bottom:34px;font-size:15px;color:var(--tinta-suave);
+  }
+  .intro strong{color:var(--tinta)}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+  .concept{
+    background:var(--creme-card);border:1px solid var(--linha);border-radius:22px;
+    padding:26px 24px 24px;text-align:center;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .concept:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(74,66,56,.12);border-color:var(--amarelo)}
+  .mark{width:96px;height:96px;display:block;margin:0 auto 14px}
+  .concept h3{font-size:19px;font-weight:700;margin-bottom:4px}
+  .concept .tag{
+    display:inline-block;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--tinta-suave);background:var(--amarelo-suave);padding:4px 12px;border-radius:100px;margin-bottom:12px;
+  }
+  .concept p{font-size:14px;color:var(--tinta-suave)}
+  .mini{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:16px;padding-top:16px;border-top:1px solid var(--linha)}
+  .mini svg{display:block}
+  .mini small{font-size:11px;color:var(--tinta-suave)}
+
+  .rec-titulo{
+    display:flex;align-items:center;gap:12px;justify-content:center;
+    font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--tinta-suave);
+    margin:48px 0 18px;
+  }
+  .rec-titulo .b{width:10px;height:10px;border-radius:50%;background:var(--terra)}
+  .mug-row{display:flex;flex-wrap:wrap;gap:18px;justify-content:center}
+  .mug-card{
+    background:var(--creme-card);border:1px solid var(--linha);border-radius:22px;padding:24px;
+    display:flex;flex-direction:column;align-items:center;gap:6px;min-width:220px;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .mug-card:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(74,66,56,.12)}
+  .mug-card h4{font-size:15px;font-weight:650;margin-top:6px}
+  .mug-card small{font-size:12.5px;color:var(--tinta-suave)}
+
+  footer{text-align:center;margin-top:44px;color:var(--tinta-suave);font-size:14px}
+  footer strong{color:var(--tinta)}
+  @media(max-width:600px){header h1{font-size:28px}body{padding:32px 16px 60px}}
+</style>
+</head>
+<body>
+
+<!-- Peças reutilizáveis -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <path id="leaf" d="M0,0 C -2.7,-4.2 -2.7,-9.2 0,-13.4 C 2.7,-9.2 2.7,-4.2 0,0 Z"/>
+    <path id="spark" d="M0,-8 Q1.5,-1.5 8,0 Q1.5,1.5 0,8 Q-1.5,1.5 -8,0 Q-1.5,-1.5 0,-8 Z"/>
+    <!-- Coroa de louros: folhas seguindo a curva do anel -->
+    <g id="wreath">
+      <use href="#leaf" transform="translate(28.7,51.7) rotate(280)"/>
+      <use href="#leaf" transform="translate(19.8,47.6) rotate(310)"/>
+      <use href="#leaf" transform="translate(14.1,39.5) rotate(340)"/>
+      <use href="#leaf" transform="translate(13.3,29.7) rotate(10)"/>
+      <use href="#leaf" transform="translate(17.5,20.8) rotate(40)"/>
+      <use href="#leaf" transform="translate(24.9,15.4) rotate(68)"/>
+      <g transform="translate(64,0) scale(-1,1)">
+        <use href="#leaf" transform="translate(28.7,51.7) rotate(280)"/>
+        <use href="#leaf" transform="translate(19.8,47.6) rotate(310)"/>
+        <use href="#leaf" transform="translate(14.1,39.5) rotate(340)"/>
+        <use href="#leaf" transform="translate(13.3,29.7) rotate(10)"/>
+        <use href="#leaf" transform="translate(17.5,20.8) rotate(40)"/>
+        <use href="#leaf" transform="translate(24.9,15.4) rotate(68)"/>
+      </g>
+    </g>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <header>
+    <h1>Símbolo da Winner</h1>
+    <p>4 caminhos com significado — todos na paleta da marca</p>
+    <div class="traco"></div>
+  </header>
+
+  <div class="intro">
+    Um bom símbolo de <strong>Winner</strong> deve fazer a pessoa se sentir vencedora só de olhar. Os três significados mais fortes e atemporais são a <strong>coroa de louros</strong> (vitória e mérito, desde a Grécia antiga), o <strong>cume da montanha</strong> (superar e chegar ao topo) e a <strong>estrela</strong> (ser destaque, excelência). Abaixo, cada um vira um símbolo limpo — que funciona grande numa parede e pequeno numa caneca. Passe o mouse pra ver com carinho. ✨
+  </div>
+
+  <div class="grid">
+
+    <!-- A · LOUROS + ESTRELA -->
+    <div class="concept">
+      <svg class="mark" viewBox="0 0 64 64" role="img" aria-label="Coroa de louros com estrela">
+        <use href="#wreath" fill="var(--tinta)"/>
+        <use href="#spark" transform="translate(32,33) scale(0.85)" fill="var(--amarelo)"/>
+      </svg>
+      <span class="tag">Clássico · Prêmio</span>
+      <h3>Louros &amp; Estrela</h3>
+      <p>A coroa da vitória com uma estrela no centro: você é o destaque, coroado pelo mérito. Atemporal e premium.</p>
+      <div class="mini">
+        <svg width="24" height="24" viewBox="0 0 64 64"><use href="#wreath" fill="var(--tinta)"/><use href="#spark" transform="translate(32,33) scale(0.85)" fill="var(--tinta)"/></svg>
+        <small>fica nítido pequeno</small>
+      </div>
+    </div>
+
+    <!-- B · CUME COM BANDEIRA -->
+    <div class="concept">
+      <svg class="mark" viewBox="0 0 64 64" role="img" aria-label="Cume com bandeira">
+        <path d="M8,52 L26,18 L34,30 L44,22 L56,52 Z" fill="var(--tinta)"/>
+        <path d="M26,18 L21,28 L25,31 L26,26 Z" fill="var(--creme-card)"/>
+        <line x1="44" y1="22" x2="44" y2="8" stroke="var(--tinta)" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M44,9 L54,12 L44,15 Z" fill="var(--amarelo)"/>
+      </svg>
+      <span class="tag">Moderno · Jornada</span>
+      <h3>Cume &amp; Bandeira</h3>
+      <p>Chegar ao topo e fincar a bandeira. Fala diretamente de superação — a cara de uma mentoria que leva você mais longe.</p>
+      <div class="mini">
+        <svg width="24" height="24" viewBox="0 0 64 64"><path d="M8,52 L26,18 L34,30 L44,22 L56,52 Z" fill="var(--tinta)"/><line x1="44" y1="22" x2="44" y2="8" stroke="var(--tinta)" stroke-width="3" stroke-linecap="round"/><path d="M44,9 L54,12 L44,15 Z" fill="var(--tinta)"/></svg>
+        <small>fica nítido pequeno</small>
+      </div>
+    </div>
+
+    <!-- C · PICOS EM W + SOL -->
+    <div class="concept">
+      <svg class="mark" viewBox="0 0 64 64" role="img" aria-label="Picos em W com sol">
+        <circle cx="43" cy="17" r="6" fill="var(--amarelo)"/>
+        <path d="M6,50 L20,20 L31,37 L44,14 L58,50 Z" fill="var(--tinta)"/>
+      </svg>
+      <span class="tag">Sutil · Monograma</span>
+      <h3>Picos em “W”</h3>
+      <p>Dois picos que sobem e formam um W discreto, com o sol nascendo atrás. Crescimento e movimento, sem dizer o óbvio.</p>
+      <div class="mini">
+        <svg width="24" height="24" viewBox="0 0 64 64"><circle cx="43" cy="17" r="6" fill="var(--tinta)"/><path d="M6,50 L20,20 L31,37 L44,14 L58,50 Z" fill="var(--tinta)"/></svg>
+        <small>fica nítido pequeno</small>
+      </div>
+    </div>
+
+    <!-- D · ESTRELA-GUIA -->
+    <div class="concept">
+      <svg class="mark" viewBox="0 0 64 64" role="img" aria-label="Estrela-guia">
+        <use href="#spark" transform="translate(30,34) scale(2.7)" fill="var(--tinta)"/>
+        <use href="#spark" transform="translate(48,16) scale(0.9)" fill="var(--amarelo)"/>
+      </svg>
+      <span class="tag">Minimalista · Ícone</span>
+      <h3>Estrela-guia</h3>
+      <p>A estrela do brilho e da excelência — “seja a estrela”. Simples ao extremo, perfeita como ícone de app e em qualquer tamanho.</p>
+      <div class="mini">
+        <svg width="24" height="24" viewBox="0 0 64 64"><use href="#spark" transform="translate(32,32) scale(3.4)" fill="var(--tinta)"/></svg>
+        <small>fica nítido pequeno</small>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RECOMENDAÇÃO / CANECA -->
+  <div class="rec-titulo"><span class="b"></span>Como fica na caneca</div>
+  <div class="mug-row">
+
+    <div class="mug-card">
+      <svg width="150" height="130" viewBox="0 0 150 130" aria-hidden="true">
+        <rect x="30" y="22" width="66" height="86" rx="12" fill="#fffdf8" stroke="var(--linha)" stroke-width="2"/>
+        <path d="M96,42 h14 a12,12 0 0 1 12,12 v14 a12,12 0 0 1 -12,12 h-14" fill="none" stroke="var(--linha)" stroke-width="6"/>
+        <g transform="translate(31,42) scale(0.53)">
+          <use href="#wreath" fill="var(--tinta)"/>
+          <use href="#spark" transform="translate(32,33) scale(0.85)" fill="var(--amarelo)"/>
+        </g>
+        <text x="63" y="100" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9.5" font-weight="700" fill="var(--tinta)" letter-spacing="1.5">WINNER</text>
+      </svg>
+      <h4>Louros na caneca creme</h4>
+      <small>discreta e elegante</small>
+    </div>
+
+    <div class="mug-card">
+      <svg width="150" height="130" viewBox="0 0 150 130" aria-hidden="true">
+        <rect x="30" y="22" width="66" height="86" rx="12" fill="var(--tinta)"/>
+        <path d="M96,42 h14 a12,12 0 0 1 12,12 v14 a12,12 0 0 1 -12,12 h-14" fill="none" stroke="var(--tinta)" stroke-width="6"/>
+        <g transform="translate(31,42) scale(0.53)">
+          <use href="#wreath" fill="#fffdf8"/>
+          <use href="#spark" transform="translate(32,33) scale(0.85)" fill="var(--amarelo)"/>
+        </g>
+        <text x="63" y="100" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9.5" font-weight="700" fill="#fffdf8" letter-spacing="1.5">WINNER</text>
+      </svg>
+      <h4>Louros na caneca escura</h4>
+      <small>com o dourado brilhando</small>
+    </div>
+
+  </div>
+
+  <footer>
+    Minha recomendação é o <strong>Louros &amp; Estrela</strong> — é o mais atemporal e o que mais dá orgulho de usar.<br>
+    São rascunhos: me diz qual te tocou que eu refino e entrego em alta qualidade (vetor) pra usar em tudo. 💛
+  </footer>
+
+</div>
+</body>
+</html>

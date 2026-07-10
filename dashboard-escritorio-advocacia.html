@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1ª Tutoria · Escritório de Advocacia</title>
+<style>
+  :root{
+    --creme:#fbf6ec;
+    --creme-card:#fffdf8;
+    --amarelo:#ffd84d;
+    --amarelo-suave:#fff2c2;
+    --rosa:#d17c4e;
+    --rosa-suave:#f5e2d1;
+    --tinta:#4a4238;
+    --tinta-suave:#8a8072;
+    --linha:#efe7d6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    background:var(--creme);color:var(--tinta);line-height:1.55;
+    padding:48px 20px 80px;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px;margin:0 auto}
+
+  header{text-align:center;margin-bottom:44px}
+  .logo{
+    display:inline-flex;align-items:center;
+    background:var(--creme-card);border:1px solid var(--linha);
+    padding:10px 24px;border-radius:100px;margin-bottom:22px;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .logo:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(74,66,56,.12);border-color:var(--amarelo)}
+  .logo-txt{display:flex;flex-direction:column;align-items:center;line-height:1.08}
+  .logo-nome{font-size:20px;font-weight:750;letter-spacing:-.01em;color:var(--tinta)}
+  .logo-sub{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--tinta-suave)}
+  .kicker{
+    display:inline-block;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--tinta-suave);background:var(--amarelo-suave);padding:6px 16px;border-radius:100px;margin-bottom:18px;
+  }
+  header h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
+  header p{color:var(--tinta-suave);font-size:17px}
+  .traco{width:52px;height:5px;border-radius:100px;background:var(--rosa);margin:20px auto 0}
+
+  .secao-titulo{
+    display:flex;align-items:center;gap:12px;
+    font-size:15px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--tinta-suave);margin:40px 0 16px;
+  }
+  .secao-titulo .bolinha{width:12px;height:12px;border-radius:50%}
+  .bolinha.rosa{background:var(--rosa)}
+  .bolinha.amarelo{background:var(--amarelo)}
+
+  .card{
+    background:var(--creme-card);border:1px solid var(--linha);border-radius:20px;
+    padding:22px 24px;margin-bottom:14px;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(74,66,56,.10);border-color:var(--amarelo)}
+  .card h3{font-size:18px;font-weight:650;margin-bottom:6px}
+  .card p{color:var(--tinta-suave);font-size:15px}
+
+  .perfil{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+  .stat{
+    background:var(--creme-card);border:1px solid var(--linha);border-radius:18px;padding:20px;text-align:center;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .stat:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(74,66,56,.10);background:var(--amarelo-suave)}
+  .stat .num{font-size:26px;font-weight:750;letter-spacing:-.02em}
+  .stat .rot{font-size:13px;color:var(--tinta-suave);margin-top:4px}
+
+  .item{
+    display:flex;gap:16px;align-items:flex-start;
+    background:var(--creme-card);border:1px solid var(--linha);border-radius:18px;padding:18px 22px;margin-bottom:12px;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .item:hover{transform:translateX(4px);box-shadow:0 10px 26px rgba(74,66,56,.09);border-color:var(--rosa)}
+  .item .ico{
+    flex-shrink:0;width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:19px;background:var(--rosa-suave);
+  }
+  .item.passo .ico{background:var(--amarelo-suave);font-weight:750;color:var(--tinta);font-size:16px}
+  .item .txt h4{font-size:16px;font-weight:650;margin-bottom:2px}
+  .item .txt p{font-size:14.5px;color:var(--tinta-suave)}
+
+  .sonho{
+    background:linear-gradient(135deg,var(--amarelo-suave),var(--rosa-suave));
+    border:none;border-radius:22px;padding:30px;text-align:center;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .sonho:hover{transform:translateY(-3px);box-shadow:0 16px 36px rgba(209,124,78,.28)}
+  .sonho .emoji{font-size:30px}
+  .sonho p{font-size:19px;font-weight:600;color:var(--tinta);margin-top:8px;line-height:1.5}
+  .sonho small{display:block;font-size:14px;font-weight:500;color:var(--tinta-suave);margin-top:10px}
+
+  footer{text-align:center;margin-top:50px;color:var(--tinta-suave);font-size:14px}
+  footer strong{color:var(--tinta)}
+
+  @media(max-width:600px){header h1{font-size:29px}body{padding:32px 16px 60px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="logo" aria-label="Winner Mentoria">
+      <div class="logo-txt">
+        <span class="logo-nome">Winner</span>
+        <span class="logo-sub">Mentoria</span>
+      </div>
+    </div>
+    <span class="kicker">1ª Tutoria · 08 jul 2026</span>
+    <h1>Primeira Tutoria — Claude Code</h1>
+    <p>Almeida Pessoa &amp; Caldas · Lázaro, Felipe e Jéssica</p>
+    <div class="traco"></div>
+  </header>
+
+  <!-- SOBRE -->
+  <div class="secao-titulo"><span class="bolinha rosa"></span>Sobre o encontro</div>
+  <div class="card">
+    <h3>Instalação e primeiros passos no Claude Code 💻</h3>
+    <p>O Guilherme apresentou o Claude Code pro time e todos instalaram ao vivo, direto no terminal. O objetivo não foi resolver tudo hoje — foi destravar a ferramenta e deixar cada um pronto pra começar a testar.</p>
+  </div>
+
+  <!-- IDEIA CENTRAL -->
+  <div class="secao-titulo"><span class="bolinha amarelo"></span>A ideia central</div>
+  <div class="sonho">
+    <div class="emoji">🧞</div>
+    <p>O Claude Code é um “gênio” à sua disposição —<br>você só precisa saber conversar com ele.</p>
+    <small>Regra de ouro: travou? Tira um print, copia e manda pro Claude. Ele te guia no resto.</small>
+  </div>
+
+  <!-- O QUE APRENDERAM -->
+  <div class="secao-titulo"><span class="bolinha rosa"></span>O que aprenderam hoje</div>
+
+  <div class="item">
+    <div class="ico">⚙️</div>
+    <div class="txt">
+      <h4>Instalar e abrir o Claude Code</h4>
+      <p>Todo mundo instalou no terminal. Pra reabrir depois: abrir o terminal e escrever “claude”. A primeira vez é a mais chatinha — depois vira um chat.</p>
+    </div>
+  </div>
+  <div class="item">
+    <div class="ico">🧑‍🏫</div>
+    <div class="txt">
+      <h4>Duas peças: tutor e ferramenta</h4>
+      <p>O Claude (app/chat) é o <strong>tutor</strong> — pra tirar dúvida. O Claude Code é a <strong>ferramenta</strong> que faz o trabalho de verdade, com acesso ao computador.</p>
+    </div>
+  </div>
+  <div class="item">
+    <div class="ico">📩</div>
+    <div class="txt">
+      <h4>Conectar o Gmail (MCP)</h4>
+      <p>Dá pra ligar o e-mail ao Claude pra ele ler e classificar. Ele mesmo conduz o passo a passo.</p>
+    </div>
+  </div>
+  <div class="item">
+    <div class="ico">🚫</div>
+    <div class="txt">
+      <h4>Sem ferramentas externas</h4>
+      <p>Não precisa montar automação no N8N. É só conversar com o Claude Code que ele resolve — de fatura a organizar pastas e até criar um app.</p>
+    </div>
+  </div>
+
+  <!-- NECESSIDADE DO ESCRITÓRIO -->
+  <div class="secao-titulo"><span class="bolinha rosa"></span>O que o escritório precisa</div>
+
+  <div class="item">
+    <div class="ico">📥</div>
+    <div class="txt">
+      <h4>Triagem automática de e-mails</h4>
+      <p>Classificar os e-mails do grupo jurídico por urgência, risco e SLA — hoje é tudo manual.</p>
+    </div>
+  </div>
+  <div class="item">
+    <div class="ico">⚖️</div>
+    <div class="txt">
+      <h4>Distribuir demandas pro advogado certo</h4>
+      <p>Cada e-mail vira uma demanda e cai no Google Workspace já marcando o advogado responsável.</p>
+    </div>
+  </div>
+  <div class="item">
+    <div class="ico">⏱️</div>
+    <div class="txt">
+      <h4>Desafogar o administrativo</h4>
+      <p>A equipe já enxugou com IA na produção. Agora o gargalo é a parte administrativa tomando tempo do time.</p>
+    </div>
+  </div>
+
+  <!-- PONTOS DE ATENÇÃO -->
+  <div class="secao-titulo"><span class="bolinha amarelo"></span>Pontos de atenção</div>
+  <div class="perfil">
+    <div class="stat"><div class="num">~40 min</div><div class="rot">e os tokens do plano Max já estouravam</div></div>
+    <div class="stat"><div class="num">Plano Max</div><div class="rot">como conectar o escritório todo?</div></div>
+    <div class="stat"><div class="num">Terminal</div><div class="rot">curva de adaptação — questão de costume</div></div>
+  </div>
+
+  <!-- COMO VAMOS TOCAR -->
+  <div class="secao-titulo"><span class="bolinha amarelo"></span>Como vamos tocar</div>
+  <div class="card">
+    <h3>Duas frentes juntas 🤝</h3>
+    <p>1) As <strong>tutorias</strong> pra vocês aprenderem na profundidade e ganharem autonomia. 2) Os <strong>projetos mais complexos</strong> executados pelo time da Winner (orçamento por horas) pra acelerar os resultados enquanto vocês aprendem. Assim vocês evoluem sem perder o ritmo do escritório.</p>
+  </div>
+
+  <!-- PRÓXIMOS PASSOS -->
+  <div class="secao-titulo"><span class="bolinha rosa"></span>Próximos passos</div>
+
+  <div class="item passo">
+    <div class="ico">1</div>
+    <div class="txt">
+      <h4>Documentar a necessidade</h4>
+      <p>Lázaro e Felipe descrevem num Word tudo que o escritório precisa e enviam pra Winner.</p>
+    </div>
+  </div>
+  <div class="item passo">
+    <div class="ico">2</div>
+    <div class="txt">
+      <h4>Call rápida pra alinhar</h4>
+      <p>Uma conversa curta pra tirar dúvidas e fechar o escopo.</p>
+    </div>
+  </div>
+  <div class="item passo">
+    <div class="ico">3</div>
+    <div class="txt">
+      <h4>Orçamento e início do projeto</h4>
+      <p>A Winner calcula as horas, envia o orçamento e, com o OK, já começa a executar.</p>
+    </div>
+  </div>
+  <div class="item passo">
+    <div class="ico">4</div>
+    <div class="txt">
+      <h4>Seguir testando a ferramenta</h4>
+      <p>Usar o Claude Code no dia a dia — as dúvidas surgem com o uso. Postar tudo no grupo de dúvidas.</p>
+    </div>
+  </div>
+
+  <footer>
+    A Winner envia a <strong>gravação e a transcrição</strong> · dúvidas no grupo, que é um prazer responder. 💛
+  </footer>
+
+</div>
+</body>
+</html>
